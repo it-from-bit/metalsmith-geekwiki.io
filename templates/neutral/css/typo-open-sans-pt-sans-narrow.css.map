@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA;;;GAGG;AAEH;;GAEG;ACPH;;;GAGG;ADQH;;GAEG;AACK,4FAAoF;AACpF,6EAAqE;AAE7E;;GAEG;AACH,wVAAiB;EAChB,WAAW,EAAE,yCAAyC;;;AAGvD,wiBAAmB;EAClB,WAAW,EAAE,8CAA8C;EAC3D,cAAc,EAAE,SAAS",
+"sources": ["typo-open-sans-pt-sans-narrow.scss","_typo.scss"],
+"names": [],
+"file": "typo-open-sans-pt-sans-narrow.css"
+}

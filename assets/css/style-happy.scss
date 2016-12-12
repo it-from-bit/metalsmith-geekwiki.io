@@ -1,0 +1,144 @@
+/**
+ * @package Live
+ * @since   1.0
+ */
+
+/*
+ * Imports
+ */
+@import "bourbon/bourbon";
+
+/*
+ * Utils
+ */
+$hover-zoom-shadow: rgba(#000, 0.2);
+
+$hover-flash-color: #fff;
+
+/*
+ * Base
+ */
+$body-background: #c9d4e6;
+
+$text-color: #212121;
+$text-alt-color: #767676;
+
+$link-color: #5782c7;
+
+$line-color: #c3c3c3;
+
+$small-color: #696969;
+
+$mark-background: #55acee;
+$mark-color: #fff;
+
+$headline-color: #0c0c0c;
+
+$nav-color: $headline-color;
+$nav-line-color: $line-color;
+
+$table-border-color: #c3c3c3;
+$table-header-color: inherit;
+$table-header-background: rgba($headline-color, 0.06);
+$table-highlight-background: rgba(#fff, 0.3);
+
+$input-border-color: #bfbfbf #f2f2f2 #f2f2f2 #bfbfbf;
+$input-background: #d8d8d8;
+$input-text-color: #212121;
+$input-placeholder-color: #767676;
+
+$button-background: #3b639f;
+$button-color: #f3f3f3;
+$button-disabled-background: #c3c3c3;
+$button-disabled-color: #484848;
+$button-success-background: #197d14;
+$button-error-background: #b10404;
+
+/*
+ * Boxes
+ */
+$box-background-color: #e6e6e6;
+$box-background-image: "../res/styles/happy/bg.png", "../res/styles/happy/bg@2x.png";
+
+$featured-gallery-overlay-background: #000;
+$featured-gallery-count-color: #fff;
+$featured-gallery-count-shadow: #000;
+
+$more-link-background: #f01e57;
+$more-link-color: #fff;
+
+$comment-timestamp-color: $text-alt-color;
+$comment-line-color: $line-color;
+
+/*
+ * Elements
+ */
+$caption-color: $text-alt-color;
+
+$small-title-color: $text-alt-color;
+
+$form-links-color: $text-alt-color;
+
+$tag-bright-color: #fff;
+$tag-dark-color: #000;
+$tag-background: (
+	"default":   #616161 darken(#616161, 6%),
+	"category":  #18694c darken(#18694c, 6%),
+	"timestamp": #5a88c4,
+	"comments":  #1d556f,
+	"author":    #bd8e20,
+	"duration":  #20377b,
+	"likes":     #cc2955,
+	"visits":    #579123,
+	"countdown": #396cae
+);
+
+$posts-list-line-color: $line-color;
+
+$tag-cloud-border-color: #a0a0a0;
+$tag-cloud-color: #0c0c0c;
+$tag-cloud-hover-background: $tag-cloud-color;
+$tag-cloud-hover-color: #e6e6e6;
+
+$broadcast-line-color: #396cae;
+
+$share-text-color: $text-alt-color;
+$share-icon-color: $box-background-color;
+$share-icon-background: $share-text-color;
+$share-icon-active-color: #fff;
+$share-icon-active-background: $link-color;
+
+$pagination-current-color: #3b639f;
+
+$modal-overlay: rgba(#000, 0.6);
+$modal-shadow: rgba(#000, 0.5);
+$modal-close-background: #adadad;
+$modal-close-color: #e7e7e7;
+$modal-close-hover-background: $button-background;
+$modal-close-hover-color: $button-color;
+
+/*
+ * Structure
+ */
+$header-share-icon-color: #000;
+$header-share-icon-background: #fff;
+$header-nav-bright-color: #f3f3f3;
+$header-nav-dark-color: #212121;
+$header-nav-hover-color: #f01e57;
+$header-nav-sub-color: $header-nav-dark-color;
+$header-nav-sub-hover-color: $header-nav-hover-color;
+$header-nav-sub-background: $box-background-color;
+$header-nav-sub-shadow: rgba(#000, 0.2);
+
+$end-note-text-color: $text-alt-color;
+$end-note-back-background: $end-note-text-color;
+
+/*
+ * 3rd party
+ */
+$simple-lightbox-overlay-background: rgba(#000, 0.7);
+$simple-lightbox-counter-color: #fff;
+$simple-lightbox-button-color: #fff;
+$simple-lightbox-spinner-color: #ccc;
+
+@import "bootstrap";

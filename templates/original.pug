@@ -1,0 +1,386 @@
+doctype html
+html.no-js.no-touch(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='msapplication-TileImage', content='/assets/content/live/thumbs/favicon-270x270.png')
+    link(rel='icon', href='/assets/content/live/thumbs/favicon-32x32.png', sizes='32x32')
+    link(rel='icon', href='/assets/content/live/thumbs/favicon-192x192.png', sizes='192x192')
+    link(rel='apple-touch-icon-precomposed', href='/assets/content/live/thumbs/favicon-180x180.png')
+    link(rel='stylesheet', href='/assets/css/style-neutral.min.css')
+    link(rel='stylesheet', href='/assets/css/typo-open-sans-pt-sans-narrow.min.css')
+    title Neutral Live
+  body
+    #wrapper
+      header#header
+        .container
+          .main.vertical-align-middle.horizontal-align-center
+            .logo
+              a(href='neutral-index.html', title='Live')
+                img(src='/assets/img/thumbs/logo-247x97.png', width='247', height='97', srcset='/assets/img/thumbs/logo-247x97.png 247w, /assets/img/thumbs/logo-494x194.png 494w', sizes='(max-width: 247px) 100vw, 247px', alt='Neutral Live logo')
+            // // .logo
+            nav.dark
+              ul
+                li
+                  a(href='neutral-index.html') Classic blog
+                li
+                  a(href='neutral-masonry.html') Masonry
+                li
+                  a(href='neutral-about.html') About
+                li.media-regular-none-important
+                  a(href='neutral-typography.html') Typography
+                li.media-regular-none-important
+                  a(href='neutral-gallery-classic.html') Gallery
+                li.media-regular-none-important
+                  a(href='#') Pages
+                  ul
+                    li
+                      a(href='neutral-video.html') Video
+                    li
+                      a(href='neutral-gallery-classic.html') Galleries
+                      ul
+                        li
+                          a(href='neutral-gallery-classic.html') Classic
+                        li
+                          a(href='neutral-gallery-with-sidebar.html') With sidebar
+                        li
+                          a(href='neutral-gallery-masonry.html') Masonry
+                    li
+                      a(href='neutral-widgets.html') Widgets
+                    li
+                      a(href='neutral-contact.html') Contact
+                    li
+                      a(href='neutral-about.html') About
+                    li
+                      a(href='#log-in-form') Log in form
+            nav.dark
+              ul
+                li
+                  a(href='neutral-typography.html') Typography
+                li
+                  a(href='neutral-gallery-classic.html') Gallery
+                li
+                  a(href='#') Pages
+                  ul
+                    li
+                      a(href='neutral-video.html') Video
+                    li
+                      a(href='neutral-gallery-classic.html') Galleries
+                      ul
+                        li
+                          a(href='neutral-gallery-classic.html') Classic
+                        li
+                          a(href='neutral-gallery-with-sidebar.html') With sidebar
+                        li
+                          a(href='neutral-gallery-masonry.html') Masonry
+                    li
+                      a(href='neutral-widgets.html') Widgets
+                    li
+                      a(href='neutral-contact.html') Contact
+                    li
+                      a(href='neutral-about.html') About
+                    li
+                      a(href='#log-in-form') Log in form
+          // // .main
+        // // .container
+      .container
+        article.box-post.sticky
+          .box-beta
+            ul.tags
+              li.tag-timestamp 1 sec ago
+              li.tag-category
+                a(href='neutral-index.html')
+                  span(data-hover='Livestream') Livestream
+              li.tag-category
+                a(href='neutral-index.html')
+                  span(data-hover='Some category') Some category
+            .box-content
+              h2.box-title
+                a(href='neutral-post-1.html') Live relation directly from an imporant event
+              .broadcast(data-broadcast-url='php/broadcast.php', data-broadcast-interval='10', data-broadcast-limit='5', data-broadcast-data='{"demo": "neutral", "count": 2}')
+              p
+                | Anim minim est at aute. Risus nullam senectus arcu dictum aliquet. Dictum commodo nam dolor ultricies cras. Quisque dignissim quam et enim ea. Pulvinar nunc quis purus dignissim pellentesque.
+            .meta
+              .share
+                span Share:
+                ul
+                  li
+                    a(data-icon='facebook', href='#')
+                  li
+                    a(data-icon='twitter', href='#')
+                  li
+                    a(data-icon='googleplus', href='#')
+                  li
+                    a(data-icon='pinterest', href='#')
+                  li
+                    a(data-icon='email', href='#')
+              a.more-link(href='neutral-post-1.html')
+                span(data-hover='More') More
+            // // .meta
+          // // .box-beta
+        // // .box-post
+        article.box-post
+          .box-alpha
+            figure.featured-image
+              a(href='neutral-post-2.html')
+                span.slideshow
+                  img(src='/assets/img/thumbs/video-1-767x431.jpg', width='767', height='431', srcset='/assets/img/thumbs/video-1-767x431.jpg 767w, /assets/img/thumbs/video-1-1534x862.jpg 1534w', sizes='(max-width: 767px) 100vw, 767px', alt='Video 1')
+                  img(src='/assets/img/thumbs/video-2-767x431.jpg', width='767', height='431', srcset='/assets/img/thumbs/video-2-767x431.jpg 767w, /assets/img/thumbs/video-2-1534x862.jpg 1534w', sizes='(max-width: 767px) 100vw, 767px', alt='Video 2')
+                  img(src='/assets/img/thumbs/video-3-767x431.jpg', width='767', height='431', srcset='/assets/img/thumbs/video-3-767x431.jpg 767w, /assets/img/thumbs/video-3-1534x862.jpg 1534w', sizes='(max-width: 767px) 100vw, 767px', alt='Video 3')
+                span.slideshow
+                  img(src='/assets/img/thumbs/video-1-350x420.jpg', width='350', height='420', srcset='/assets/img/thumbs/video-1-350x420.jpg 350w, /assets/img/thumbs/video-1-700x840.jpg 700w', sizes='(max-width: 767px) 100vw, 350px', alt='Video 1')
+                  img(src='/assets/img/thumbs/video-2-350x420.jpg', width='350', height='420', srcset='/assets/img/thumbs/video-2-350x420.jpg 350w, /assets/img/thumbs/video-2-700x840.jpg 700w', sizes='(max-width: 767px) 100vw, 350px', alt='Video 2')
+                  img(src='/assets/img/thumbs/video-3-350x420.jpg', width='350', height='420', srcset='/assets/img/thumbs/video-3-350x420.jpg 350w, /assets/img/thumbs/video-3-700x840.jpg 700w', sizes='(max-width: 767px) 100vw, 350px', alt='Video 3')
+          // // .box-alpha
+          .box-beta
+            ul.tags
+              li.tag-timestamp 8 hours ago
+              li.tag-category
+                a(href='neutral-index.html')
+                  span(data-hover='Journal') Journal
+              li.tag-category
+                a(href='neutral-index.html')
+                  span(data-hover='Video') Video
+            .box-content
+              h2.box-title
+                a(href='neutral-post-2.html') Example post with video player and table
+              p
+                | Enim hendrerit nascetur eiusmod vestibulum mollis. Consectetuer neque blandit ligula dolor. Adipiscing etiam praesent aptent tristique fames metus egestas.
+              .table
+                table.width-full
+                  caption (provisional results)
+                  colgroup
+                    col.width-min
+                    col
+                    col.width-min
+                    col
+                    col.width-min
+                  tbody
+                    tr
+                      td 1.
+                      td Marcus Wandenberg
+                      td NED
+                      td Axis Cayen 4
+                      td 3:42:55
+                    tr
+                      td 2.
+                      td Andrea McKinley
+                      td GBR
+                      td Ozone Triton 25
+                      td 3:48:00
+                    tr
+                      td 3.
+                      td Thomas Morgentaller
+                      td FRA
+                      td BGD Mantra 3
+                      td 3:50:21
+                    tr.highlight
+                      td 7.
+                      td Yassen Nullam
+                      td SWE
+                      td Gin Freex 2
+                      td 4:01:12
+              // // .table
+            // // .box-content
+            .meta
+              .share
+                span Share:
+                ul
+                  li
+                    a(data-icon='facebook', href='#')
+                  li
+                    a(data-icon='twitter', href='#')
+                  li
+                    a(data-icon='googleplus', href='#')
+                  li
+                    a(data-icon='pinterest', href='#')
+                  li
+                    a(data-icon='email', href='#')
+              a.more-link(href='neutral-post-2.html')
+                span(data-hover='More') More
+            // // .meta
+          // // .box-beta
+        // // .box-post
+        article.box-post
+          .box-alpha
+            figure.featured-image
+              a(href='neutral-post-3.html')
+                img(src='/assets/img/thumbs/flowers-pinky-767x431.jpg', width='767', height='431', srcset='/assets/img/thumbs/flowers-pinky-767x431.jpg 767w, /assets/img/thumbs/flowers-pinky-1534x862.jpg 1534w', sizes='(max-width: 767px) 100vw, 767px', alt='Flowers pinky')
+                img(src='/assets/img/thumbs/flowers-pinky-350x420.jpg', width='350', height='420', srcset='/assets/img/thumbs/flowers-pinky-350x420.jpg 350w, /assets/img/thumbs/flowers-pinky-700x840.jpg 700w', sizes='(max-width: 767px) 100vw, 350px', alt='Flowers pinky')
+            .featured-gallery
+              a(href='/assets/img/thumbs/flowers-hand-1920x1080.jpg')
+                img(src='/assets/img/thumbs/flowers-hand-157x157.jpg', width='157', height='157', srcset='/assets/img/thumbs/flowers-hand-157x157.jpg 157w, /assets/img/thumbs/flowers-hand-314x314.jpg 314w', sizes='(max-width: 767px) 100vw, 157px', alt='Flowers hand')
+              a(href='/assets/img/thumbs/flowers-wires-1920x1080.jpg')
+                img(src='/assets/img/thumbs/flowers-wires-157x157.jpg', width='157', height='157', srcset='/assets/img/thumbs/flowers-wires-157x157.jpg 157w, /assets/img/thumbs/flowers-wires-314x314.jpg 314w', sizes='(max-width: 767px) 100vw, 157px', alt='Flowers wires')
+              a(href='/assets/img/thumbs/flower-white-1920x1080.jpg')
+                img(src='/assets/img/thumbs/flower-white-157x157.jpg', width='157', height='157', srcset='/assets/img/thumbs/flower-white-157x157.jpg 157w, /assets/img/thumbs/flower-white-314x314.jpg 314w', sizes='(max-width: 767px) 100vw, 157px', alt='Flower white')
+              a(href='/assets/img/thumbs/flowers-detail-1920x1080.jpg', data-featured-gallery-count='4')
+                img(src='/assets/img/thumbs/flowers-detail-157x157.jpg', width='157', height='157', srcset='/assets/img/thumbs/flowers-detail-157x157.jpg 157w, /assets/img/thumbs/flowers-detail-314x314.jpg 314w', sizes='(max-width: 767px) 100vw, 157px', alt='Flowers detail')
+              a(href='/assets/img/thumbs/flowers-bee-1920x1080.jpg')
+              a(href='/assets/img/thumbs/flowers-full-1920x1080.jpg')
+              a(href='/assets/img/thumbs/flowers-grain-1920x1080.jpg')
+              a(href='/assets/img/thumbs/flowers-sun-1920x1080.jpg')
+            // // .featured-gallery
+          // // .box-alpha
+          .box-beta
+            ul.tags
+              li.tag-timestamp 3 days ago
+              li.tag-category
+                a(href='neutral-index.html')
+                  span(data-hover='Photography') Photography
+            .box-content
+              h2.box-title
+                a(href='neutral-post-3.html') Field photo session with new budget camera. Light conditions, hard subject.
+              p
+                | Risus nullam senectus arcu dictum aliquet. Dictum commodo nam dolor ultricies cras. Quisque dignissim quam et enim ea. Pulvinar nunc quis purus dignissim pellentesque. Nullam do sunt nascetur nisi conubia reprehenderit iaculis.
+              p
+                | Commodo consectetuer auctor imperdiet aptent nunc. Primis feugiat anim diam enim. Orci placerat pede aliquip auctor odio. Cyrenaici quidem non recusant; Itaque in rebus minime obscuris non multus est apud eos disserendi labor. Quae autem natura suae primae institutionis oblita est. Sed ad bona praeterita redeamus.
+            // // .box-content
+            .meta
+              .share
+                span Share:
+                ul
+                  li
+                    a(data-icon='facebook', href='#')
+                  li
+                    a(data-icon='twitter', href='#')
+                  li
+                    a(data-icon='googleplus', href='#')
+                  li
+                    a(data-icon='pinterest', href='#')
+                  li
+                    a(data-icon='email', href='#')
+              a.more-link(href='neutral-post-3.html')
+                span(data-hover='More') More
+            // // .meta
+          // // .box-beta
+        // // .box-post
+        article.box-post
+          .box-beta
+            ul.tags
+              li.tag-timestamp 4 days ago
+              li.tag-category
+                a(href='neutral-index.html')
+                  span(data-hover='Essay') Essay
+              li.tag-category
+                a(href='neutral-index.html')
+                  span(data-hover='Tips and tricks') Tips and tricks
+            .box-content
+              h2.box-title
+                a(href='neutral-post-4.html') This post doesn't have any images - just pure text
+              p
+                | Sanim minim est at aute. Risus nullam senectus arcu dictum aliquet. Dictum commodo nam dolor ultricies cras quisque dignissim quam et enim eartes nullam. Penatibus condimentum aliquam. Diam vehicula quis volutpat nisi auctor penat sibus risus congue tincidunt lorem pariatur. 
+                mark Eque pellentesque metus parturient porttitor per malesuada.
+                |  Nullam do sunt nascetur nisi conubia. Reprehenderit iaculis viverra hendrerit amet cubilia commodo.
+              p
+                | Lacus lacinia diam sagittis mollis consectetuer auctor imperdiet aptent nunc primis feugiat anim. Pretium facilisis aenean ligula aute facilisi do. Accumsan voluptate sodales enim nostrud viverra rutrum exercitation tortor morbi tellus qui. Fusce vehicula class conubia aliquam dapibus consectetuer ad curae euismod sollicitudin dictum aliquet.
+            // // .box-content
+            .meta
+              .share
+                span Share:
+                ul
+                  li
+                    a(data-icon='facebook', href='#')
+                  li
+                    a(data-icon='twitter', href='#')
+                  li
+                    a(data-icon='googleplus', href='#')
+                  li
+                    a(data-icon='pinterest', href='#')
+                  li
+                    a(data-icon='email', href='#')
+              a.more-link(href='neutral-post-4.html')
+                span(data-hover='More') More
+            // // .meta
+          // // .box-beta
+        // // .box-post
+        article.box-post
+          .box-alpha
+            figure.featured-image
+              a(href='neutral-post-5.html')
+                img(src='/assets/img/thumbs/interior-man-767x431.jpg', width='767', height='431', srcset='/assets/img/thumbs/interior-man-767x431.jpg 767w, /assets/img/thumbs/interior-man-1534x862.jpg 1534w', sizes='(max-width: 767px) 100vw, 767px', alt='Interior man')
+                img(src='/assets/img/thumbs/interior-man-350x420-04x05.jpg', width='350', height='420', srcset='/assets/img/thumbs/interior-man-350x420-04x05.jpg 350w, /assets/img/thumbs/interior-man-700x840-04x05.jpg 700w', sizes='(max-width: 767px) 100vw, 350px', alt='Interior man')
+          // // .box-alpha
+          .box-beta
+            ul.tags
+              li.tag-timestamp 6 days ago
+              li.tag-category
+                a(href='neutral-index.html')
+                  span(data-hover='Lifestyle') Lifestyle
+              li.tag-category
+                a(href='neutral-index.html')
+                  span(data-hover='Tips and tricks') Tips and tricks
+            .box-content
+              h2.box-title
+                a(href='neutral-post-5.html') 10 practical interior design advices
+              p
+                | Do et euismod varius urna vivamus. Pretium arcu ligula nisi proident. Lacinia pellentesque qui mi porta parturient. Bibendum feugiat inceptos facilisis dictum anim metus. Leo nam dictum magnis duis. Idleo proident pede tortor mus nisi duis class labore tempor ea ligula velit netus venenatis cum libero purus morbi habitant nostrud.
+              p
+                | Anim proident aliquip euismod commodo nisi consectetuer vel. Sagittis habitant laborum aute a quisque laboris orci quam sem. Nullam do sunt nascetur nisi conubia. Reprehenderit iaculis viverra hendrerit amet cubilia sem cubilia pariatur. Commodo consectetuer auctor imperdiet aptent nunc primis feugiat anim.
+            // // .box-content
+            .meta
+              .share
+                span Share:
+                ul
+                  li
+                    a(data-icon='facebook', href='#')
+                  li
+                    a(data-icon='twitter', href='#')
+                  li
+                    a(data-icon='googleplus', href='#')
+                  li
+                    a(data-icon='pinterest', href='#')
+                  li
+                    a(data-icon='email', href='#')
+              a.more-link(href='neutral-post-5.html')
+                span(data-hover='More') More
+            // // .meta
+          // // .box-beta
+        // // .box-post
+        .post-loader(data-post-loader-url='php/post_loader.php', data-post-loader-count='5', data-post-loader-data='{"demo": "neutral"}')
+          .box
+            .box-content
+              .small-title.post-loader-control
+          // // .box
+        // // .post-loader
+      // // .container
+      footer#footer
+        .container
+          .end-note
+            .align-left
+              p © Your name here, 2016
+            .align-right
+              .share.featured
+                ul
+                  li
+                    a(data-icon='facebook', href='#')
+                  li
+                    a(data-icon='twitter', href='#')
+                  li
+                    a(data-icon='youtube', href='#')
+              // // .share
+            a.back(href='#wrapper', title='Back to top')
+          // // .end-note
+        // // .container
+    // // #wrapper
+    #log-in-form.modal
+      .modal-content
+        img.align-center(src='/assets/img/thumbs/logo-212x83.png', width='212', height='83', srcset='/assets/img/thumbs/logo-212x83.png 212w, /assets/img/thumbs/logo-424x166.png 424w', sizes='(max-width: 212px) 100vw, 212px', alt='Logo')
+        form(action='#filename', method='post')
+          p
+            input.width-full(type='email', placeholder='e-mail', required='')
+          p
+            input.width-full(type='password', placeholder='password', required='')
+          p
+            input.width-full(type='submit', value='Log in')
+          p.form-links
+            a(href='#filename') Sign up ›
+            a(href='#filename') Forget password?
+      // // .modal-content
+      a.close
+    // // #log-in-form.modal
+    script(src='/assets/components/jquery/jquery.min.js')
+    script(src='/assets/js/app.min.js')
+    script.
+      new Live;

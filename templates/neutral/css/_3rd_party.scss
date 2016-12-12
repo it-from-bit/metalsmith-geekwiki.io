@@ -1,0 +1,67 @@
+/**
+ * @package Live
+ * @since   1.0
+ */
+
+/*
+ * Simple lightbox
+ */
+.sl-overlay {
+	background: $simple-lightbox-overlay-background;
+	opacity: 1;
+}
+.sl-wrapper {
+
+	button {
+		color: $simple-lightbox-button-color;
+		font-weight: bold;
+	}
+
+	.sl-counter {
+		color: $simple-lightbox-counter-color;
+	}
+
+	.sl-navigation button {
+
+		&.sl-prev {
+			margin-left: -15px;
+			left: 2.5%;
+		}
+
+		&.sl-next {
+			margin-right: -15px;
+			right: 2.5%;
+		}
+
+	}
+
+	.sl-image .sl-caption {
+		@extend %caption;
+		@include font-extend(secondary);
+	}
+
+}
+
+.sl-spinner {
+	border-color: $simple-lightbox-spinner-color;
+}
+
+body.hidden-scroll {
+	padding-right: 0 !important;
+	overflow: visible;
+}
+
+/*
+ * SpinKit
+ */
+.sk-wave {
+
+	margin: 0;
+	width: auto;
+
+	.sk-rect {
+		margin: 0 2px;
+		width: 3px;
+	}
+
+}
