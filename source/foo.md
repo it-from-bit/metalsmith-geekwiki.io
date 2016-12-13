@@ -1,5 +1,5 @@
 ---
-title: two
+title: foo
 layout: two.pug
 ---
 
