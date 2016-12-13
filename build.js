@@ -18,7 +18,6 @@ const msIf        = require( 'metalsmith-if' )
 const static      = require( 'metalsmith-static' )
 const redirect    = require( 'metalsmith-redirect' )
 const buildDate   = require( 'metalsmith-build-date' ) 
-const s3          = require( 'metalsmith-s3' )
 //const yamlToJson  = require( './metalsmith-yaml-to-json' )
 
 const config = {
@@ -36,14 +35,6 @@ const config = {
     '/github': 'https://github.com/jhyland87'
   }
 }
-/*
-export AWS_ACCESS_KEY_ID='AKIAJM6WLS3SGNOUESBQ'
-export AWS_SECRET_ACCESS_KEY='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'
-[default]
-aws_access_key_id = AKIAJM6WLS3SGNOUESBQ
-aws_secret_access_key = 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
-*/
-
 /* Metalsmith
  ******************************************************************************/
 
@@ -100,13 +91,6 @@ const siteBuild = Metalsmith(__dirname)
         'merge-emphasis': false,
         'hide-comments': false
       }
-    })
-  ))
-  .use(msIf(
-    false,
-    s3({
-      action: 'write',
-      bucket: 'geekwiki.io'
     })
   ))
   .build(function (err) {
