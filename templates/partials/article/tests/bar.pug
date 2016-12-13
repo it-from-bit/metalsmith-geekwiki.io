@@ -1,0 +1,31 @@
+//- 
+  This is the article base template...
+
+// Begin Article Base
+article.box-post
+  //- 
+    .box-alpha
+      //- Featured Image here (Optional)
+      figure.featured-image
+        a(href='neutral-post-2.html')
+          //- Need to have slideshow partials here
+          include slideshow
+    // // .box-alpha
+  .box-beta
+    include tags
+    .box-content
+      //- Article/Post title
+      h2.box-title
+        //- This needs to link to full article
+        a(href='neutral-post-4.html') Template....
+      //- Main Article Body
+      include demo-content/template
+    // // .box-content
+    .meta
+      include share
+      a.more-link(href='neutral-post-2.html')
+        span(data-hover='More') More
+    // // .meta
+  // // .box-beta
+// // .box-post
+// End Article Base

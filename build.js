@@ -18,13 +18,13 @@ const msIf        = require( 'metalsmith-if' )
 const static      = require( 'metalsmith-static' )
 const redirect    = require( 'metalsmith-redirect' )
 const buildDate   = require( 'metalsmith-build-date' ) 
+const s3          = require( 'metalsmith-s3' )
 //const yamlToJson  = require( './metalsmith-yaml-to-json' )
 
 const config = {
   enableModules: {
     tidyHtml: true
   },
-  template: 'neutral',
   source: 'source',
   buildPath: 'public',
   usePretty: true,
@@ -36,7 +36,13 @@ const config = {
     '/github': 'https://github.com/jhyland87'
   }
 }
-
+/*
+export AWS_ACCESS_KEY_ID='AKIAJM6WLS3SGNOUESBQ'
+export AWS_SECRET_ACCESS_KEY='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'
+[default]
+aws_access_key_id = AKIAJM6WLS3SGNOUESBQ
+aws_secret_access_key = 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
+*/
 
 /* Metalsmith
  ******************************************************************************/
@@ -45,74 +51,16 @@ const siteBuild = Metalsmith(__dirname)
   .source( config.source )
   .destination( config.buildPath )
   .clean(true)
-  .use(metadata({
-    /*
-    'personal': 'data/personal/general.json',
-    'experience': 'data/professional/experience.json',
-    'skillsets': 'data/professional/skillsets.json',
-    'metadata': 'data/configs/meta.json',
-    'webconfigs': 'data/configs/web.json'
-    
-    'personal': 'data/personal/general.yaml',
-    'experience': 'data/professional/experience.yaml',
-    'skillsets': 'data/professional/skillsets.yaml',
-    'metadata': 'data/configs/meta.yaml',
-    'webconfigs': 'data/configs/web.yaml',
-    'lists': 'data/configs/lists.yaml'*/
-  }))
-  /*.use(collections({
-    education: {
-      pattern: 'education/**\/*.md',
-      sortBy: 'startDate',
-      reverse: true
-    },
-      experience: {
-      pattern: 'experience/**\/*.md',
-      sortBy: 'startDate',
-      reverse: true
-    },
-      pages: {
-      pattern: '*.md'
-    },
-      foo: {
-      pattern: 'foo.md',
-      sortBy: 'startDate'
-    }
-  }))*/
-  
   .use( assets({
     source: './assets', 
     destination: './assets' 
   }))
-  .use(buildDate({ 
-    key: 'lastBuild' 
-  }))
-  // HTML
-  /*.use(layouts({
-    engine: 'pug',
-    pretty: config.usePretty,
-    moment: require( 'moment'),
-    contrast: require( 'get-contrast'),
-    directory: 'templates',
-    default: 'new/partials/skeleton.pug',
-    pattern: '**\/*.html'
-  }))*/
-
-  // 
   .use(msIf(
     true,
     inplace({
       engine: 'pug',
       pretty: config.usePretty,
       pattern: '*.md'
-      /*pattern: [
-        '*.md'
-        'partials/template/*.md'
-        '*.pug', '**\/*.pug', 
-        '*.md', '**\/*.md', 
-        '**',
-        '!*.yaml', '!**\/*.yaml'
-      ]*/
     })
   ))
   //.ignore(path.resolve( __dirname, 'source/data' ))
@@ -126,23 +74,6 @@ const siteBuild = Metalsmith(__dirname)
     },
     render: 'inline'
   }))
-  // Process the pug templates used as 'partials' 
-  // Note: This needs to be done before the metalsmith-include 
-  /*.use(layouts({
-    engine: 'pug',
-    pretty: config.usePretty,
-    directory: 'templates/partials/',
-    pattern: [
-      'partials/*',
-      'partials/*\/*'
-    ]
-  }))
-  .use(include({
-    engine:'pug',
-    inPlace: true,
-    pretty: config.usePretty,
-    deletePartials: true
-  }))*/
   .use(layouts({
     engine: 'pug',
     pretty: config.usePretty,
@@ -154,11 +85,6 @@ const siteBuild = Metalsmith(__dirname)
       '!partials/*',  '!partials/*/*'
     ]
   }))
-  /*
-  .use(static({
-    src: './static-data',
-    dest: './static-data2'
-  }))*/
   .use(msIf(
     false,
     tidy({
@@ -174,6 +100,13 @@ const siteBuild = Metalsmith(__dirname)
         'merge-emphasis': false,
         'hide-comments': false
       }
+    })
+  ))
+  .use(msIf(
+    false,
+    s3({
+      action: 'write',
+      bucket: 'geekwiki.io'
     })
   ))
   .build(function (err) {
