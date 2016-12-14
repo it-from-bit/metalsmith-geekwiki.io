@@ -1,0 +1,13 @@
+---
+title: Flexibly moving files with lftp
+slug: flexibly-moving-files-lftp
+create_date: 2013-09-02 01:40:33
+tags: 
+updates:
+  username: 6
+  date: 2013-09-02 01:40:33
+  comment: Initial import of post from WP
+---
+There is a great tutorial over at IT World on using&nbsp;**[lftp](http://www.linuxdigest.org/wp-content/uploads/lftp.yar.ru "lftp")**,&nbsp;a lesser known command line FTP/HTTP client. &nbsp; This versatile client has been around since the mid 90's, but gets less visibility these days compared to curl or wget. &nbsp;There are many great features in lftp, such as SSL support, recursive transfers, and even the ability to put a running transfer in the background. &nbsp;If you want to give it a try, you can install it straight from your package repository on most Linux distributions.
+
+<address id="article-title"><strong><a title="Unix: Flexibly moving files with lftp" href="http://www.linuxdigest.org/wp-content/uploads/unix-flexibly-moving-files-lftp" target="_blank">Unix: Flexibly moving files with lftp</a></strong></address>

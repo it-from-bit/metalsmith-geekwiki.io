@@ -1,0 +1,12 @@
+---
+title: Viewing Bash Exit Status Codes With Pipes
+slug: viewing-bash-exit-status-codes-with-pipes
+create_date: 2012-06-25 16:18:31
+tags: 
+updates:
+  username: 2
+  date: 2012-06-25 16:18:31
+  comment: Initial import of post from WP
+---
+Recently I was executing bash scripts from within bash scripts, and executing commands based off of exit code,&nbsp;typically I just use [bash]/bin/bash ./script.sh || echo "script.sh failed"&nbsp;[/bash] or just the typical [bash]/bin/bash ./script.sh if [$? -ne 0]; then echo&nbsp;"script.sh failed"; fi[/bash] But now what if you are also piping the output of _script.sh_ through&nbsp;[tee](http://www.linuxdigest.org/wp-content/uploads/Tee_(command))? Then you will see that $? is actually the exit code of the tee command. I found a nifty bash variable/array,&nbsp;$PIPESTATUS. This is an array that contains the exit statuses of all of the exit codes ran by the last command. By default, if you just echo&nbsp;$PIPESTATUS, you will get the first value, which in this case would be the exit value of&nbsp;/bin/bash ./script.sh. The exit code of the scripts/commands are placed into the $PIPESTATUS array in the same order that they are executed. Heres an example of how to properly access the exit codes: [bash] who | wc -l | foo if [${PIPESTATUS[0]} -ne "0" ]; then echo "The 'who' command failed" elif [${PIPESTATUS[1]} -ne "0" ]; then echo "The 'wc -l' command failed" elif [${PIPESTATUS[2]} -ne "0" ]; then echo "The 'foo' command failed" else echo "it worked!" fi [/bash]
+

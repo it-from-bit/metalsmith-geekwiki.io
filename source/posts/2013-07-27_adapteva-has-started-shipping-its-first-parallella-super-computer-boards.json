@@ -1,0 +1,30 @@
+---
+title: Parallella: Supercomputing for everyone
+slug: adapteva-has-started-shipping-its-first-parallella-super-computer-boards
+create_date: 2013-07-27 05:44:37
+tags: 
+updates:
+  username: 3
+  date: 2013-07-27 05:44:37
+  comment: Initial import of post from WP
+---
+[![logo](http://www.linuxdigest.org/wp-content/uploads/2013/07/logo.png)](http://www.linuxdigest.org/wp-content/uploads/2013/07/logo.png)  Adapteva Has Started Shipping Its First Parallella Super Computer Boards to its Kickstarter supporters, and will soon be available to the public. This is some damn cool stuff.  About Adapteva info ... From they're website:> _"Adapteva, Inc. is a privately held computer manufacturer based in Lexington, Massachusetts that develops and builds the most energy efficient microprocessor chips and single board computers in the world. Adapteva’s ground breaking Epiphany multicore architecture and Parallella credit card sized computers will disrupt a wide range of end markets from compact mobile devices to next generation supercomputers."_ And as they put it in they're kickstarter project goal:> _"Parallella has a rather astonishing goal: It’s all about creating a credit card-sized computer that has a complex enough architecture that it can push out up to 90 gigaflops."_So check this thing out...  [caption id="attachment\_1096" align="alignnone" width="300"][![Beeeaaaauuuuutifullll!](http://www.linuxdigest.org/wp-content/uploads/2013/07/parallella_beauty1_1755x1175_large-300x200.jpg)](http://www.linuxdigest.org/wp-content/uploads/parallella-16) Beeeaaaauuuuutifullll![/caption]  Its cost? $99 ... At only using 2watts it delivers 102 TFLOPS!!!  Specs and some comparisons to existing technologies: **Specifications:**
+- [Xilinx Zynq®-7000 All Programmable SoC (XC7Z010) with Dual Core ARM A9 CPU](http://www.linuxdigest.org/wp-content/uploads/zynq-7000.html "http://www.xilinx.com/content/xilinx/en/products/silicon-devices/soc/zynq-7000.html")
+- [Epiphany III (16-core CPU Accelerator](http://www.linuxdigest.org/wp-content/uploads/e16g301 "Epiphany-III Datasheet"))
+- 1GB DDR3 SDRAM
+- 128Mb Quad-SPI flash
+- Ethernet 10/100/1000
+- Micro HDMI connection
+- Micro SD Card Slot
+- Micro USB 2.0 (two)
+- Dimensions are 3.4'' x 2.1''
+**Optional Upgrades:**
+- Four 60-pin backside high speed expansion connectors ("PEC") for GPIO, external power, and Epiphany links
+- Zynq SoC upgrade to XC7Z020
+[![technology_table-1024x546](http://www.linuxdigest.org/wp-content/uploads/2013/07/technology_table-1024x546-300x159.png)](http://www.linuxdigest.org/wp-content/uploads/2013/07/technology_table-1024x546.png)  But that is not even the cool part. As stated in the title of this article&nbsp;Adapteva is providing affordable super-computing to the mass'es  I present... **The Parrallella Cluster Kit:**  [caption id="attachment\_1102" align="alignnone" width="300"][![parallella_cluster7_1775x1175_1024x1024](http://www.linuxdigest.org/wp-content/uploads/2013/07/parallella_cluster7_1775x1175_1024x1024-300x200.jpg)](http://www.linuxdigest.org/wp-content/uploads/parallella-cluster-kit) WOW[/caption]  Priced at $575> _"The Parallella Cluster Kit includes four Parallella-16 boards and the accessories needed to set up a high performance cluster in no time!"_ **Includes:**
+- Four Parallella-16 boards (XC7Z010 version with backside expansion connectors "PEC")
+- 4 Pre-loaded 16GB SD Cards (Ubuntu 12.04)
+- 4 board-to-board flexible Epiphany link connector cables (up to 10Gb/s total bandwidth per cable)
+- 20 metal standoff legs
+- 110-240V Power adapter
+ I don't even know what I would do with that much computing power sitting on my desk for just over $500 ... 1/4 of the price of a decently powered PC.  But what would you actually do with it? Well, as they state it comes pre-loaded with Ubuntu on it. They also opensourced their SDK Epiphany which lets you take advantage of all of those CPU's and pretty easily write efficient code that will run parallel across all of them. This could make the ultimate WEP/WPA/WPA2 or password cracker. In all seriousness though, for less then the cost that it takes to bootup an Amazon GPU instance for a few hours you can have your own supercomputer sitting on your desktop. That is just bad ass.  Here is the info for the SDK and their Linux Kernels.  Software Distribution:  Free pre-built Linux kernels and Epiphany software development tools can be downloaded from&nbsp;[ftp.parallella.org](ftp://ftp.parallella.org/ "ftp.parallella.org"). Open source software repositories can be downloaded from&nbsp;&nbsp;[www.github.com/parallella](http://www.linuxdigest.org/wp-content/uploads/parallella "github.com/parallella")&nbsp;and&nbsp;[www.github.com/adapteva](http://shop.adapteva.com/collections/parallella/products/www.github.com/adapteva "www.github.com/adapteva").  Also, one last thing to take a look at is where they expect to be at in 2018. [![roadmap-1024x684](http://www.linuxdigest.org/wp-content/uploads/2013/07/roadmap-1024x684-300x200.png)](http://www.linuxdigest.org/wp-content/uploads/introduction)  1 TFLOP/100Watt ...  From they're site:> "Yes, we know it looks ridiculous, but we stand by it and will make every effort to make it a reality."
