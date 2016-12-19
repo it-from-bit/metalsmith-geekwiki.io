@@ -1,69 +1,75 @@
-// Begin Article1
-article.box-post
-  .box-alpha
-    //- Featured Image here (Optional)
-    figure.featured-image
-      a(href='neutral-post-2.html')
-        //- Need to have slideshow partials here
-        include slideshow
-  // // .box-alpha
-  .box-beta
-    ul.tags
-      li.tag-timestamp 8 hours ago
-      li.tag-category
-        a(href='neutral-index.html')
-          span(data-hover='Journal') Journal
-      li.tag-category
-        a(href='neutral-index.html')
-          span(data-hover='Video') Video
-    .box-content
-      //- Article/Post title
-      h2.box-title
-        //- This needs to link to full article
-        a(href='#') Post Title...
-      p
-        | Post summary blah blah idkwtf poopie
-      .table
-        table.width-full
-          caption (provisional results)
-          colgroup
-            col.width-min
-            col
-            col.width-min
-            col
-            col.width-min
-          tbody
-            tr
-              td 1.
-              td Marcus Wandenberg
-              td NED
-              td Axis Cayen 4
-              td 3:42:55
-            tr
-              td 2.
-              td Andrea McKinley
-              td GBR
-              td Ozone Triton 25
-              td 3:48:00
-            tr
-              td 3.
-              td Thomas Morgentaller
-              td FRA
-              td BGD Mantra 3
-              td 3:50:21
-            tr.highlight
-              td 7.
-              td Yassen Nullam
-              td SWE
-              td Gin Freex 2
-              td 4:01:12
-      // // .table
-    // // .box-content
-    .meta
-      include share
-      a.more-link(href='neutral-post-2.html')
-        span(data-hover='More') More
-    // // .meta
-  // // .box-beta
-// // .box-post
-// End Article1
+extends ../../base
+
+block content
+  // Begin Article1
+  article.box-post
+    .box-alpha
+      //- Featured Image here (Optional)
+      figure.featured-image
+        a(href='neutral-post-2.html')
+          //- Need to have slideshow partials here
+          include slideshow
+    // // .box-alpha
+    .box-beta
+      ul.tags
+        li.tag-timestamp 8 hours ago
+        li.tag-category
+          a(href='neutral-index.html')
+            span(data-hover='Journal') Journal
+        li.tag-category
+          a(href='neutral-index.html')
+            span(data-hover='Video') Video
+      .box-content
+        //- Article/Post title
+        h2.box-title
+          //- This needs to link to full article
+          a(href='#') Post Title...
+        p
+          | Post summary blah blah idkwtf poopie
+        .table
+          table.width-full
+            caption (provisional results)
+            colgroup
+              col.width-min
+              col
+              col.width-min
+              col
+              col.width-min
+            tbody
+              tr
+                td 1.
+                td Marcus Wandenberg
+                td NED
+                td Axis Cayen 4
+                td 3:42:55
+              tr
+                td 2.
+                td Andrea McKinley
+                td GBR
+                td Ozone Triton 25
+                td 3:48:00
+              tr
+                td 3.
+                td Thomas Morgentaller
+                td FRA
+                td BGD Mantra 3
+                td 3:50:21
+              tr.highlight
+                td 7.
+                td Yassen Nullam
+                td SWE
+                td Gin Freex 2
+                td 4:01:12
+        // // .table
+      // // .box-content
+      .meta
+        include share
+        a.more-link(href='neutral-post-2.html')
+          span(data-hover='More') More
+      hr
+      block article_content
+        h2 Testing!... 
+      // // .meta
+    // // .box-beta
+  // // .box-post
+  // End Article1

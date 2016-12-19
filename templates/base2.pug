@@ -1,3 +1,4 @@
+include components/article
 doctype html
 html.no-js.no-touch(lang='en')
   head
@@ -11,10 +12,62 @@ html.no-js.no-touch(lang='en')
       // End Header
       // Begin Body Content
       .container
-        include banner
-        // // .box-post
-        include partials/article/base
-        include partials/post-loader
+        //- Example with no title provided
+        +article-post0()
+          h3 This is an example of article ONE
+          p Just some other content...
+
+        //- Example with title provided
+        +article-post0({ title: '<strong>Example</strong> Using Post <em>Mixin #2</em>'})
+          h3 This is an example of article ONE
+          p Just some other content...
+       
+        //-
+          +article-post1('Post Numero Uno!..')
+            p
+              | bla bla bla.. BLA BLA!
+              |  Nullam do sunt nascetur nisi conubia. Reprehenderit iaculis viverra hendrerit amet cubilia commodo.
+            p
+              | Paragraph TWO!...
+
+          +article-post('Post Num TWOOOOO')
+            h3 Step One
+            p Blah blah... foo, bar...
+            hr
+            h3 Step Two
+            p Lacus lacinia diam sagittis mollis consectetuer auc
+            hr
+            h3 Step Three
+            p m nostrud viverra rutrum exercitation tortor m
+
+        
+        +article-post2({
+          title: '<strong>Example</strong> Using Post <em>Mixin #2</em>',
+          categories: [{
+            href: '#FOO',
+            title: 'Testing One'
+          },{
+            href: '#Bar',
+            title: 'Testing TWO'
+          }]
+        })
+          h3(style="text-align: left !important;") Step One
+          p Blah blah... foo, bar...
+          hr
+          h3(style="text-align: left !important;") Step Two
+          p Lacus lacinia diam sagittis mollis consectetuer auc
+          hr
+          h3(style="text-align: left !important;") Step Three
+          p m nostrud viverra rutrum exercitation tortor mo
+
+        +article-post3({
+          title: 'Example Using Post Mixin #3',
+          categories: [
+            ['Testing One','#FOO'],
+            ['Testing TWO','#Bar']
+          ]
+        })
+
       // End Body Content
       // // .container
       footer#footer

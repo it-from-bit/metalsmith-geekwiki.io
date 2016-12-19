@@ -36,13 +36,6 @@ const config = {
     '/github': 'https://github.com/jhyland87'
   }
 }
-/*
-export AWS_ACCESS_KEY_ID='AKIAJM6WLS3SGNOUESBQ'
-export AWS_SECRET_ACCESS_KEY='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'
-[default]
-aws_access_key_id = AKIAJM6WLS3SGNOUESBQ
-aws_secret_access_key = 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
-*/
 
 /* Metalsmith
  ******************************************************************************/
@@ -63,6 +56,7 @@ const siteBuild = Metalsmith(__dirname)
       pattern: '*.md'
     })
   ))
+  .use(include())
   //.ignore(path.resolve( __dirname, 'source/data' ))
   // 
   .use(markdownit({

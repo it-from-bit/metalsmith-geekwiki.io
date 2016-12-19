@@ -1,13 +1,32 @@
-.share
-  span Share:
-  ul
-    li
-      a(data-icon='facebook', href='#')
-    li
-      a(data-icon='twitter', href='#')
-    li
-      a(data-icon='googleplus', href='#')
-    li
-      a(data-icon='pinterest', href='#')
-    li
-      a(data-icon='email', href='#')
+//-
+  .share
+    span Share:
+    ul
+      li
+        a(data-icon='facebook', href='#')
+      li
+        a(data-icon='twitter', href='#')
+      li
+        a(data-icon='googleplus', href='#')
+      li
+        a(data-icon='pinterest', href='#')
+      li
+        a(data-icon='email', href='#')
+
+mixin social-network(shareables)
+  .share
+    span Share:
+    ul
+      each share in shareables
+        li
+          a(data-icon='#{share.icon}', href='#{share.href}')
+   
+
+//-
+  +social-network([
+    { icon: 'facebook', href: '#' },
+    { icon: 'twitter', href: '#' },
+    { icon: 'googleplus', href: '#' },
+    { icon: 'pinterest', href: '#' },
+    { icon: 'email', href: '#' }
+  ])

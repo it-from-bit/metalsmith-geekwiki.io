@@ -1,5 +1,6 @@
 ---
 title: base
-layout: base.pug
+layout: partials/article/article.pug
 ---
 
+p TEST!..
