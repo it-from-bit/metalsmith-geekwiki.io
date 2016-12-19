@@ -18,7 +18,6 @@ const msIf        = require( 'metalsmith-if' )
 const static      = require( 'metalsmith-static' )
 const redirect    = require( 'metalsmith-redirect' )
 const buildDate   = require( 'metalsmith-build-date' ) 
-const s3          = require( 'metalsmith-s3' )
 //const yamlToJson  = require( './metalsmith-yaml-to-json' )
 
 const config = {
@@ -36,7 +35,10 @@ const config = {
     '/github': 'https://github.com/jhyland87'
   }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> f4df1d2bd17029708bdb0cdd8db156a7de1c08ad
 /* Metalsmith
  ******************************************************************************/
 
@@ -94,13 +96,6 @@ const siteBuild = Metalsmith(__dirname)
         'merge-emphasis': false,
         'hide-comments': false
       }
-    })
-  ))
-  .use(msIf(
-    false,
-    s3({
-      action: 'write',
-      bucket: 'geekwiki.io'
     })
   ))
   .build(function (err) {

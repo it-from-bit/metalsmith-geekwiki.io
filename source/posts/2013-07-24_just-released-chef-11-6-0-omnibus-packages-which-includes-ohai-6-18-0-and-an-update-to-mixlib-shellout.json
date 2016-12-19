@@ -1,0 +1,97 @@
+---
+title: Just released!! Chef 11.6.0 Omnibus packages, which includes Ohai 6.18.0 and an update to mixlib-shellout!
+slug: just-released-chef-11-6-0-omnibus-packages-which-includes-ohai-6-18-0-and-an-update-to-mixlib-shellout
+create_date: 2013-07-24 19:51:56
+tags: 
+updates:
+  username: 3
+  date: 2013-07-24 19:51:56
+  comment: Initial import of post from WP
+---
+Original Post from OpsCode:&nbsp;[http://www.opscode.com/blog/](http://www.linuxdigest.org/wp-content/uploads/blog)  We've got a bundle of exciting Chef news for you today.
+
+- Chef 11.6.0 release
+- Ohai 6.18.0 release
+- Client release cadence
+- Testing matrices
+
+## Chef 11.6.0
+ Opscode is excited to announce the release of version 11.6.0 of the Chef client. You can download the installation packages from the&nbsp;[install page](http://www.linuxdigest.org/wp-content/uploads/install)&nbsp;now.
+#### Highlights
+
+- The file resource and provider, as well as the subclasses such as cookbook\_file and template, have been significantly refactored.
+  - Added atomic updates
+  - Simplified code
+  - Base SELinux support
+  - Conditional GETs (ETags)
+  - ftp and local file copy
+- Ruby is upgraded to 1.9.3-p448 to include the OpenSSL security fix (CVE-2013-4073)
+- Template helper methods
+- Daemonized chef-client now defaults to forking on Linux/Unix.
+- The batch and powershell\_script resources from the windows cookbook are now in core Chef.
+- Initial Ruby/rubygems 2.0 support (when testing under a gem based install)
+- Encrypted data bag items now support&nbsp;[authenticated encryption](http://www.linuxdigest.org/wp-content/uploads/CHEF-3615)
+- Node objects are now sortable
+- Native support for running the Chef client as a service on Windows
+- CA certificates are now included in the Omnibus packaging
+
+#### Release Notes
+ For more information, check out the&nbsp;[full release notes](http://www.linuxdigest.org/wp-content/uploads/release_notes.html).
+#### Contributors
+ As usual, we had a huge number of contributions from the Chef community:  Jesse Campbell&nbsp;spear-headed many of the file resource and provider related tickets and was a big part of all the refactor work. Thanks Jesse!&nbsp;_You’re this release’s MVP!_ Xabier de Zuazo&nbsp;past double-MVP, provided many patches. He fixed bugs in ‘knife cookbook site share’ and ‘knife cookbook test’, added support for debian and Ubuntu to the ifconfig resource, silenced some EPIPE errors, fixed bugs in the route provider, raise the precedence of not\_if/only\_if in the resource, and added support for new conditionals when comparing platform versions Ranjib Dey&nbsp;improved the knife -a flag to support returning multiple attributes, added GCEL platform support, and cleaned up the spec tests Ionuț Arțăriși&nbsp;ported the zypper provider to shellout so command output would be captured, enabled gpg checks in zypper, and fixed a bug in the group provider on openSuSE 12.3 Yoni Yalovitsky&nbsp;fixed a bug preventing the path to config files from showing up in exceptions, and improved an unhelpful error that occurred when log\_location was not writable Teemu Matilainen&nbsp;added support for chained lazy-loaded dependencies in knife, updated the omnibus bootstrap template to use SSL, and cleaned up some really old Chef::Config default values that are no longer used Chris Roberts&nbsp;provided a patch that allows passing Procs as attribute values Ben Bytheway&nbsp;updated the embedded ruby to 1.9.3-p429 to include significant Windows performance improvements Felix Bünemann&nbsp;improved cross-platform support for chef-solo in the cookbook tarball unpacking code Jon Morrow&nbsp;cleaned up on old monkey-patch to Dir Jessica Bourne&nbsp;ensured that the user\_valid\_regex check supported Windows usernames Phil Dibowitz&nbsp;improved the yum package provider and added support for a timeout Steffen Gebert&nbsp;updated the git provider to run a submodule sync when using submodules Eric Saxby&nbsp;fixed changing a user’s groups on SmartOS Kyle Goodwin&nbsp;added support for enviroments in chef-solo Matthew Horan&nbsp;made the client finish up before exiting on TERM Loic Antoine-Gombeaud&nbsp;improved messaging in Chef::REST around redirections Peter Vernigorov&nbsp;tracked down an issue in the error\_report error handler Yukihiko Sawanobori&nbsp;improved the solaris service provider, and brought improvements to the SmartOS package provider across the goal line Kristian Vlaardingerbroek&nbsp;fixed an issue in the mount provider that prevented it from updating changes mount options, and added support for mounting device symlinks Daniel Schauenberg&nbsp;cleaned up the extra newlines in the output of knife search Pawel Kozlowski&nbsp;improved the git provider to support the URL changing Thom May&nbsp;ensured that knife creates tempfiles with a suffix of .json when editing JSON, and added support for “none” as a mountpoint Adam Spiers&nbsp;ensured that zypper provider does not block Jeff Blaine&nbsp;caught an issue where FileEdit would raise an exception if the file existed but was empty Loic Antoine-Gombeaud&nbsp;cleaned up some dead code in #set\_or\_return Mike Fiedler&nbsp;added support for explicitly setting a nodes run list using knife Sander Botman&nbsp;ensured that knife sub-commands were sorted in the help output Decklin Foster&nbsp;added ssh authentication forwarding to knife Greg Thornton&nbsp;made the cookbook syntax checks use chefignore files JJ Asghar&nbsp;caught a typo in the chef-client output Grégoire Seux&nbsp;found and fixed an issue where Chef wouldn’t release the lockfile when it timed out on a connection Hiroaki Nakamura&nbsp;added support for DataBag.list in chef-solo Kannan Manickam&nbsp;cleaned up duplicate push and \<\< methods in the resource collection Nicolas Szalay&nbsp;improved the included init scripts for Chef Brandon Adams&nbsp;no\_lazy\_load patch is now working H. “Waldo” G.&nbsp;changed the gemfile to source over SSL Martin Vidner&nbsp;fixed a bug in the unit tests where a dot-file was not being included Matthew Kent&nbsp;made Chef not consider a definition in the same file a duplicate Pavel Valodzka&nbsp;improved the execute resource creates attribute in be relative to the cwd attribute if present Darren Birkett&nbsp;fixed an inconsistency in the LanguageIncludeRecipe deprecation message Javier Frias&nbsp;added XenServer platform support Andrea Campi&nbsp;cleaned up some output in LWRPs related to why\_run mode
+## Ohai 6.18.0
+ This Ohai release cleans up some major cloud detection functionality, adds support for a couple of new pieces of data and fixes a couple of bugs. It is primarily a community driven release, so thank&nbsp;_you_!
+#### Contributors
+ Joseph Anthony Pasquale Holsten&nbsp;added a root\_group attributes to simplify community cookbooks. Thanks for being such a great community member over the years Joseph.&nbsp;_You’re this Ohai release’s MVP!_ Mike Javorski&nbsp;added support to the EC2 plugin for handling missing metadata API versions Chris Roberts&nbsp;added support for detecting Rackspace Cloud through metadata Sander van Harmelen&nbsp;added XenServer to the ‘rhel’ platform family Ranjib Dey&nbsp;added support for GCEL Malte Swart&nbsp;and&nbsp;John Skopis&nbsp;improved the ssh key plugin to collect ECDSA keys Lann Martin&nbsp;fixed a bug to collect ssh host keys when the path is not specified in the sshd\_config file Yukihiko Sawanobori&nbsp;quieted some output to allow JSON parsing via pipes Laurent Désarmes&nbsp;fixed ip address detection on vserver guests with /32 addresses Pete Cheslock&nbsp;fixed Openstack detection in the HP cloud Tim Smith&nbsp;patched the Rackspace plugin to not provide detection using MAC addresses Eugene Wood&nbsp;fixed a parsing bug with the -d option Dmytro Kovalov&nbsp;contributed to a cpu plugin for darwin
+#### Release Notes
+ Bug
+- [[OHAI-126](http://www.linuxdigest.org/wp-content/uploads/OHAI-126)] – ohai -d option parsing bug?
+- [[OHAI-387](http://www.linuxdigest.org/wp-content/uploads/OHAI-387)] – The rackspace plugin identifies a server from another provider (OVH) as from rackspace
+- [[OHAI-425](http://www.linuxdigest.org/wp-content/uploads/OHAI-425)] – Ohai discovery on hp cloud fails (using the openstack plugin)
+- [[OHAI-426](http://www.linuxdigest.org/wp-content/uploads/OHAI-426)] – IP address not detected for vserver guest
+- [[OHAI-430](http://www.linuxdigest.org/wp-content/uploads/OHAI-430)] – Linux Mint 14 is detected as Debian
+- [[OHAI-433](http://www.linuxdigest.org/wp-content/uploads/OHAI-433)] – change log level info to debug at network plugin.
+- [[OHAI-434](http://www.linuxdigest.org/wp-content/uploads/OHAI-434)] – ec2 metadata is unpopulated / ec2 fetch\_metadata loops forever
+- [[OHAI-442](http://www.linuxdigest.org/wp-content/uploads/OHAI-442)] – Ohai does not detect ssh host keys properly
+- [[OHAI-445](http://www.linuxdigest.org/wp-content/uploads/OHAI-445)] – Detect ecdsa host key
+- [[OHAI-455](http://www.linuxdigest.org/wp-content/uploads/OHAI-455)] – ohai leaves zombie processes in it's wake.
+- [[OHAI-472](http://www.linuxdigest.org/wp-content/uploads/OHAI-472)] – XenServer is recognized correctly using LSB, but is not assigned to a platform\_family.
+- [[OHAI-489](http://www.linuxdigest.org/wp-content/uploads/OHAI-489)] – GCE plugin breaks EC2 plugin
+- [[OHAI-490](http://www.linuxdigest.org/wp-content/uploads/OHAI-490)] – root\_group plugin hangs chef-client on Windows with large AD installations
+ Improvement
+- [[OHAI-279](http://www.linuxdigest.org/wp-content/uploads/OHAI-279)] – Add a cpu plugin for darwin
+- [[OHAI-419](http://www.linuxdigest.org/wp-content/uploads/OHAI-419)] – cloud.public\_ipv4 attribute is not set for Windows Azure VM's created using knife azure plugin.
+- [[OHAI-466](http://www.linuxdigest.org/wp-content/uploads/OHAI-466)] – Detect rackspace via metadata
+ New Feature
+- [[OHAI-428](http://www.linuxdigest.org/wp-content/uploads/OHAI-428)] – provide root\_group attribute
+- [[OHAI-444](http://www.linuxdigest.org/wp-content/uploads/OHAI-444)] – Support Google Compute Engine as a cloud platform
+- [[OHAI-450](http://www.linuxdigest.org/wp-content/uploads/OHAI-450)] – Recognize GCEL as a platform
+
+## Client release cadence
+ We’ve listened to your suggestions and requests, and we’re moving to a three month release cadence for the client. There will be two months of development followed by one month for the internal testing and release process. This means we will be “freezing” for release at the beginning of the month and will have the release out toward the end of the month. We will still review code and generally help you out during release months, it just won’t get merged until after the release. We’re being careful to not set fixed release dates, because we still want to make the best choices we can for you, like including fixes for critical bugs even after the code freeze. This means we’ll be targeting releases of Chef 10.28.0 in August, 11.8.0 in October, and 10.30.0 in November. We hope this helps you set better expectations around your Chef contributions and deployments!
+## Testing Matrices
+ For this release, we took a step back and looked at our test coverage, and then made a concerted, dedicated effort to shore it up in the ways we felt would have the biggest impact. We thought it might be helpful to share some of the ways in which we’ve tested this release.
+#### CI
+ Our Continuous Integration infrastructure is running pretty much continuously. You can find the tests that are being run in the&nbsp;[chef repository](http://www.linuxdigest.org/wp-content/uploads/chef), and here are the platforms and architectures we’re running them on:
+- Debian 6 (i686, x86\_64)
+- Enterprise Linux 5 & 6 (i686, x86\_64)
+- Mac OS X 10.6, 10.7 (x86\_64)
+- openSUSE 12.1 (i686, x86\_64)
+- Solaris 5.9 (sparc)
+- Solaris 5.10 & 5.11 (i386, sparc)
+- SUSE Enterprise 11.2 (i686, x86\_64)
+- Ubuntu 10.04, 10.10, 11.04, 11.10, 12.04, 12.10 (i686, x86\_64)
+- Windows 2003 R2, 2008 (i686, x86\_64)
+- Windows 2008 R2, 2012 (x86\_64)
+
+#### Interoperability
+ We have sanity tested this release to the point of convergence against the following set of Chef Servers:
+- OPC 1.4.6-1
+- OPC 1.2.8.2-1
+- Hosted Chef
+- OSC 11.8
+- OSC 11.6
+- OSC 10.26.0
+
+#### Cookbook Functionality
+ We have exercised a large set of cookbooks using a combination of test-kitchen and manual testing. Expect to see this matrix published with future releases.  Please note that this is not the totality of the test effort, only a cross-section which I thought folks might find interesting. If you have specific questions, feel free to let me know – as well as if there are specific tests which you believe will add a lot of value in what they prove and what bugs they would catch.

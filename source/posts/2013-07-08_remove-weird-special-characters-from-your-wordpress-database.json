@@ -1,0 +1,12 @@
+---
+title: Remove weird special characters from your WordPress Database
+slug: remove-weird-special-characters-from-your-wordpress-database
+create_date: 2013-07-08 03:07:20
+tags: 
+updates:
+  username: 12
+  date: 2013-07-08 03:07:20
+  comment: Initial import of post from WP
+---
+A few months ago I had to restore our website from a backup, and noticed that when I did so almost all of the posts&nbsp;that we have done had weird special characters inside them. I started to manually edit the posts and remove the special&nbsp;characters and when I realized how many there were I decided to do it a quick and easy way. With a little MySQL magic&nbsp;you can easily replace any of the weird special characters in all of your posts saving you a ton of time. The special character&nbsp;that I personally had floating around was:&nbsp;Â &nbsp;-- So I simply logged into my MySQL database via a command line:  [bash] mysql -u username -p \<database\>[/bash]  Then you want to use the database for your wordpress blog:  [bash]use \<database\>;[/bash]  Then all you need to do is paste the following query to replace the weird&nbsp;Â character with a blank space:  [bash]&nbsp;UPDATE wp\_posts SET post\_content = REPLACE(post\_content, 'Â', '');[/bash]  One thing to note, though. If you changed your prefix from the standard wp\_ you will want to update the above query to reflect&nbsp;whatever you prefixed your tables with. If you have any other weird characters, simply copy it from a post and replace it in the&nbsp;query and re-run it against your database and you will quickly clear them out. If you have them in your comments then simply replace&nbsp;the post\_content items with comment\_content and make sure you change wp\_post to wp\_comments.
+

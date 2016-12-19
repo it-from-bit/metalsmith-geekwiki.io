@@ -1,0 +1,21 @@
+---
+title: Bash Trick - Display Timestamp For Each Command In History
+slug: bash-trick-display-timestamp-command-history
+create_date: 2014-04-24 08:21:16
+tags: 
+updates:
+  username: 2
+  date: 2014-04-24 08:21:16
+  comment: Initial import of post from WP
+---
+Ever go through your _history_, and wish you knew the exact date and time a given command was typed? Well theres actually a fairly simple trick. It's the global _HISTTIMEFORMAT_ variable.  To test it out, copy and paste the following into your bash prompt, type a few commands, then type _history_ again.`$ HISTTIMEFORMAT="%d/%m/%y %T "`  You should see the typical history output, with the date and time prepended to each line. Heres an example from my _history_ output.` 497 24/04/14 01:16:46 man nmap
+  498 24/04/14 01:16:46 sudo su -
+  499 24/04/14 01:16:46 sudo su -
+  500 24/04/14 01:16:46 exit
+  501 24/04/14 01:16:53 clear
+  502 24/04/14 01:16:54 HISTTIMEFORMAT="%d/%m/%y %T "
+  503 24/04/14 01:16:57 ls
+  504 24/04/14 01:17:04 whoami
+  505 24/04/14 01:17:17 ps aux |grep bla
+  506 24/04/14 01:17:20 history |tail`  Now if you want this to be permanent, then execute the following, to add it to your _.bash\_profile_`$ echo 'export HISTTIMEFORMAT="%d/%m/%y %T "' >> ~/.bash_profile`
+

@@ -1,0 +1,30 @@
+---
+title: Bash Parallel - easily run parallel processes in bash
+slug: bash-parallel-easily-run-parallel-processes-bash
+create_date: 2014-01-13 19:38:41
+tags: 
+updates:
+  username: 3
+  date: 2014-01-13 19:38:41
+  comment: Initial import of post from WP
+---
+You don't have to write complicated bash shell scripts to accomplish parallel processing!  Take this as an example of the hard way,&nbsp;It's going to create 5 "threads" and each while loop can run with 5 at a time.  [bash]  [/bash]  Eh... Complicated. Why make life hard or reinvent the wheel? Just use [parallel](http://linux.die.net/man/1/parallel "parallel man page")The two main flags you would probably care about are:  [divider] **-j maxjobs -&nbsp;** Use to limit the number of jobs that are run at the same time.
+
+<dl compact>
+<dt>
+<b>-l maxload - </b>Wait as needed to avoid starting new jobs when the system's load average is not below the specified limit.</dt>
+<dt></dt>
+<dt>[divider]Some examples:
+
+</dt>
+<dt></dt>
+<dt>- Move files to a new directory</dt>
+<dt>[bash]ls | parallel mv {} destdir[/bash]
+
+</dt>
+<dt></dt>
+<dt>- This will recompress all files in the current directory with names ending in .gz using bzip2, running one job per CPU (-j #) in parallel.</dt>
+<dt>[bash]ls *.gz | parallel -j 4 &amp;quot;zcat {} | bzip2 &amp;amp;gt;{.}.bz2 &amp;amp;amp;&amp;amp;amp; rm {}&amp;quot;[/bash]
+
+</dt>
+</dl>

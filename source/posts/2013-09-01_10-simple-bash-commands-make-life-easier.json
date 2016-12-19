@@ -1,0 +1,12 @@
+---
+title: 10 Simple BASH Commands to Make Your Life Easier
+slug: 10-simple-bash-commands-make-life-easier
+create_date: 2013-09-01 21:22:25
+tags: 
+updates:
+  username: 6
+  date: 2013-09-01 21:22:25
+  comment: Initial import of post from WP
+---
+Knowing how to quickly manipulate the command line in the BASH shell will save you a lot of time and frustration. &nbsp;Here are 10 Simple key combinations that will make your life easier and speed up your line editing skills.  CTRL + a&nbsp;-&nbsp;Places your cursor at the beginning of the line you are on  CTRL + e -&nbsp;Places your cursor at the end of the current line you are on  CTRL + u -&nbsp;Clears the line of everything **BEFORE** the cursor  CTRL + k -&nbsp;Clears the line of everything **AFTER** the cursor  CTRL + d -&nbsp;Deletes the character under the curser  CTRL + p -&nbsp;Goes back a previous command in history. &nbsp;This is the same as using the up arrow.  CTRL + n -&nbsp;Goes forward a command in history. &nbsp;This is the same as using the down arrow.  ALT + f -&nbsp;Move forward one word  ALT + b -&nbsp;Move backward one word  ALT + . -&nbsp;Inserts the last word from the previous history entry
+

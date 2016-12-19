@@ -11,7 +11,7 @@
     <link rel="icon" href="/assets/content/live/thumbs/favicon-32x32.png" sizes="32x32">
     <link rel="icon" href="/assets/content/live/thumbs/favicon-192x192.png" sizes="192x192">
     <link rel="apple-touch-icon-precomposed" href="/assets/content/live/thumbs/favicon-180x180.png">
-    <link rel="stylesheet" href="/assets/css/style-neutral-custom.css">
+    <link rel="stylesheet" href="/assets/css/style-neutral.min.css">
     <link rel="stylesheet" href="/assets/css/typo-open-sans-pt-sans-narrow.min.css">
     <!-- End CSS-->
     <title>Neutral Live</title>
@@ -85,30 +85,78 @@
       <!-- End Header-->
       <!-- Begin Body Content-->
       <div class="container">
-        <!-- Content-->
-        <!-- Begin Article1-->
-        <article class="box-post">
-          <!-- // .box-alpha-->
+        <article class="box-post sticky">
           <div class="box-beta">
             <ul class="tags">
-              <li class="tag-timestamp">8 hours ago</li>
-              <li class="tag-category"><a href="neutral-index.html"><span data-hover="Journal">Journal</span></a></li>
-              <li class="tag-category"><a href="neutral-index.html"><span data-hover="Video">Video</span></a></li>
+              <li class="tag-timestamp">1 sec ago</li>
+              <li class="tag-category"><a href="neutral-index.html"><span data-hover="Livestream">Livestream</span></a></li>
+              <li class="tag-category"><a href="neutral-index.html"><span data-hover="Some category">Some category</span></a></li>
             </ul>
             <div class="box-content">
-              <h2 class="box-title"><a href="#">tester</a></h2>
-THIS IS A TEST!!!
-              <!-- // .table-->
+              <h2 class="box-title"><a href="neutral-post-1.html">Live relation directly from an imporant event</a></h2>
+              <div class="broadcast" data-broadcast-url="php/broadcast.php" data-broadcast-interval="10" data-broadcast-limit="5" data-broadcast-data="{&quot;demo&quot;: &quot;neutral&quot;, &quot;count&quot;: 2}"></div>
+              <p>Anim minim est at aute. Risus nullam senectus arcu dictum aliquet. Dictum commodo nam dolor ultricies cras. Quisque dignissim quam et enim ea. Pulvinar nunc quis purus dignissim pellentesque.</p>
             </div>
-            <!-- // .box-content-->
-            <div class="meta"><a class="more-link" href="neutral-post-2.html"><span data-hover="More">More</span></a>
+            <div class="meta">
+              <div class="share"><span>Share:</span>
+                <ul>
+                  <li><a data-icon="facebook" href="#"></a></li>
+                  <li><a data-icon="twitter" href="#"></a></li>
+                  <li><a data-icon="googleplus" href="#"></a></li>
+                  <li><a data-icon="pinterest" href="#"></a></li>
+                  <li><a data-icon="email" href="#"></a></li>
+                </ul>
+              </div><a class="more-link" href="neutral-post-1.html"><span data-hover="More">More</span></a>
             </div>
             <!-- // .meta-->
           </div>
           <!-- // .box-beta-->
         </article>
         <!-- // .box-post-->
-        <!-- End Article1-->
+        <!-- Begin Article Base-->
+        <article class="box-post">
+          <div class="box-beta">
+            <ul class="tags">
+              <li class="tag-timestamp">8 hours ago</li>
+              <li class="tag-category"><a href="neutral-index.html"><span data-hover="Something">Someting</span></a></li>
+              <li class="tag-category"><a href="neutral-index.html"><span data-hover="Video">Video</span></a></li>
+            </ul>
+            <div class="box-content">
+              <h2 class="box-title"><a href="neutral-post-4.html">Hello World!</a></h2>
+              <p>Sanim minim est at aute. Risus nullam senectus arcu dictum aliquet. Dictum commodo nam dolor ultricies cras quisque dignissim quam et enim eartes nullam. Penatibus condimentum aliquam. Diam vehicula quis volutpat nisi auctor penat sibus risus congue tincidunt lorem pariatur. 
+                <mark>Eque pellentesque metus parturient porttitor per malesuada.</mark> Nullam do sunt nascetur nisi conubia. Reprehenderit iaculis viverra hendrerit amet cubilia commodo.
+              </p>
+              <p>Lacus lacinia diam sagittis mollis consectetuer auctor imperdiet aptent nunc primis feugiat anim. Pretium facilisis aenean ligula aute facilisi do. Accumsan voluptate sodales enim nostrud viverra rutrum exercitation tortor morbi tellus qui. Fusce vehicula class conubia aliquam dapibus consectetuer ad curae euismod sollicitudin dictum aliquet.</p>
+            </div>
+            <!-- // .box-content-->
+            <div class="meta">
+              <div class="share"><span>Share:</span>
+                <ul>
+                  <li><a data-icon="facebook" href="#"></a></li>
+                  <li><a data-icon="twitter" href="#"></a></li>
+                  <li><a data-icon="googleplus" href="#"></a></li>
+                  <li><a data-icon="pinterest" href="#"></a></li>
+                  <li><a data-icon="email" href="#"></a></li>
+                </ul>
+              </div><a class="more-link" href="neutral-post-2.html"><span data-hover="More">More</span></a>
+            </div>
+            <!-- // .meta-->
+          </div>
+          <!-- // .box-beta-->
+        </article>
+        <!-- // .box-post-->
+        <!-- End Article Base-->
+        <!-- Begin Post Loader-->
+        <div class="post-loader" data-post-loader-url="php/post_loader.php" data-post-loader-count="5" data-post-loader-data="{&quot;demo&quot;: &quot;neutral&quot;}">
+          <div class="box">
+            <div class="box-content">
+              <div class="small-title post-loader-control"></div>
+            </div>
+          </div>
+          <!-- // .box-->
+        </div>
+        <!-- // .post-loader-->
+        <!-- End Post Loader-->
       </div>
       <!-- End Body Content-->
       <!-- // .container-->
@@ -137,6 +185,24 @@ THIS IS A TEST!!!
       </footer>
     </div>
     <!-- // #wrapper-->
+    <div class="modal" id="log-in-form">
+      <div class="modal-content"><img class="align-center" src="/assets/img/thumbs/logo-212x83.png" width="212" height="83" srcset="/assets/img/thumbs/logo-212x83.png 212w, /assets/img/thumbs/logo-424x166.png 424w" sizes="(max-width: 212px) 100vw, 212px" alt="Logo">
+        <form action="#filename" method="post">
+          <p>
+            <input class="width-full" type="email" placeholder="e-mail" required="">
+          </p>
+          <p>
+            <input class="width-full" type="password" placeholder="password" required="">
+          </p>
+          <p>
+            <input class="width-full" type="submit" value="Log in">
+          </p>
+          <p class="form-links"><a href="#filename">Sign up ›</a><a href="#filename">Forget password?</a></p>
+        </form>
+      </div>
+      <!-- // .modal-content--><a class="close"></a>
+    </div>
+    <!-- // #log-in-form.modal-->
     <script src="/assets/components/jquery/jquery.min.js"></script>
     <script src="/assets/js/app.min.js"></script>
     <script>new Live;</script>

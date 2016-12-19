@@ -1,0 +1,14 @@
+---
+title: Linux Kernel 3.11 Release Boosts Performance, Efficiency
+slug: linux-kernel-3-11-release-boosts-performance-efficiency
+create_date: 2013-09-07 05:19:17
+tags: 
+updates:
+  username: 3
+  date: 2013-09-07 05:19:17
+  comment: Initial import of post from WP
+---
+Be a short a sweet article to summarize the recent release of the new Linux Kernel.  Source Article:&nbsp;https://www.linux.com/news/featured-blogs/200-libby-clark/736790-linux-kernel-311-release-boosts-performance-efficiency
+
+## 
+**Linux Kernel 3.11 Release**  Just to quickly summarize, the major benefits coming out from this new kernel are mostly performance tweaks, as well as the widely anticipated 64bit KVM/XEN support for the ARM arch.  This I think will be huge for the future of cloud computing, as I think we will see a shift to the ARM arch for its efficiency... Bringing virtualization support with that is crucial to its adoption.  Other tweaks appear to help with swap performance for SSD drives, from the article:> _“zswap basically trades CPU cycles for potentially reduced swap I/O. This trade-off can also result in a significant performance improvement if reads from the compressed cache are faster than reads from a swap device.”_ This should really help those with laptops or devices with small amounts of memory but with SSD drives.  One of the last things it also mentions is performance tweaks to low latency network polling. However the usefulness there is really for those who support platforms like the NYSE or other real time transactional systems.  Either way, exciting things are to be expected with the 3.11 kernel release, as with each ... It just make Linux better and better!

@@ -1,0 +1,33 @@
+---
+title: Installing Graphite on CentOS 6
+slug: installing-graphite-centos-6
+create_date: 2012-07-01 00:43:15
+tags: 
+updates:
+  username: 3
+  date: 2012-07-01 00:43:15
+  comment: Initial import of post from WP
+---
+This is the fastest way I have found to get Graphite installed. It is a rough tutorial but this is the fasteset way I have found to get it up and running.
+
+- Install epel repo
+ [bash]rpm -ivh http://mirror.us.leaseweb.net/epel/6/i386/epel-release-6-5.noarch.rpm[/bash]
+- Install dependencies
+ [bash]yum install Django pycairo bitmap bitmap-fonts python-pip gcc python-devel mod\_wsgi perl django-tagging[/bash]
+- You can try and compile from source, but if it can be avoided always use some sort of package manager, in this case we will use Python Pip!
+ [bash]pip-python install carbon pip-python install carbon pip-python install whisper pip-python install graphite-web[/bash]
+- Setup basic conf files (you may need to configure them more later, but for now example confs will do to get the basic interface up
+ [bash]cd /opt/graphite/conf cp carbon.conf.example carbon.conf cp storage-schemas.conf.example storage-schemas.conf cp graphite.wsgi.example graphite.wsgi[/bash]
+- Setup httpd conf file: Use this as an example:&nbsp;http://bazaar.launchpad.net/~graphite-dev/graphite/trunk/view/head:/examples/example-graphite-vhost.conf
+ [bash]vi /etc/httpd/conf.d/graphite.conf[/bash]
+- Setup graphite webapp
+- 
+
+    # Enable debug
+
+ [bash]\</span\>\</span\>cd /opt/graphite/webapp/graphite cp local\_settings.py.example local\_settings.py vi local\_settings.py[/bash]   [bash]python manage.py syncdb[/bash]
+- Start carbon
+ [bash]cd /opt/graphite/ ./bin/carbon-cache.py start[/bash]
+- Chown log file dir so apache can write
+ [bash]chown -R apache:apache /opt/graphite/storage/[/bash] 
+
