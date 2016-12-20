@@ -1,0 +1,45 @@
+//- This article 'post' is for the summarized version of the article/blog post. (this is shown multiple times)
+
+//- Include Template Base
+extends ../base
+
+//- Content blog for post
+block content
+  // Begin Article1
+  article.box-post
+    //- Featured Image here (Optional)
+      .box-alpha
+        figure.featured-image
+          a(href='neutral-post-2.html')
+            //- Need to have slideshow partials here
+            include ../partials/article/slideshow
+
+    // // .box-alpha
+    .box-beta
+      ul.tags
+        li.tag-timestamp # hours ago
+        li.tag-category
+          a(href='neutral-index.html')
+            span(data-hover='Journal') Journal
+        li.tag-category
+          a(href='neutral-index.html')
+            span(data-hover='Video') Video
+      .box-content
+        //- Article/Post title
+        h2.box-title
+          //- This needs to link to full article
+          a(href='#') 
+            != articletitle
+
+        != contents
+          
+        // // .table
+      // // .box-content
+      .meta
+        include ../partials/article/share
+        a.more-link(href='neutral-post-2.html')
+          span(data-hover='More') More
+      // // .meta
+    // // .box-beta
+  // // .box-post
+  // End Article1

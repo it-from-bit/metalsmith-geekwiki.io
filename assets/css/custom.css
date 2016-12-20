@@ -1,0 +1,9 @@
+pre {
+    background-color: #f1f1f1;
+    margin-left: 10px;
+    padding: 5px;
+    font-size: 0.75em;
+}
+.subtitle-prefix {
+  padding-right: 5px !important;
+}

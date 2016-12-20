@@ -17,8 +17,10 @@ const msIf        = require( 'metalsmith-if' )
 //const tojson      = require( 'metalsmith-to-json' )
 const static      = require( 'metalsmith-static' )
 const redirect    = require( 'metalsmith-redirect' )
+const markdown    = require( 'metalsmith-markdown' )
 const buildDate   = require( 'metalsmith-build-date' ) 
 //const yamlToJson  = require( './metalsmith-yaml-to-json' )
+const metallic    = require( 'metalsmith-metallic' )
 
 const config = {
   enableModules: {
@@ -35,10 +37,6 @@ const config = {
     '/github': 'https://github.com/jhyland87'
   }
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> f4df1d2bd17029708bdb0cdd8db156a7de1c08ad
 /* Metalsmith
  ******************************************************************************/
 
@@ -50,6 +48,13 @@ const siteBuild = Metalsmith(__dirname)
     source: './assets', 
     destination: './assets' 
   }))
+  .use(collections({
+    articles: {
+      pattern: '*.md',
+      sortBy: 'date',
+      reverse: true
+    }
+  }))
   .use(msIf(
     true,
     inplace({
@@ -60,7 +65,7 @@ const siteBuild = Metalsmith(__dirname)
   ))
   .use(include())
   //.ignore(path.resolve( __dirname, 'source/data' ))
-  // 
+  .use(markdown())
   .use(markdownit({
     options: {
       html: true,
@@ -81,6 +86,7 @@ const siteBuild = Metalsmith(__dirname)
       '!partials/*',  '!partials/*/*'
     ]
   }))
+  .use(metallic())
   .use(msIf(
     false,
     tidy({

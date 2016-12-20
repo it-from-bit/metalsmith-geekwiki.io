@@ -1,0 +1,65 @@
+/**
+ * @package Live
+ * @since   1.0
+ */
+
+/*
+ * Variables
+ */
+$devices: js, no-js, touch, no-touch;
+
+$breakpoints: (
+	xsmall:  0,
+	small:   480px,
+	medium:  768px,
+	regular: 960px,
+	large:   1120px,
+	xlarge:  1440px,
+	xxlarge: 1600px
+);
+
+$default-site-width-name: large;
+$default-site-width: map-get($breakpoints, $default-site-width-name);
+
+$site-widths: (
+	xlarge:  map-get($breakpoints, xlarge),
+	xxlarge: map-get($breakpoints, xxlarge)
+);
+
+$body-background-width: 2200px;
+
+$max-columns: 8;
+
+$all-text-inputs: $all-text-inputs + ", select";
+
+$all-buttons: $all-buttons + ", .button";
+$all-buttons: selector-replace($all-buttons, button, "button:not([class^=sl-])");
+
+/*
+ * Imports
+ */
+@import "simplelightbox/simplelightbox";
+@import "spinkit/spinners/3-wave";
+
+@import "simple_icons";
+@import "typo";
+
+@import "reset";
+@import "utils";
+@import "base";
+
+@import "elements";
+@import "structure";
+@import "boxes";
+@import "widgets";
+
+@import "3rd_party";
+
+/*
+ * Typografy selectors check
+ */
+@each $name, $fonts in (primary: $font-primary, secondary: $font-secondary) {
+	@if $fonts != map-get($_fonts, $name) {
+		@warn "$font-#{$name}: " + inspect(map-get($_fonts, $name)) + ";";
+	}
+}

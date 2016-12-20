@@ -1,5 +1,5 @@
 ---
-title: base
+title: home
 layout: base.pug
 ---
 

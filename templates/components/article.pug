@@ -116,6 +116,42 @@ mixin default-share
     { icon: 'email', href: '#' }
   ])
 
+
+//-
+  Mixin to show the title in the articles object data, or display a 
+  defaulted value (if defined)
+
+  @param  {object|string}   articleObj    Articles Object, or the title itself
+  @param  {string}          deault        Default value for title
+  @param  {boolean}         sanitize      Sanitize the result (default doesn't)
+
+  @example
+     +article-post0({ title: '<strong>Example</strong> Using Post <em>Mixin #2</em>'})
+          h3 This is an example of article ONE
+          p Just some other content...
+mixin article-post( articleObj )
+  article.box-post.sticky
+    .box-beta
+      //- Article Tags go here
+      +article-tags( '1 Minute Ago', [
+        { title: 'Foo', href: '#' },
+        { title: 'Bar', href: '#' }
+      ])
+      .box-content
+        //- Article Title goes here
+        h2.box-title
+          a(href='neutral-post-1.html')
+            +article-title( articleObj )
+        .broadcast(data-broadcast-url='php/broadcast.php', data-broadcast-interval='10', data-broadcast-limit='5', data-broadcast-data='{"demo": "neutral", "count": 2}')
+        block
+      .meta
+        +default-share
+        a.more-link(href='neutral-post-1.html')
+          span(data-hover='More') More
+      // // .meta
+    // // .box-beta
+
+
 //-
   Mixin to show the title in the articles object data, or display a 
   defaulted value (if defined)

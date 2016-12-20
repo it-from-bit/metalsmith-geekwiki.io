@@ -1,0 +1,149 @@
+//- This article 'page' is for the full version of the article/blog post.
+
+//- Include Template Base
+extends ../base
+
+//- Content blog for post
+block content
+  article.box-page
+    if alpha_content
+      // Begin Alpha Content
+      .box-alpha
+        p 
+          != alpha_content
+      // End Alpha Content
+
+    // // .box-alpha
+    .box-beta
+      // Begin Beta Content
+      .box-content
+        h2.box-title 
+          != title
+
+
+        - 
+          var steps = []
+          var authorTxt
+          var authorHref
+          var pageSubtitle = {
+            'prefix': '',
+            'string': ''
+          }
+          var authorId
+
+          // If a custom headline is provided
+          if ( typeof subtitle === 'string' ){
+            //headlineStr = subtitle
+            pageSubtitle.string = subtitle
+          }
+
+          // If the author meta data is just a string, use that
+          else if ( typeof author === 'string' ){
+            //authorTxt = author
+            pageSubtitle.string = author
+
+            pageSubtitle.prefix = ( typeof author.prefix === 'string' ? author.prefix : 'Author:' )
+          }
+
+          // If its an object, it should contain more data 
+          else if ( typeof author === 'object' ){
+            pageSubtitle.prefix = ( typeof author.prefix === 'string' ? author.prefix : 'Author:' )
+
+            var authorArr = []
+
+            // If a custom format is specified...
+            if ( typeof author.format === 'string' ){
+              // @todo Parse & match the case of the format (EG: Last, First = Doe, John; and FLast = JDoe)
+              authorId = author.format
+
+              if ( typeof author.firstname === 'string' )
+                authorId = authorId.replace( /firstname/i, author.firstname )
+              
+              if ( typeof author.lastname === 'string' )
+                authorId = authorId.replace( /lastname/i, author.lastname )
+
+              if ( typeof author.username === 'string' )
+                authorId = authorId.replace( /username/i, author.username )
+              
+            }
+
+            // If no custom format is specified
+            else if ( typeof author.firstname === 'string' || typeof author.lastname === 'string' ){
+              if ( typeof author.firstname === 'string' )
+                authorArr.push( author.firstname )
+              
+              if ( typeof author.lastname === 'string' )
+                authorArr.push( author.lastname )
+              
+              authorId = authorArr.join( '&nbsp;' )
+            }
+
+            // If no first/last name was provided, but just a username..
+            else if ( typeof author.username === 'string' )
+              authorId = author.username
+          
+            // Determine Link
+            if ( typeof author.link === 'string' )
+              authorHref = author.link
+            
+            // If a username is specified, use it for a github link
+            else if ( typeof author.username === 'string' )
+              authorHref = 'https://github.com/' + author.username.toLocaleLowerCase()
+            
+            // If there's no prefix yet, but a manual one was provided
+            if ( ! pageSubtitle.prefix && typeof author.prefix === 'string' )
+              pageSubtitle.prefix = author.prefix
+          }
+
+          // If a prefix is set, make sure it ends in a semicolon
+          if ( pageSubtitle.prefix && pageSubtitle.prefix.substr(-1, 1) !== ':')
+            pageSubtitle.prefix += ':'
+          
+
+          if ( authorHref && authorId )
+            pageSubtitle.string = '<a href="'+ authorHref +'" target="_blank">'+ authorId +'</a>'
+          
+          else if ( authorId )
+            pageSubtitle.string = authorId
+          
+          var stepsStr = steps.join('\n')
+
+        //- Only show page headline if theres a result
+        if pageSubtitle.string 
+          // Begin Headline
+          p.small-title
+            if pageSubtitle.prefix
+              span
+                span.subtitle-prefix
+                  != pageSubtitle.prefix
+                span.subtitle-value
+                  strong
+                    != pageSubtitle.string
+            else
+              span.subtitle-value
+                strong
+                  != pageSubtitle.string
+          // End Headline
+
+        // Begin Page Contents
+        != contents
+        // End Page Contents
+
+        .share
+          include ../partials/share
+      // // .box-content
+      ul.tags
+        li
+          a(href='neutral-index.html')
+            span(data-hover='another tag') another tag
+        li
+          a(href='neutral-index.html')
+            span(data-hover='neutral') neutral
+        li
+          a(href='neutral-index.html')
+            span(data-hover='example tag') example tag
+        li
+          a(href='neutral-index.html')
+            span(data-hover='live template') live template
+      // // .tags
+    // Begin Beta Content
