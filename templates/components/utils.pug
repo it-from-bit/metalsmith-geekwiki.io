@@ -5,7 +5,6 @@
   @param  {string}  shareables.href   Href for link
   @param  {string}  shareables.icon   Icon to use
   @note   Only icons are: facebook, twitter, googleplus, pinterest, email
-
   @example
     Example w/ FB & Email
     +social-network([
@@ -44,11 +43,11 @@ mixin social-network(shareables)
 //-
   Create the blue tags in the upper left corner of each article/post item. This includes the timestamp
   the article was posted, and the categories
+
   @param  {string}  timestamp             Timestamp the article was posted
   @param  {array}   categories            Categories of said article
   @param  {string}  categories[*].title   Title of category
   @param  {string}  categories[*].href    Link for category link to target
-
   @example
     +article-tags( '1 Minute Ago', [
       { title: 'Foo', href: '#' },
@@ -78,7 +77,6 @@ mixin article-tags( timestamp, categories )
   @param  {object|string}   articleObj    Articles Object, or the title itself
   @param  {string}          deault        Default value for title
   @param  {boolean}         sanitize      Sanitize the result (default doesn't)
-
   @example 
     // Basic Example
     +article-title({title: 'Hello World'})
@@ -165,6 +163,182 @@ mixin inc-e( text )
 mixin inc-0( text )
   +inc-e( text )
 
+
+//-
+  Make tags
+
+  <ul class="tags">
+    <li class="tag-category"><a href="#"><span data-hover="Livestream">Livestream</span></a></li>
+    <li class="tag-category"><a href="#"><span data-hover="Some category">Some category</span></a></li>
+    <li class="tag-category"><a href="#"><span data-hover="4 comments">4 comments</span></a></li>
+  </ul>
+
+  ul.tags
+    li.tag-category
+      a(href="#")
+        span(data-hover="Hover Text") Tag Text
+    li.tag-category
+      a(href="#")
+        span(data-hover="Hover Text") Tag Text
+mixin gen-tag-ul( tags )
+  - 
+    function makeTagList( tags ){
+      var _tagList = {
+        /*
+        label: {
+          hover: '',
+          href: ''
+        }
+        */
+      }
+      
+      var _isHref = function( href ){
+        return typeof href === 'string' 
+          && href.length > 0 
+          && /^((https?:)?\/\/|\#)[a-z0-9]+/i.test( href )
+      }
+
+      var _makeTag = function( tag ){
+        // String
+        if ( typeof tag === 'string' ){
+          return {
+            hover: tag.toUpperCase()
+          }
+        }
+        
+        // Array
+        if ( typeof tag === 'object' && Array.isArray( tag ) ){
+          if ( tag.length === 1 ){
+            return {
+              hover: tag[0]
+            }
+          }
+          if ( tag.length > 1 ){
+            return {
+              hover: tag[0],
+              href: tag[1]
+            }
+          }
+        }
+
+        // Object
+        if ( typeof tag === 'object' && ! Array.isArray( tag ) ){
+          var _r = {}
+          if ( typeof tag.hover === 'string' ){
+            _r['hover'] = tag.hover
+          }
+          if ( typeof tag.href === 'string' ){
+            _r['href'] = tag.href
+          }
+          return _r
+        }
+      }
+
+
+      if ( typeof tags === 'object' ){
+
+        if ( Array.isArray( tags ) ){
+
+          // Iterate over a list array
+          for (var i = 0; i < tags.length; i++) {
+            _tagList[ tags[i] ] = {
+              hover: tags[i].toUpperCase()
+            }
+          }
+        }
+        else {
+          var _thisTag
+          // Iterate over a hash object
+          for ( let tag in tags ) {
+            _thisTag = tags[tag]
+
+            if ( typeof _thisTag === 'object' ){
+              _tagList[ tag ] = _thisTag
+            }
+            else if ( typeof _thisTag === 'string' ){
+              if ( _isHref( _thisTag ) ){
+                _tagList[ tag ] = {
+                  href: _thisTag
+                }
+              }
+              else {
+                _tagList[ tag ] = {
+                  hover: _thisTag
+                }
+              }
+            }
+
+            //_tagList[ tag ] = _makeTag( tags[tag] )
+          }
+        }
+      }
+      // Single string tag
+      else if ( typeof tags === 'string' ){
+        _tagList[ tag ] = _makeTag( tag )
+      }
+
+      return _tagList
+    }
+
+  if tags
+    - var tagObj = makeTagList( tags )
+    if tagObj
+      ul&attributes(attributes).tags
+        each tObj, text in tagObj
+          li
+            //- Display it as a link if theres an href value
+            if tObj.href
+              a(href=tObj.href)
+                span(data-hover=text) 
+                  != text
+            //- Tags without links are just spans
+            else
+              span(data-hover=text) 
+                != text
+
+//-
+  Process a single asset, or a list of assets (js, css, etc)
+  
+  @param  {string|array}  asset_list    Either a list of JS and/or CSS files, or a single file
+  @note Asset file type is determined by parsing the assets file extension
+  @note Recognizable file extensions: css, js, png, ico
+  @example
+    +display-assets( '/assets/js/custom.js' )
+      //- Result:
+        <script src="/assets/js/custom.js"></script>
+    +display-assets( [ '/assets/css/foo.css', '/assets/css/bar.css' ] )
+      //- Result:
+        <link rel="stylesheet" href="/assets/css/foo.css">
+        <link rel="stylesheet" href="/assets/css/bar.css">
+mixin display-assets( asset_list )
+  if asset_list
+    -
+      var assetArr = []
+      if ( typeof asset_list === 'string' ){
+        assetArr.push( asset_list )
+      }
+      else if ( typeof asset_list === 'object' ){
+        if ( Array.isArray( asset_list ) ){
+          assetArr = asset_list
+        }
+        else {
+          assetArr = Object.values( asset_list )
+        }
+      }
+    if assetArr.length > 0
+      each asset in assetArr
+        - var fileExt = asset.split('.')[ asset.split('.').length -1 ].toLowerCase()
+        - if ( fileExt === 'js' )
+          script()&attributes({ src: asset })
+        - else if ( fileExt === 'css' )
+          link(rel='stylesheet')&attributes({ href: asset })
+        - else if ( fileExt === 'ico' )
+          link(rel='shortcut icon')&attributes({ href: asset })
+        - else if ( fileExt === 'png' )
+          link(rel='icon')&attributes({ href: asset })
+        - else
+          | <!-- Unknown asset extension: !{fileExt} -->
+
 //- 
   @param  {object|string}   author            Author object, or username
   @param  {string}          author.firstname  Authors first name
@@ -175,7 +349,6 @@ mixin inc-0( text )
   @param  {string}          author.facebook   Authors Facebook username
   @param  {string}          author.twotter    Authors Twitter username
   @param  {string|boolean}  author.href       Custom link (string), or disable hyperlink (boolean:false)
-
   @note   Only one of author.username, author.github, author.facebook or author.twitter can be defined
 mixin compileAuthorLink( author )
   -

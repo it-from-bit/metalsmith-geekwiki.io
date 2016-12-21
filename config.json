@@ -1,0 +1,11 @@
+{
+  "enableModules": {
+    "tidyHtml": true
+  },
+  "source": "source",
+  "buildPath": "public",
+  "usePretty": true,
+  "redirects": {
+    "/md": "/posts/markdown-demo.html"
+  }
+}

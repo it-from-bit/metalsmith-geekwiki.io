@@ -1,6 +1,13 @@
+include ../../components/utils
+
+// Begin JS
 script(src='/assets/components/jquery/jquery.min.js')
 script(src='/assets/js/app.min.js')
 script(src='/assets/js/jquery.popupwindow.js')
 script(src='/assets/js/custom.js')
+//- Load any JS assets defined for this page
+if template && template.assets && template.assets.js
+  +display-assets( template.assets.js )
 script.
   new Live;
+// End JS

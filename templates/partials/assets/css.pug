@@ -1,9 +1,16 @@
+include ../../components/utils
+
 // Begin CSS
 link(rel='icon', href='/assets/content/live/thumbs/favicon-32x32.png', sizes='32x32')
 link(rel='icon', href='/assets/content/live/thumbs/favicon-192x192.png', sizes='192x192')
 link(rel='apple-touch-icon-precomposed', href='/assets/content/live/thumbs/favicon-180x180.png')
-link(rel='stylesheet', href='/assets/css/style-neutral-custom.css')
+link(rel='stylesheet', href='/assets/css/style-'+ site.theme +'.css')
+link(rel='stylesheet', href='/assets/css/custom.css')
 link(rel='stylesheet', href='/assets/css/typo-open-sans-pt-sans-narrow.min.css')
+link(rel='stylesheet', href='/assets/css/font-awesome.min.css')
 //- link(rel='stylesheet', href='/assets/css/custom.css')
 link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css')
+//- Load any CSS assets defined for this page
+if template && template.assets && template.assets.css
+  +display-assets( template.assets.css )
 // End CSS

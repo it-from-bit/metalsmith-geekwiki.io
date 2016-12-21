@@ -10,6 +10,10 @@ defaults:
       - pinterest
       - linkedin
       - stumbleupon
+  export:
+    formats:
+      - pdf
+      - docx
 verbosity:
   all: true
   include: true

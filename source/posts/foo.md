@@ -15,6 +15,9 @@ share:
   title: 'Article: Foo'
   summary: Short summary of the Foo post
   href: http://geekwiki.local/posts/foo.html
+export:
+  - pdf
+  - docx
 ---
 
 # Example: Foo

@@ -1,1 +1,15 @@
 title: Some Blog
+# The theme needs to exist at: assets/css/style-#{theme}.css
+theme: neutral
+# 
+#  Themes:
+#  active
+#  blue-dark
+#  happy
+#  loud
+#  neutral-custom
+#  neutral
+#  pastel
+#  serious
+#  strong
+#  yellowish

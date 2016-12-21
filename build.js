@@ -1,6 +1,7 @@
 const timer = {
   start: new Date()
-} 
+}
+
 console.log( 'Starting at: %s', timer.start )
 
 const fs          = require( 'fs' )
@@ -29,23 +30,35 @@ const metallic    = require( 'metalsmith-metallic' )
 
 const _internal = {}
 
-_internal.ms2human = function(ms){
+/**
+ * Quick internal function to turn a millisecond duration into something
+ * a little more human readable
+ *
+ * @param   {string|number}   ms    Milliseconds to calculate
+ * @return  {string}                Format: # hour(s), # minute(s), # second(s)
+ */
+_internal.ms2human = ms => {
   sec = Math.round( (ms/1000 )%60 )
   min = Math.round( (ms/(1000*60))%60 )
   hrs = Math.round( (ms/(1000*60*60))%24 )
   
-  var result = []
+  let result = []
 
-  if ( hrs > 0 ) result.push( 'Hours: ' + hrs )
-  if ( min > 0 ) result.push( 'Minutes: ' + min )
-  if ( sec > 0 ) result.push( 'Seconds: ' + sec )
+  let _plural = ( str, count ) => ( count > 1 ? str+'s' : str )
+
+  if ( hrs > 0 ) result.push( `${hrs} ${_plural('hour',hrs)}` )
+  if ( min > 0 ) result.push( `${min} ${_plural('minute',min)}` )
+  if ( sec > 0 ) result.push( `${sec} ${_plural('second',sec)}` )
 
   if ( ! result.length )
-    return
+    return 'Time Unknown'
 
   return result.join(', ')
 }
 
+
+/**
+ * Configuration 
 
 const config = {
   enableModules: {
@@ -54,14 +67,13 @@ const config = {
   source: 'source',
   buildPath: 'public',
   usePretty: true,
-  resumePdf: {
-    source: 'resume-pdf.html',
-    dest: 'Justin-Hyland-Resume.pdf'
-  },
   redirects: {
-    '/github': 'https://github.com/jhyland87'
+    '/md': '/posts/markdown-demo.html'
   }
 }
+ */
+const config = require( './config' )
+
 /* Metalsmith
  ******************************************************************************/
 
@@ -78,6 +90,7 @@ const siteBuild = Metalsmith(__dirname)
     source: './assets', 
     destination: './assets' 
   }))
+  /*
   .use( collections({
     articles: {
       pattern: '*.md',
@@ -85,6 +98,7 @@ const siteBuild = Metalsmith(__dirname)
       reverse: true
     }
   }))
+  */
   .use(msIf(
     true,
     inplace({
@@ -95,7 +109,7 @@ const siteBuild = Metalsmith(__dirname)
   ))
   .use(include())
   .ignore( path.resolve( __dirname, 'public/.git' ) )
-  .ignore( path.resolve( __dirname, 'public/CNAME' ) )
+  //.ignore( path.resolve( __dirname, 'public/CNAME' ) )
   .use(markdown())
   .use(markdownit({
     options: {
@@ -135,7 +149,7 @@ const siteBuild = Metalsmith(__dirname)
       }
     })
   ))
-  .build(function (err) {
+  .build( err => {
     if (err) {
       console.log('Error:',err)
     } 

@@ -12,16 +12,7 @@ block content
     .box-alpha
 
       // Begin Alpha Tags
-      ul.tags
-        li.tag-category
-          a(href="#")
-            span(data-hover="Livestream") Livestream
-        li.tag-category
-          a(href="#")
-            span(data-hover="Some category") Some category
-        li.tag-category
-          a(href="#")
-            span(data-hover="4 comments") 4 comments
+      +gen-tag-ul( tags ).float-left
       // End Alpha Tags
 
       if alpha_content
@@ -67,7 +58,6 @@ block content
                     != _subtitle.string
             // End Headline
 
-
         // Begin Page Contents
         != contents
         // End Page Contents
@@ -79,7 +69,8 @@ block content
 
       // Begin Beta Tags
       //- The beta box tags are tags that the author can define
-      include ../partials/tags
+      //- include ../partials/tags
+      +gen-tag-ul( tags ).float-right
       // End Beta Tags
 
       //-

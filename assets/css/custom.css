@@ -7,3 +7,37 @@ pre {
 .subtitle-prefix {
   padding-right: 5px !important;
 }
+
+/*
+ * Headlines
+ */
+h1, .box-title, h2, h3, h4, .navigation .post-title, h5, .box-author .box-title, h6 {
+  text-align: left;
+}
+h1, .box-title {
+  font-size: 2rem;
+}
+.box-title {
+  text-align: center !important;
+}
+.float-right, .f-right {
+  float: right !important;
+}
+.float-left, .f-left {
+  float: left !important;
+}
+.full-width {
+  width: 100% !important;
+}
+#font-awesome-demo {
+  width: 100% !important;
+}
+#font-awesome-demo > tbody > tr > td {
+  text-align: center;
+}
+#font-awesome-demo > tbody > tr > td.icon-cell > span > i.fa {
+  padding: 0 10px 0 10px;
+}
+.align-center {
+  text-align: center !important;
+}
