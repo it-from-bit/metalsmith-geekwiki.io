@@ -15,6 +15,10 @@ Whenever a new article is published and merged into the *master* branch, the un-
 
 The only elements of the blog that aren't static, would be the visitor related features, such as comments on articles, which will be accomplished via *[Facebooks API](https://developers.facebook.com/docs/plugins/comments/)*. Any other dynamic content will be queried from *[Githubs API](https://developer.github.com/v3/repos/contents/)*.
 
+-----
+
+### Why?
+
 Now hold on... I know what you're thinking... You're thinking:
 
 > Why on earth would one create a **'static'** website that still utilizes **'dynamic'** content?!
