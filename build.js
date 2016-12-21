@@ -68,7 +68,7 @@ const config = {
 const siteBuild = Metalsmith(__dirname)
   .source( config.source )
   .destination( config.buildPath )
-  .clean(true)
+  .clean(false)
   .use(metadata({
     'site': 'data/site.yaml',
     'social_networks': 'data/social_networks.yaml',
@@ -78,7 +78,7 @@ const siteBuild = Metalsmith(__dirname)
     source: './assets', 
     destination: './assets' 
   }))
-  .use(collections({
+  .use( collections({
     articles: {
       pattern: '*.md',
       sortBy: 'date',
@@ -94,7 +94,8 @@ const siteBuild = Metalsmith(__dirname)
     })
   ))
   .use(include())
-  //.ignore(path.resolve( __dirname, 'source/data' ))
+  .ignore( path.resolve( __dirname, 'public/.git' ) )
+  .ignore( path.resolve( __dirname, 'public/CNAME' ) )
   .use(markdown())
   .use(markdownit({
     options: {
