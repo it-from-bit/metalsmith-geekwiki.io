@@ -1,4 +1,4 @@
-# GeekWiki Blog
+# GeekWiki Blog Generator
 
 
 ### What?
