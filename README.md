@@ -3,7 +3,7 @@
 
 ### What?
 
-**GeekWiki** is a ***static* blog**, generated with the static site generator **[Metalsmith](http://www.metalsmith.io/)**. 
+**GeekWiki** is a **_mostly_** statically generated blog. I say *"mostly"*, because even though the blog itself operates without being directly dependent on a database, *some* of the content is still dynamically retrieved from external resources.
 
 -----
 
@@ -14,6 +14,12 @@ Well.. Instead of relying on a database to hold the blog content, the articles a
 Whenever a new article is published and merged into the *master* branch, the un-processed articles are processed and published to our **[geekwiki.github.io.git](https://github.com/geekwiki/geekwiki.github.io.git)** repository. This process will eventually be automated with some nifty [AWS](https://aws.amazon.com) badassery.
 
 The only elements of the blog that aren't static, would be the visitor related features, such as comments on articles, which will be accomplished via *[Facebooks API](https://developers.facebook.com/docs/plugins/comments/)*. Any other dynamic content will be queried from *[Githubs API](https://developer.github.com/v3/repos/contents/)*.
+
+Now hold on... I know what you're thinking... You're thinking:
+
+> Why on earth would one create a **'static'** website that still utilizes **'dynamic'** content?!
+
+And the reason is that none of the dynamic content is critical for the blog to operate. Meaning if the API requests **all** fail, the blog itself would still operate, albeit shy of some article comments and changelogs. Where a blog thats completely reliant on a database wouldn't be able to serve any content (typically..)
 
 -----
 
