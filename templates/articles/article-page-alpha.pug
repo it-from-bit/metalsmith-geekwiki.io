@@ -5,12 +5,10 @@ extends ../base
 
 //- Content blog for post
 block content
-  // Begin Box Page
   article.box-page
 
     // Begin Alpha Box
     .box-alpha
-
       // Begin Alpha Tags
       ul.tags
         li.tag-category
@@ -30,10 +28,12 @@ block content
           p 
             != alpha_content
         // End Alpha Content
+
     // End Alpha Box
 
-    // Begin Beta Box
+
     .box-beta
+      
       // Begin Beta Content
       .box-content
         h2.box-title 
@@ -68,19 +68,21 @@ block content
             // End Headline
 
 
+         
+
+
+            
+
         // Begin Page Contents
         != contents
         // End Page Contents
 
-        //- The share partial handles the logic that determines if any share links should be displayed
-        include ../partials/share
+        .share
+          include ../partials/share
 
-      // End Beta Content
-
-      // Begin Beta Tags
-      //- The beta box tags are tags that the author can define
+      // Begin Tags
       include ../partials/tags
-      // End Beta Tags
+      // End Tags
 
       //-
         // // .box-content
@@ -98,5 +100,4 @@ block content
             a(href='neutral-index.html')
               span(data-hover='live template') live template
         // // .tags
-    // End Beta Box
-  // End Box Page
+    // Begin Beta Content

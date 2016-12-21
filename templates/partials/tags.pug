@@ -1,0 +1,114 @@
+-
+  function makeTagList( tags ){
+    var _tagList = {
+      /*
+      label: {
+        hover: '',
+        href: ''
+      }
+      */
+    }
+    
+    var _isHref = function( href ){
+      return typeof href === 'string' 
+        && href.length > 0 
+        && /^((https?:)?\/\/|\#)[a-z0-9]+/i.test( href )
+    }
+
+    var _makeTag = function( tag ){
+      // String
+      if ( typeof tag === 'string' ){
+        return {
+          hover: tag.toUpperCase()
+        }
+      }
+      
+      // Array
+      if ( typeof tag === 'object' && Array.isArray( tag ) ){
+        if ( tag.length === 1 ){
+          return {
+            hover: tag[0]
+          }
+        }
+        if ( tag.length > 1 ){
+          return {
+            hover: tag[0],
+            href: tag[1]
+          }
+        }
+      }
+
+      // Object
+      if ( typeof tag === 'object' && ! Array.isArray( tag ) ){
+        var _r = {}
+        if ( typeof tag.hover === 'string' ){
+          _r['hover'] = tag.hover
+        }
+        if ( typeof tag.href === 'string' ){
+          _r['href'] = tag.href
+        }
+        return _r
+      }
+    }
+
+
+    if ( typeof tags === 'object' ){
+
+      if ( Array.isArray( tags ) ){
+
+        // Iterate over a list array
+        for (var i = 0; i < tags.length; i++) {
+          _tagList[ tags[i] ] = {
+            hover: tags[i].toUpperCase()
+          }
+        }
+      }
+      else {
+        var _thisTag
+        // Iterate over a hash object
+        for ( let tag in tags ) {
+          _thisTag = tags[tag]
+
+          if ( typeof _thisTag === 'object' ){
+            _tagList[ tag ] = _thisTag
+          }
+          else if ( typeof _thisTag === 'string' ){
+            if ( _isHref( _thisTag ) ){
+              _tagList[ tag ] = {
+                href: _thisTag
+              }
+            }
+            else {
+              _tagList[ tag ] = {
+                hover: _thisTag
+              }
+            }
+          }
+
+          //_tagList[ tag ] = _makeTag( tags[tag] )
+        }
+      }
+    }
+    // Single string tag
+    else if ( typeof tags === 'string' ){
+      _tagList[ tag ] = _makeTag( tag )
+    }
+
+    return _tagList
+  }
+
+if tags
+  - var tagObj = makeTagList( tags )
+  if tagObj
+    ul.tags
+      each tObj, text in tagObj
+        li
+          //- Display it as a link if theres an href value
+          if tObj.href
+            a(href=tObj.href)
+              span(data-hover=text) 
+                != text
+          //- Tags without links are just spans
+          else
+            span(data-hover=text) 
+              != text

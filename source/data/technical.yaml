@@ -1,0 +1,15 @@
+defaults:
+  share:
+    title: Default Title
+    summary: Default Summary
+    href: '#Default-Href'
+    networks:
+      - facebook
+      - twitter
+      - googleplus
+      - pinterest
+      - linkedin
+      - stumbleupon
+verbosity:
+  all: true
+  include: true

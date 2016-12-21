@@ -134,169 +134,36 @@ mixin process-link( href, replacements )
     block
 
 //-
-  Mixin to show the title in the articles object data, or display a 
-  defaulted value (if defined)
-
-  @param  {object|string}   articleObj    Articles Object, or the title itself
-  @param  {string}          deault        Default value for title
-  @param  {boolean}         sanitize      Sanitize the result (default doesn't)
-
-  @example
-     +article-post0({ title: '<strong>Example</strong> Using Post <em>Mixin #2</em>'})
-          h3 This is an example of article ONE
-          p Just some other content...
-mixin article-post( articleObj )
-  article.box-post.sticky
-    .box-beta
-      //- Article Tags go here
-      +article-tags( '1 Minute Ago', [
-        { title: 'Foo', href: '#' },
-        { title: 'Bar', href: '#' }
-      ])
-      .box-content
-        //- Article Title goes here
-        h2.box-title
-          a(href='neutral-post-1.html')
-            +article-title( articleObj )
-        .broadcast(data-broadcast-url='php/broadcast.php', data-broadcast-interval='10', data-broadcast-limit='5', data-broadcast-data='{"demo": "neutral", "count": 2}')
-        block
-      .meta
-        +default-share
-        a.more-link(href='neutral-post-1.html')
-          span(data-hover='More') More
-      // // .meta
-    // // .box-beta
-
+  Only show the comment text if the technical.verbosity[ type ] is true or 
+  technical.verbosity.all is true
+mixin debug-comment( text, type )
+  if technical.verbosity.all == true || technical.verbosity[ type ] == true
+    | <!-- [#{type}] #{text} -->
 
 //-
-  Mixin to show the title in the articles object data, or display a 
-  defaulted value (if defined)
+  Include comment
+mixin inc-com( text )
+  +debug-comment( text, 'include' )
 
-  @param  {object|string}   articleObj    Articles Object, or the title itself
-  @param  {string}          deault        Default value for title
-  @param  {boolean}         sanitize      Sanitize the result (default doesn't)
-mixin article-post0( articleObj )
-  article.box-post.sticky
-    .box-beta
-      //- Article Tags go here
-      +article-tags( '1 Minute Ago', [
-        { title: 'Foo', href: '#' },
-        { title: 'Bar', href: '#' }
-      ])
-      .box-content
-        //- Article Title goes here
-        h2.box-title
-          a(href='neutral-post-1.html')
-            +article-title( articleObj )
-        .broadcast(data-broadcast-url='php/broadcast.php', data-broadcast-interval='10', data-broadcast-limit='5', data-broadcast-data='{"demo": "neutral", "count": 2}')
-        block
-      .meta
-        +default-share
-        a.more-link(href='neutral-post-1.html')
-          span(data-hover='More') More
-      // // .meta
-    // // .box-beta
+//-
+  Beginning Include comment
+mixin inc-b( text )
+  +inc-com( 'Begin: ' + text )
 
-mixin article-post1(title)
-  // Begin Article Base
-  article.box-post
-    .box-beta
-      ul.tags
-        li.tag-timestamp 8 hours ago
-        li.tag-category
-          a(href='neutral-index.html')
-            span(data-hover='Something') Someting
-        li.tag-category
-          a(href='neutral-index.html')
-            span(data-hover='Video') Video
-      .box-content
-        //- Article/Post title
-        h2.box-title
-          //- This needs to link to full article
-          a(href='#') 
-            != title
-        // Begin Content
-        block
-        // End Content
-      // // .box-content
-      .meta
-        +default-share
-        a.more-link(href='neutral-post-2.html')
-          span(data-hover='More') More
-      // // .meta
-    // // .box-beta
-  // // .box-post
-  // End Article Base
+//-
+  Beginning Include comment (binary)
+mixin inc-1( text )
+  +inc-b( text )
 
-mixin article-post2( articleObj )
-  // Begin Article Post Mixin #2
-  article.box-post
-    .box-beta
-      ul.tags
-        li.tag-timestamp 1 sec ago
-        if articleObj.categories
-          each category in articleObj.categories
-            li.tag-category
-              a(href="#{category.href}")
-                span(data-hover="#{category.title}") 
-                != category.title
-      .box-content
-        //- Article/Post title
-        h2.box-title
-          //- This needs to link to full article
-          a(href='#') 
-            if articleObj.title
-              != articleObj.title
-            else
-              | No Title Provided...
-        // Begin Content
-        block
-        // End Content
-      // // .box-content
-      .meta
-        +default-share
-        a.more-link(href='neutral-post-2.html')
-          span(data-hover='More') More
-      // // .meta
-    // // .box-beta
-  // // .box-post
-  // End Article Post Mixin #2
+//-
+  Ending Include comment
+mixin inc-e( text )
+  +inc-com( 'End: ' + text )
 
-
-mixin article-post3( articleObj )
-  // Begin Article Post Mixin #3
-  article.box-post
-    .box-beta
-      ul.tags
-        li.tag-timestamp 1 sec ago
-        if articleObj.categories
-          each category in articleObj.categories
-            li.tag-category
-              a(href="#{category[1]}")
-                span(data-hover="#{category[0]}") 
-                != category[0]
-
-      .box-content
-        //- Article/Post title
-        h2.box-title
-          //- This needs to link to full article
-          a(href='#') 
-            if articleObj.title
-              != articleObj.title
-            else
-              | No Title Provided...
-        // Begin Content
-        block
-        // End Content
-      // // .box-content
-      .meta
-        +default-share
-        a.more-link(href='neutral-post-2.html')
-          span(data-hover='More') More
-      // // .meta
-    // // .box-beta
-  // // .box-post
-  // End Article Post Mixin #3
+//-
+  Ending Include comment (binary)
+mixin inc-0( text )
+  +inc-e( text )
 
 //- 
   @param  {object|string}   author            Author object, or username

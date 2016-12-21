@@ -1,3 +1,8 @@
+const timer = {
+  start: new Date()
+} 
+console.log( 'Starting at: %s', timer.start )
+
 const fs          = require( 'fs' )
 const path        = require( 'path' )
 const postcss     = require( 'postcss' )
@@ -22,6 +27,26 @@ const buildDate   = require( 'metalsmith-build-date' )
 //const yamlToJson  = require( './metalsmith-yaml-to-json' )
 const metallic    = require( 'metalsmith-metallic' )
 
+const _internal = {}
+
+_internal.ms2human = function(ms){
+  sec = Math.round( (ms/1000 )%60 )
+  min = Math.round( (ms/(1000*60))%60 )
+  hrs = Math.round( (ms/(1000*60*60))%24 )
+  
+  var result = []
+
+  if ( hrs > 0 ) result.push( 'Hours: ' + hrs )
+  if ( min > 0 ) result.push( 'Minutes: ' + min )
+  if ( sec > 0 ) result.push( 'Seconds: ' + sec )
+
+  if ( ! result.length )
+    return
+
+  return result.join(', ')
+}
+
+
 const config = {
   enableModules: {
     tidyHtml: true
@@ -44,6 +69,11 @@ const siteBuild = Metalsmith(__dirname)
   .source( config.source )
   .destination( config.buildPath )
   .clean(true)
+  .use(metadata({
+    'site': 'data/site.yaml',
+    'social_networks': 'data/social_networks.yaml',
+    'technical': 'data/technical.yaml'
+  }))
   .use( assets({
     source: './assets', 
     destination: './assets' 
@@ -114,6 +144,13 @@ const siteBuild = Metalsmith(__dirname)
        //stylesheets()
        print()
     }
+
+    timer.end = new Date()
+    timer.duration = timer.end - timer.start
+
+    console.log( 'Stopped at: %s', timer.end )
+    console.log( 'Elapsed: %s ms', timer.duration )
+    console.log( 'Duration: %s', _internal.ms2human( timer.duration ) )
   })
 
 /* PostCSS
@@ -195,3 +232,5 @@ function print () {
     //process.exit()
   })
 }
+
+
