@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA;;;GAGG;AAEH;;GAEG;ACPH;;;GAGG;ADQH;;GAEG;AACK,0GAAkG;AAClG,yEAAiE;AAEzE;;GAEG;AACH,wVAAiB;EAChB,WAAW,EAAE,yCAAyC;EACtD,WAAW,EAAE,GAAG;;;AAGjB,wiBAAmB;EAClB,WAAW,EAAE,wCAAwC;EACrD,cAAc,EAAE,SAAS",
-"sources": ["typo-open-sans-montserrat.scss","_typo.scss"],
-"names": [],
-"file": "typo-open-sans-montserrat.css"
-}
