@@ -44,6 +44,7 @@ Just a couple of *badass* geeks
       * **Changelog**: Cached data of the changes made to articles/posts
       * **Categories/Tags Indexing**: Articles should be categorized, and those categories should be indexed, as well as article tags
       * **Gist Snippets**: Authors should be able to reference a Gist code snippet in their articles
+      * **Tags**: The `gen-tag-ul()` mixin needs some work (links, hover, title, positioning, limit, etc)
     * **Other**:
       * **News Feed**: The homepage should have a "feed" of updates (articles, article comments, etc)
   * **User Functionality**:
@@ -57,5 +58,6 @@ Just a couple of *badass* geeks
     * **Implement Webpack**: The assets could/should be rolled up into one `.js` file and one `.css` file, which is easy with *[metalsmith-webpack](https://github.com/christophercliff/metalsmith-webpack)*
     * **Article Title Changelog and Redirect**: When articles are renamed, the *.html* file also gets renamed, there needs to be a way to keep track of these changes, and return a 301 redirect to the correct URL
   * **Other**:
+    * **Standardize Quotations**: The string values in the metadata of the `source/*.md` files should all be encapsulated in double quotes
     * **Article Management**: The process for creating/editing/deleting articles needs to be documented, logged, and potentially automated (with just email notifications on updates (Per a notification? Or daily?... Depends on traffic and severity))
     * **Documentation**: Need to document how articles are processed, and need to add some JSDoc comments to the various Jade/PUG mixin functions
