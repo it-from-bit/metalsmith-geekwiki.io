@@ -8,8 +8,7 @@ const fs          = require( 'fs' )
 const path        = require( 'path' )
 const postcss     = require( 'postcss' )
 const pdf         = require( 'html-pdf' )
-//const markdownit  = require( 'metalsmith-markdownit2' )
-const markdownit  = require( '/Users/jhyland/Documents/Projects/metalsmith-markdownit2/' )
+const markdownit  = require( 'metalsmith-markdownit' )
 const metadata    = require( 'metalsmith-metadata' )
 const Metalsmith  = require( 'metalsmith' )
 const layouts     = require( 'metalsmith-layouts' )
@@ -27,6 +26,8 @@ const markdown    = require( 'metalsmith-markdown' )
 const buildDate   = require( 'metalsmith-build-date' ) 
 //const yamlToJson  = require( './metalsmith-yaml-to-json' )
 const metallic    = require( 'metalsmith-metallic' )
+const dynamic     = require( 'metalsmith-dynamic' )
+const _           = require( 'lodash' )
 
 const _internal = {}
 
@@ -56,22 +57,6 @@ _internal.ms2human = ms => {
   return result.join(', ')
 }
 
-
-/**
- * Configuration 
-
-const config = {
-  enableModules: {
-    tidyHtml: true
-  },
-  source: 'source',
-  buildPath: 'public',
-  usePretty: true,
-  redirects: {
-    '/md': '/posts/markdown-demo.html'
-  }
-}
- */
 const config = require( './config' )
 
 /* Metalsmith
@@ -112,13 +97,10 @@ const siteBuild = Metalsmith(__dirname)
   //.ignore( path.resolve( __dirname, 'public/CNAME' ) )
   .use(markdown())
   .use(markdownit({
-    options: {
-      html: true,
-      xhtmlOut: true,
-      typographer: true,
-      linkify: true
-    },
-    render: 'inline'
+    html: true,
+    xhtmlOut: true,
+    typographer: true,
+    linkify: true
   }))
   .use(layouts({
     engine: 'pug',
@@ -149,6 +131,15 @@ const siteBuild = Metalsmith(__dirname)
       }
     })
   ))
+  .use( ( files, metalsmith, done ) => {
+    var files2 = _.filter( files, ( fileStats, fileName ) => { 
+      var dirSegs = fileName.split('/')
+      //console.log('dirSegs[0]:',dirSegs[0])
+      return dirSegs[0] === 'demos'
+    })
+
+    //console.log( 'Files:', files2 )
+  })
   .build( err => {
     if (err) {
       console.log('Error:',err)

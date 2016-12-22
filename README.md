@@ -51,6 +51,7 @@ Just a couple of *badass* geeks
       * **Comments**: Ability to comment on articles using Facebooks API
       * **User Activity**: Whenever a visitor authors or comments on an article, that activity should be logged... statically... somehow... 
   * **Core Functionality**:
+    * **Main Navigation**: The navigation menu at the top needs to be configurable
     * **Analytics**: Need to be logging the traffic, duhhh!  
     * **Code Cleanup**: The `build.js` was from another *Metalsmith* project, so theres plenty in there that could easily be cleaned up
     * **Build Time**: Executing the `build.js` can take anywhere from less than 10 seconds, to more than a couple minutes. This could be due to residual template files/folders that are getting needlessly processed

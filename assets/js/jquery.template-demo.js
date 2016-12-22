@@ -1,4 +1,18 @@
+function clickFirst(){
+  $( 'input.icon-size:eq(0)' ).trigger( 'click' )
+}
+
+function countChecked(){
+  if ( ! $( 'input.icon-size:checked' ).length ){
+    clickFirst()
+  }
+}
+
 $(document).ready(function(){
+
+  /**
+   *
+   */
   function toggleIcon( size, visible ){
     var iconSize = 'lg'
     // If its not boolean, or zero, use lg
@@ -15,7 +29,7 @@ $(document).ready(function(){
 
     if ( visible ){
       if ( totalIcons > $table.find( 'i.fa-' + iconSize ).length ){
-        $('.icon-cell').each(function(k,e){
+        $('.icon-cell').each(function( k, e ){
           var $c = $( this )
           var icon = $c.data( 'icon' )
 
@@ -31,10 +45,15 @@ $(document).ready(function(){
       if ( $table.find( 'span > i.fa-' + iconSize ).length ){
         $table.find( 'span > i.fa-' + iconSize ).remove()
       }
+
+      // If no icons are selected, then check the first one
+      if ( ! $table.find( 'span > i.fa' ).length ) {
+        clickFirst()
+      }
     }
   }
 
-
+  // Toggle the visibility of the icons whenever a size checkbox is checked
   $('.icon-size').change(function() {
     var $check = $(this)
     toggleIcon( parseInt( $check.data('size') ), $check.is(':checked') )
@@ -43,5 +62,5 @@ $(document).ready(function(){
 
 // When the page fully loads, Click the large icon checkbox
 $( window ).load(function() {
-  $('input.icon-size[data-size="lg"]').trigger('click')
+  clickFirst()
 })
