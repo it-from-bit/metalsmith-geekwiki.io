@@ -131,15 +131,6 @@ const siteBuild = Metalsmith(__dirname)
       }
     })
   ))
-  .use( ( files, metalsmith, done ) => {
-    var files2 = _.filter( files, ( fileStats, fileName ) => { 
-      var dirSegs = fileName.split('/')
-      //console.log('dirSegs[0]:',dirSegs[0])
-      return dirSegs[0] === 'demos'
-    })
-
-    //console.log( 'Files:', files2 )
-  })
   .build( err => {
     if (err) {
       console.log('Error:',err)
