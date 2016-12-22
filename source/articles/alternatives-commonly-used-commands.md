@@ -2,7 +2,7 @@
 title: "Alternatives To Commonly Used Linux Commands"
 layout: "articles/article-page.pug"
 summary: "Alternatives To Commonly Used Linux Commands"
-featured_image: "assets/posts/linux-commands.png"
+featured_image: "assets/articles/linux-commands.png"
 create_date: "07-01-2014"
 author:
   firstname: "Justin"
@@ -22,7 +22,7 @@ I like to research alternative methods of accomplishing common tasks, just to se
 The _[traceroute](http://linux.die.net/man/8/traceroute "Traceroute Man Page")_ command is probably one of the most commonly used commands for diagnosing network related issues. It's a fairly simple command, you just run something like 'traceroute google.com' and it
 
 Screenshot of the difference between the output of traceroute and the output of mtr
-![Screenshot of the difference between the output of traceroute and the output of mtr](/assets/posts/traceroute_vs_mtr.png)
+![Screenshot of the difference between the output of traceroute and the output of mtr](/assets/articles/traceroute_vs_mtr.png)
 
 will print the route packets trace to whatever host you specified (google.com, in my example).
 
@@ -38,7 +38,7 @@ ___
 Even more popular than the _traceroute_ command would be top. I think top is probably the first command you learn as a sys admin, as far as diagnostics goes. Top will show you the load averages, the top
 
 Difference in the output of the commands top and htop
-![Command outputs of TOP and HTOP](/assets/posts/top_vs_htop.png)
+![Command outputs of TOP and HTOP](/assets/articles/top_vs_htop.png)
 
 Resource intensive processes, the users, pids, memory utilization, CPU utilization, pretty much everything you need to know. If you want to manipulate the output (Such as sort by CPU or Memory, only show specific user processes, or show a tree view for example), that can only be accomplished using the arguments associated with top when you run the command itself.
 
@@ -60,7 +60,7 @@ I think the irony in the names is just a simple pun, _less_ is _more_, and _more
 
 ___
 ## Nslookup vs Dig & Host
-![Nslookup_VS_Dig_VS_Host](/assets/posts/Nslookup_VS_Dig_VS_Host.png)
+![Nslookup_VS_Dig_VS_Host](/assets/articles/Nslookup_VS_Dig_VS_Host.png)
 
 [Nslookup](http://linux.die.net/man/1/nslookup "Nslookup man page") is probably one of the most popular commands for any sysadmin. It's a fairly simple command, all it does is return the DNS record of whatever is provided to it as an argument.
 
@@ -74,7 +74,7 @@ If this isn't enough as it is... _nslookup_ is deprecated. The organization tha
 
 ___
 ## Di vs Df (and Du)
-![Output comparison between DU, DF and DI](/assets/posts/df_vs_du_vs_di.png "DU, DF and DI")
+![Output comparison between DU, DF and DI](/assets/articles/df_vs_du_vs_di.png "DU, DF and DI")
 
 Pretty much everyone knows about [df](http://linux.die.net/man/1/df) but theirs one I just learned about. it's called [di](http://linux.die.net/man/1/di), which means Disk Information, (I bet you could have guessed that :-P)
 
@@ -84,7 +84,7 @@ You can see in the screenshot on the right, the information provided by the comm
 
 ___
 ## Vi vs VIM
-![VIM Plugin YouCompleteMe](/assets/posts/youcompleteme.gif "VIM Plugin YouCompleteMe")
+![VIM Plugin YouCompleteMe](/assets/articles/youcompleteme.gif "VIM Plugin YouCompleteMe")
 
 At first glance to me, VIM was nothing more than VI with syntax highlighting. But after further research, I found some differences than count for more than just syntax highlighting.
 
