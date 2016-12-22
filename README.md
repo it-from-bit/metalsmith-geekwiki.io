@@ -50,7 +50,7 @@ Just a couple of *badass* geeks
   * **User Functionality**:
       * **Comments**: Ability to comment on articles using Facebooks API
       * **User Activity**: Whenever a visitor authors or comments on an article, that activity should be logged... statically... somehow... 
-      * **User Settings**: Such as preferred/default categories, news feeds, etc - This would obviously operate via cookies or *[local storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage)
+      * **User Settings**: Such as preferred/default categories, news feeds, etc - This would obviously operate via client side cookies or *[local storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage)*
       * **RSS Feed Subbmissions**: Maybe a way for visitors to suggest other RSS feeds - even if its just a form that populates a Facebook comment for the GeekWiki FB page
   * **Core Functionality**:
     * **Main Navigation**: The navigation menu at the top needs to be configurable
