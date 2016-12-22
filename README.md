@@ -58,7 +58,8 @@ Just a couple of *badass* geeks
     * **Theme Assets**: The theme for the blog is the [`theme` value defined in the metafile **source/data/site.yaml**](https://github.com/geekwiki/blog/blob/master/source/data/site.yaml#L3) ; The build process should copy over **only** the assets associated to the specified theme
     * **Implement Webpack**: The assets could/should be rolled up into one `.js` file and one `.css` file, which is easy with *[metalsmith-webpack](https://github.com/christophercliff/metalsmith-webpack)*
     * **Article Title Changelog and Redirect**: When articles are renamed, the *.html* file also gets renamed, there needs to be a way to keep track of these changes, and return a 301 redirect to the correct URL
+  * **Management**: 
+    * **Article Management**: The process for creating/editing/deleting articles needs to be documented, logged, and potentially automated (with just email notifications on updates (Per a notification? Or daily?... Depends on traffic and severity))
   * **Other**:
     * **Standardize Quotations**: The string values in the metadata of the `source/*.md` files should all be encapsulated in double quotes
-    * **Article Management**: The process for creating/editing/deleting articles needs to be documented, logged, and potentially automated (with just email notifications on updates (Per a notification? Or daily?... Depends on traffic and severity))
     * **Documentation**: Need to document how articles are processed, and need to add some JSDoc comments to the various Jade/PUG mixin functions
