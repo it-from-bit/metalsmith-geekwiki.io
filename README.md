@@ -46,10 +46,12 @@ Just a couple of *badass* geeks
       * **Gist Snippets**: Authors should be able to reference a Gist code snippet in their articles
       * **Tags**: The `gen-tag-ul()` mixin needs some work (links, hover, title, positioning, limit, etc)
     * **Other**:
-      * **News Feed**: The homepage should have a "feed" of updates (articles, article comments, etc)
+      * **News/RSS Feed**: A live RSS feed polling from various sources using client side JS <sub>[more..](#rss-news-feed)</sub>
   * **User Functionality**:
       * **Comments**: Ability to comment on articles using Facebooks API
       * **User Activity**: Whenever a visitor authors or comments on an article, that activity should be logged... statically... somehow... 
+      * **User Settings**: Such as preferred/default categories, news feeds, etc - This would obviously operate via cookies or *[local storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage)
+      * **RSS Feed Subbmissions**: Maybe a way for visitors to suggest other RSS feeds - even if its just a form that populates a Facebook comment for the GeekWiki FB page
   * **Core Functionality**:
     * **Main Navigation**: The navigation menu at the top needs to be configurable
     * **Analytics**: Need to be logging the traffic, duhhh!  
@@ -58,8 +60,46 @@ Just a couple of *badass* geeks
     * **Theme Assets**: The theme for the blog is the [`theme` value defined in the metafile **source/data/site.yaml**](https://github.com/geekwiki/blog/blob/master/source/data/site.yaml#L3) ; The build process should copy over **only** the assets associated to the specified theme
     * **Implement Webpack**: The assets could/should be rolled up into one `.js` file and one `.css` file, which is easy with *[metalsmith-webpack](https://github.com/christophercliff/metalsmith-webpack)*
     * **Article Title Changelog and Redirect**: When articles are renamed, the *.html* file also gets renamed, there needs to be a way to keep track of these changes, and return a 301 redirect to the correct URL
+    * **RSS Feed**: Even though the site is static, I would think an RSS feed would be useful
   * **Management**: 
     * **Article Management**: The process for creating/editing/deleting articles needs to be documented, logged, and potentially automated (with just email notifications on updates (Per a notification? Or daily?... Depends on traffic and severity))
   * **Other**:
     * **Standardize Quotations**: The string values in the metadata of the `source/*.md` files should all be encapsulated in double quotes
     * **Documentation**: Need to document how articles are processed, and need to add some JSDoc comments to the various Jade/PUG mixin functions
+
+#### RSS News Feed
+
+Just a starter list of some example RSS feed sources and categories:
+
+  * **[Linux Journal](http://www.linuxjournal.com/rss_feeds)**
+    * [Home](http://feeds.feedburner.com/LinuxJournalcom?format=xml)
+    * [Breaking News](http://feeds.feedburner.com/LinuxJournal-BreakingNews?format=xml)
+    * [Featured Videos](http://feeds.feedburner.com/LinuxJournalFeaturedVideo?format=xml)
+    * [Blogs/News](http://feeds.feedburner.com/LinuxJournalBlogs?format=xml)
+    * [Audio Video](http://feeds.feedburner.com/LinuxJournalAudioVideo?format=xml)
+    * [Community](http://feeds.feedburner.com/LinuxJournalCommunity?format=xml)
+    * [Education](http://feeds.feedburner.com/LinuxJournalEducation?format=xml)
+    * [Embedded](http://feeds.feedburner.com/LinuxJournalEmbedded?format=xml)
+    * [Hardware](http://feeds.feedburner.com/LinuxJournalHardware?format=xml)
+    * [HOWTOs](http://feeds.feedburner.com/LinuxJournalHowtos?format=xml)
+    * [International](http://feeds.feedburner.com/LinuxJournalInternational?format=xml)
+    * [Security](http://feeds.feedburner.com/LinuxJournalSecurity?format=xml)
+    * [Software](http://feeds.feedburner.com/LinuxJournalSoftware?format=xml)
+    * [Sysadmin](http://feeds.feedburner.com/LinuxJournalSysadmin?format=xml)
+    * [Webmaster](http://feeds.feedburner.com/LinuxJournalWebmaster?format=xml)
+  * **[Linux Magazine](http://www.linux-magazine.com/Online/RSS-Feeds)**
+    * [Full Content](http://www.linux-magazine.com/rss/feed/lmi_full)
+    * [News](http://www.linux-magazine.com/rss/feed/lmi_news)
+      * **Referenced Blogs**
+        * [ROSE Blog](http://www.linux-magazine.com/rss/feed/rose_blog)
+        * [Paw Prints](http://www.linux-magazine.com/rss/feed/paw_prints_writings_of_the_maddog)
+        * [Productivity Sauce](http://www.linux-magazine.com/rss/feed/productivity_sauce)
+        * [Off The Beat](http://www.linux-magazine.com/rss/feed/off_the_beat)
+        * [Beagle Blog](http://www.linux-magazine.com/rss/feed/beagleblog)
+  * **[Linux Security](http://www.linuxsecurity.com/component/option,com_rss_feeds/)**
+    * [Hybrid](http://www.linuxsecurity.com/static-content/linuxsecurity_hybrid.rss) - *Most recent advisories, news stories, and feature stories.*
+    * [Advisries](http://www.linuxsecurity.com/static-content/linuxsecurity_advisories.rss) - *Most recent Linux vendor security advisories.*
+    * [Latest News](http://www.linuxsecurity.com/static-content/linuxsecurity_articles.rss) - *Most recent news articles.*
+    * [Features](http://www.linuxsecurity.com/static-content/linuxsecurity_features.rss) - *Most recent feature stories by the editorial staff.*
+
+And in regards to processing the RSS feed contents, no need to re-invent the wheel, *[there are plenty of JS and jQuery parsers available](https://www.sitepoint.com/jquery-rss-feed-readers/)*. 
