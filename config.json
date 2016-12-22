@@ -8,5 +8,10 @@
   "redirects": {
     "/md": "/posts/markdown-demo.html"
   },
-  "sourceData": "data"
+  "sourceData": "data",
+  "redirects": {
+    "/nslookup": "/posts/a-better-nslookup.html",
+    "/foo.html": "/demos/foo.html",
+    "/f.html": "/demos/foo.html"
+  }
 }

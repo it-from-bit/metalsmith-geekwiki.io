@@ -4,6 +4,7 @@
   "description": "Static blog for GeekWiki",
   "main": "build.js",
   "dependencies": {
+    "async": "^2.1.4",
     "autoprefixer": "https://registry.npmjs.org/autoprefixer/-/autoprefixer-6.3.7.tgz",
     "browser-sync": "https://registry.npmjs.org/browser-sync/-/browser-sync-2.13.0.tgz",
     "colors.css": "https://registry.npmjs.org/colors.css/-/colors.css-3.0.0.tgz",
@@ -15,6 +16,7 @@
     "jstransformer-pug": "https://registry.npmjs.org/jstransformer-pug/-/jstransformer-pug-0.2.2.tgz",
     "lodash": "https://registry.npmjs.org/lodash/-/lodash-4.17.2.tgz",
     "metalsmith": "https://registry.npmjs.org/metalsmith/-/metalsmith-2.1.0.tgz",
+    "metalsmith-alias": "0.0.2",
     "metalsmith-assets": "https://registry.npmjs.org/metalsmith-assets/-/metalsmith-assets-0.1.0.tgz",
     "metalsmith-build-date": "^0.2.0",
     "metalsmith-collections": "https://registry.npmjs.org/metalsmith-collections/-/metalsmith-collections-0.7.0.tgz",

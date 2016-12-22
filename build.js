@@ -28,6 +28,7 @@ const buildDate   = require( 'metalsmith-build-date' )
 const metallic    = require( 'metalsmith-metallic' )
 const dynamic     = require( 'metalsmith-dynamic' )
 const _           = require( 'lodash' )
+const alias       = require( 'metalsmith-alias' )
 
 const _internal = {}
 
@@ -65,7 +66,7 @@ const config = require( './config' )
 const siteBuild = Metalsmith(__dirname)
   .source( config.source )
   .destination( config.buildPath )
-  .clean(false)
+  .clean(true)
   .use(metadata({
     'site': config.sourceData + '/site.yaml',
     'social_networks': config.sourceData + '/social_networks.yaml',
@@ -75,6 +76,18 @@ const siteBuild = Metalsmith(__dirname)
     source: './assets', 
     destination: './assets' 
   }))
+  .use(msIf(
+    ( typeof config.redirects === 'object' && ! Array.isArray( config.redirects ) ),
+    redirect( config.redirects )
+  ))
+  .use(msIf(
+    false,
+    alias({
+      '/nslookup': '/posts/a-better-nslookup.html'
+      //'/foo.html': '/demos/foo.html',
+      //'/f.html': '/demos/foo.html'
+    })
+  ))
   /*
   .use( collections({
     articles: {

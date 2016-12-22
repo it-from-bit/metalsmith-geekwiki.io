@@ -18,6 +18,10 @@ share:
 export:
   - pdf
   - docx
+alias:
+  - foo-one
+  - foo-two
+  - foo-three.html
 ---
 
 # Example: Foo
