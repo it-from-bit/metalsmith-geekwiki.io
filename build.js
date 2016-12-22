@@ -29,6 +29,7 @@ const metallic    = require( 'metalsmith-metallic' )
 const dynamic     = require( 'metalsmith-dynamic' )
 const _           = require( 'lodash' )
 const alias       = require( 'metalsmith-alias' )
+const filenames   = require( 'metalsmith-filenames' )
 
 const _internal = {}
 
@@ -67,6 +68,7 @@ const siteBuild = Metalsmith(__dirname)
   .source( config.source )
   .destination( config.buildPath )
   .clean(true)
+  .use( filenames() )
   .use(metadata({
     'site': config.sourceData + '/site.yaml',
     'social_networks': config.sourceData + '/social_networks.yaml',
