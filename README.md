@@ -1,5 +1,6 @@
 # GeekWiki Blog Generator
 
+<center> **[What?](#what)** | **[How?](#how)** | **[Why?](#why)** | **[Who?](#who)** | **[Todo?](#todo-list)** </center>
 
 ### What?
 
