@@ -69,6 +69,7 @@ Just a couple of *badass* geeks
   * **Other**:
     * **Standardize Quotations**: The string values in the metadata of the `source/*.md` files should all be encapsulated in double quotes
     * **Documentation**: Need to document how articles are processed, and need to add some JSDoc comments to the various Jade/PUG mixin functions
+    * **Metalsmith Result**: When new builds are executed, the HTML content destination is the [**public** folder within **GeekWiki/blog.git**](https://github.com/geekwiki/blog/tree/master/public), the *public* folder should be a **[Subtree](https://help.github.com/articles/about-git-subtree-merges/)** or **[Submodules](https://github.com/blog/2104-working-with-submodules)**, which can be accomplished by using either Githubs **[Submodules](https://gist.github.com/gitaarik/8735255)** feature, or its **[Subtree](https://help.github.com/articles/about-git-subtree-merges/)** feature
 
 #### RSS News Feed
 
