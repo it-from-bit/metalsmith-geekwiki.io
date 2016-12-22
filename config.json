@@ -7,5 +7,6 @@
   "usePretty": true,
   "redirects": {
     "/md": "/posts/markdown-demo.html"
-  }
+  },
+  "sourceData": "data"
 }

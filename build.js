@@ -67,9 +67,9 @@ const siteBuild = Metalsmith(__dirname)
   .destination( config.buildPath )
   .clean(false)
   .use(metadata({
-    'site': 'data/site.yaml',
-    'social_networks': 'data/social_networks.yaml',
-    'technical': 'data/technical.yaml'
+    'site': config.sourceData + '/site.yaml',
+    'social_networks': config.sourceData + '/social_networks.yaml',
+    'technical':  config.sourceData + '/technical.yaml'
   }))
   .use( assets({
     source: './assets', 
