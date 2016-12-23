@@ -18,6 +18,7 @@ share:
 In my opinion, one of the best things about Unix/Linux, is there's typically always more than one correct way to do something. Sometimes, some ways are better than others, or quicker or more efficient or reliable, but it's common to get locked into doing something one specific way just because you've done it repeatedly. There's always alternative methods of accomplishing a task, like if you wanted to find out what ports are open on a server, depending on if you are on the server itself or not, you have lsof, nmap, netstat
 
 I like to research alternative methods of accomplishing common tasks, just to see if there's a better way of doing.... whatever it is I'm doing.
+
 ## Traceroute vs. MTR
 The _[traceroute](http://linux.die.net/man/8/traceroute "Traceroute Man Page")_ command is probably one of the most commonly used commands for diagnosing network related issues. It's a fairly simple command, you just run something like 'traceroute google.com' and it
 
