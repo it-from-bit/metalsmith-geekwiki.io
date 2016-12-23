@@ -1,62 +1,148 @@
-const timer = {
-  start: new Date()
-}
-
-console.log( 'Starting at: %s', timer.start )
-
 const fs          = require( 'fs' )
 const path        = require( 'path' )
+const _           = require( 'lodash' )
+const debug       = require( 'debug' )( 'build.js' )
 const postcss     = require( 'postcss' )
 const pdf         = require( 'html-pdf' )
-const markdownit  = require( 'metalsmith-markdownit' )
-const metadata    = require( 'metalsmith-metadata' )
 const Metalsmith  = require( 'metalsmith' )
-const layouts     = require( 'metalsmith-layouts' )
-const assets      = require( 'metalsmith-assets' )
-const include     = require( 'metalsmith-include' )
-const inplace     = require( 'metalsmith-in-place' )
-const pug         = require( 'metalsmith-pug' )
-const collections = require( 'metalsmith-collections' )
-const tidy        = require( 'metalsmith-html-tidy' )
-const msIf        = require( 'metalsmith-if' )
-//const tojson      = require( 'metalsmith-to-json' )
-const static      = require( 'metalsmith-static' )
-const redirect    = require( 'metalsmith-redirect' )
-const markdown    = require( 'metalsmith-markdown' )
-const buildDate   = require( 'metalsmith-build-date' ) 
-//const yamlToJson  = require( './metalsmith-yaml-to-json' )
-const metallic    = require( 'metalsmith-metallic' )
-const dynamic     = require( 'metalsmith-dynamic' )
-const _           = require( 'lodash' )
-const alias       = require( 'metalsmith-alias' )
-const filenames   = require( 'metalsmith-filenames' )
+
+// Metalsmith plugin names to load (names of npm packages without /^metalsmith-/)
+const msPlugins = [
+  'markdownit',
+  'metadata',
+  'layouts',
+  'assets',
+  'include',
+  'in-place',
+  'pug',
+  'collections',
+  'html-tidy',
+  'if',
+  'static',
+  'redirect',
+  'markdown',
+  'build-date',
+  'metallic',
+  'dynamic',
+  'alias',
+  'paths',
+
+  /**
+   * Not sure I'm satisfied with using this to keep track of execution duration, since 
+   * it literally does absolutely nothing other than pass the string parameter provided
+   * to the debug() function. But leaving it for now.
+   * @see: https://github.com/deltamualpha/metalsmith-timer/blob/master/lib/index.js
+   * @note: I think the entire plugin can be rewritten as ES6 in 4 lines:
+   *    module.exports = string => ( files, metalsmith, done ) => { 
+   *      require( 'debug' )( 'metalsmith-timer' )( string )
+   *      done() 
+   *    }
+   */
+  'timer'
+
+  /* Disabled plugins
+  ,'yaml-to-json',
+  'to-json'
+  */
+]
+
+// Object to store any loaded Metalsmith plugins
+const ms = {}
+
+// Iterate over the list of Metalsmith plugins, requiring each one and adding it 
+// to the ms object (with a camelCase format of the names as keys)
+_.forEach( msPlugins, value => {
+  let key     = _.camelCase( value )
+  let name    = `metalsmith-${value}`
+  let plugin  = require( name )
+
+  if ( ! plugin || typeof plugin !== 'function' ){
+    debug( 'Failed to load Metalsmith plugin "%s" as "%s" (require returned typeof: %s)', name, key, typeof plugin )
+    return
+  }
+
+  ms[ key ] = plugin
+
+  debug( 'Loaded Metalsmith plugin "%s" as "%s"', name, key )
+})
+
+debug( `Loaded ${Object.keys(ms).length} of ${msPlugins.length} plugins specified` )
 
 const _internal = {}
 
-/**
- * Quick internal function to turn a millisecond duration into something
- * a little more human readable
- *
- * @param   {string|number}   ms    Milliseconds to calculate
- * @return  {string}                Format: # hour(s), # minute(s), # second(s)
- */
-_internal.ms2human = ms => {
-  sec = Math.round( (ms/1000 )%60 )
-  min = Math.round( (ms/(1000*60))%60 )
-  hrs = Math.round( (ms/(1000*60*60))%24 )
+
+//const es6Plugin = options => {
+function es6Plugin({ rowFilesLimit, verbose }){
+  let row = { limit: rowFilesLimit, rowFiles: [], count: 0 }
+
+  if ( verbose ) 
+    console.log( 'Plugin Opts: %s', ( arguments.length ? JSON.stringify( arguments[0] ) : 'None' ) )
+
+  return ( files, metalsmith, done ) => {
+    var fKeys = Object.keys( files )
+
+    for ( var k = 0; k < fKeys.length; k++ ) {
+      row.rowFiles.push( fKeys[ k ] )
+        
+      if ( row.limit === row.rowFiles.length+1 || k+1 === fKeys.length ){
+        row.count = row.count+1
+
+        if ( verbose ) console.log( 'Row #%s: %s', row.count, row.rowFiles.join( ', ') )
+
+        row.rowFiles = []
+      }
+    }
+    done()
+  }
+}
+
+const pluginVersion = false
+
+const es6Plugin2 = options => {
+  let row = { limit: 10, rowFiles: [], count: 0 }
+
+  return ( files, metalsmith, done ) => {
+    var fKeys = Object.keys( files )
+    
+    for ( var k = 0; k < fKeys.length; k++ ) {
+      row.rowFiles.push( fKeys[ k ] )
+        
+      if ( row.limit === row.rowFiles.length+1 || k+1 === fKeys.length ){
+        row.count = row.count+1
+        console.log( '>>>>> ROW %s: %s', row.count, row.rowFiles.join( ', ') )
+        row.rowFiles = []
+      }
+    }
+    done()
+  }
+}
+
+
+var es5Plugin = function( options ){
+  var row = { limit: 10, rowFiles: [], count: 0 }
   
-  let result = []
+  console.log('Plugin Options:',options)
+  return function ( files, metalsmith, done ){
+    var fKeys = Object.keys( files )
+    console.log('File count:', fKeys.length )
+    console.log( "FILE COUNT: %s", fKeys.length || 'None' )
+    /*
+    for ( let [ key, value ] of files ) {
+      console.log('Key "%s":', key,'count')
+    }*/
 
-  let _plural = ( str, count ) => ( count > 1 ? str+'s' : str )
 
-  if ( hrs > 0 ) result.push( `${hrs} ${_plural('hour',hrs)}` )
-  if ( min > 0 ) result.push( `${min} ${_plural('minute',min)}` )
-  if ( sec > 0 ) result.push( `${sec} ${_plural('second',sec)}` )
-
-  if ( ! result.length )
-    return 'Time Unknown'
-
-  return result.join(', ')
+    for ( var k = 0; k < fKeys.length; k++ ) {
+      row.rowFiles.push( files[ fKeys ] )
+        
+      if ( row.limit === row.rowFiles.length+1 || k+1 === fKeys.length ){
+        row.count = row.count+1
+        console.log( '>>>>> ROW %s: %s', row.count, row.rowFiles.join( ', ') )
+        row.rowFiles = []
+      }
+    }
+    done()
+  }
 }
 
 const config = require( './config' )
@@ -65,33 +151,53 @@ const config = require( './config' )
  ******************************************************************************/
 
 const siteBuild = Metalsmith(__dirname)
+  .use( ms.timer( 'pre-source' ) )
   .source( config.source )
+  .use( ms.timer( 'post-source' ) )
   .destination( config.buildPath )
   .clean(true)
-  .use( filenames() )
-  .use(metadata({
+  .use(ms.paths({
+    property: 'paths'
+  }))
+  .use(ms.metadata({
     'site': config.sourceData + '/site.yaml',
     'social_networks': config.sourceData + '/social_networks.yaml',
     'technical':  config.sourceData + '/technical.yaml'
   }))
-  .use( assets({
+  .use(ms.if(
+    ( pluginVersion && pluginVersion == 6 ),
+    es6Plugin({ 
+      //limit: 10, rowFiles: [], count: 0 
+      rowFileLimit: 10, verbose: 4
+    })
+  ))
+  .use(ms.if(
+    ( pluginVersion && pluginVersion == 5 ),
+    es5Plugin({ 
+      //limit: 10, rowFiles: [], count: 0 
+      rowFileLimit: 10, verbose: 4
+    })
+  ))
+  .use( ms.timer( 'pre-assets' ) )
+  .use( ms.assets({
     source: './assets', 
     destination: './assets' 
   }))
-  .use(msIf(
+  .use( ms.timer( 'post-assets' ) )
+  .use(ms.if(
     ( typeof config.redirects === 'object' && ! Array.isArray( config.redirects ) ),
-    redirect( config.redirects )
+    ms.redirect( config.redirects )
   ))
-  .use(msIf(
+  .use(ms.if(
     false,
-    alias({
+    ms.alias({
       '/nslookup': '/posts/a-better-nslookup.html'
       //'/foo.html': '/demos/foo.html',
       //'/f.html': '/demos/foo.html'
     })
   ))
   /*
-  .use( collections({
+  .use( ms.collections({
     articles: {
       pattern: '*.md',
       sortBy: 'date',
@@ -99,25 +205,25 @@ const siteBuild = Metalsmith(__dirname)
     }
   }))
   */
-  .use(msIf(
+  .use(ms.if(
     true,
-    inplace({
+    ms.inPlace({
       engine: 'pug',
       pretty: config.usePretty,
       pattern: '*.md'
     })
   ))
-  .use(include())
+  .use(ms.include())
   .ignore( path.resolve( __dirname, 'public/.git' ) )
   //.ignore( path.resolve( __dirname, 'public/CNAME' ) )
-  .use(markdown())
-  .use(markdownit({
+  .use(ms.markdown())
+  .use(ms.markdownit({
     html: true,
     xhtmlOut: true,
     typographer: true,
     linkify: true
   }))
-  .use(layouts({
+  .use(ms.layouts({
     engine: 'pug',
     pretty: config.usePretty,
     directory: 'templates/',
@@ -128,10 +234,10 @@ const siteBuild = Metalsmith(__dirname)
       '!partials/*',  '!partials/*/*'
     ]
   }))
-  .use(metallic())
-  .use(msIf(
+  .use(ms.metallic())
+  .use(ms.if(
     false,
-    tidy({
+    ms.htmlTidy({
       pattern: '**/*html',
       tidyOptions: {
         // See http://api.html-tidy.org/tidy/tidylib_api_5.1.25/quick_ref.html
@@ -146,6 +252,7 @@ const siteBuild = Metalsmith(__dirname)
       }
     })
   ))
+  .use( ms.timer( 'pre-build' ) )
   .build( err => {
     if (err) {
       console.log('Error:',err)
@@ -156,13 +263,6 @@ const siteBuild = Metalsmith(__dirname)
        //stylesheets()
        print()
     }
-
-    timer.end = new Date()
-    timer.duration = timer.end - timer.start
-
-    console.log( 'Stopped at: %s', timer.end )
-    console.log( 'Elapsed: %s ms', timer.duration )
-    console.log( 'Duration: %s', _internal.ms2human( timer.duration ) )
   })
 
 /* PostCSS
