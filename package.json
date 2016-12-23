@@ -24,6 +24,7 @@
     "metalsmith-default-values": "https://registry.npmjs.org/metalsmith-default-values/-/metalsmith-default-values-0.0.2.tgz",
     "metalsmith-drafts": "https://registry.npmjs.org/metalsmith-drafts/-/metalsmith-drafts-0.0.1.tgz",
     "metalsmith-dynamic": "^0.4.0",
+    "metalsmith-filenames": "^1.0.0",
     "metalsmith-html-minifier": "https://registry.npmjs.org/metalsmith-html-minifier/-/metalsmith-html-minifier-2.0.0.tgz",
     "metalsmith-html-tidy": "^1.1.2",
     "metalsmith-if": "^0.1.1",

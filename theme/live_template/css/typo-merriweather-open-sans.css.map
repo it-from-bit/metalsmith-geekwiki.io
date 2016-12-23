@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA;;;GAGG;AAEH;;GAEG;ACPH;;;GAGG;ADQH;;GAEG;AACK,+FAAuF;AACvF,4FAAoF;AAE5F;;GAEG;AACH,wVAAiB;EAChB,WAAW,EAAE,6CAA6C;;;AAG3D,wiBAAmB;EAClB,WAAW,EAAE,yCAAyC",
-"sources": ["typo-merriweather-open-sans.scss","_typo.scss"],
-"names": [],
-"file": "typo-merriweather-open-sans.css"
-}
