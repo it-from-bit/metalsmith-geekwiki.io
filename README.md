@@ -48,6 +48,9 @@ Just a couple of *badass* geeks
       * **Social Media**: Whenever the build is ran, if any new articles were generated, then they should be posted to the FB and Twitter account for GeekWiki
       * **Article Title Slug Aliases**: It may be useful to allow a config item in the source .md files yaml info for multiple slug URL's (EG: `a-better-nslookup` and `better-nslookup` could go to the same article, or one could redirect to the other)
       * **Unique Article Titles**: Whenever the build is ran, it should look through the source files to collect the article titles and validate there are no duplicates
+      * **Article/Category Subscriptions**: Visitors/Authors/etc should be able to subscribe to a channel for updated content notifications
+      * **Article Update Notification Override**: If an article gets updated, and the update is deemed trivial, then any notifications that would normally be sent out should be able to be disabled (Not sure how to do this with static content and a job that builds the website periodically)
+      * **Tag Cloud**: Create a [tag cloud](https://en.wikipedia.org/wiki/Tag_cloud) for all the tags
     * **Other**
       * **News/RSS Feed**: A live RSS feed polling from various sources using client side JS <sub>[more..](#rss-news-feed)</sub>
     * **Visitor Functionality**
