@@ -46,6 +46,8 @@ Just a couple of *badass* geeks
       * **Tags**: The `gen-tag-ul()` mixin needs some work (links, hover, title, positioning, limit, etc)
       * **Header Anchors**: The header tags should link to its own anchor, Just like this page does. (It may actually be better to just create a header mixin, EG: `+h(3, 'Some String')`, or something similar)
       * **Social Media**: Whenever the build is ran, if any new articles were generated, then they should be posted to the FB and Twitter account for GeekWiki
+      * **Article Title Slug Aliases**: It may be useful to allow a config item in the source .md files yaml info for multiple slug URL's (EG: `a-better-nslookup` and `better-nslookup` could go to the same article, or one could redirect to the other)
+      * **Unique Article Titles**: Whenever the build is ran, it should look through the source files to collect the article titles and validate there are no duplicates
     * **Other**
       * **News/RSS Feed**: A live RSS feed polling from various sources using client side JS <sub>[more..](#rss-news-feed)</sub>
     * **Visitor Functionality**
@@ -132,6 +134,8 @@ And in regards to processing the RSS feed contents, no need to re-invent the whe
 
 Some of the dev tasks may not be possible (or at least reasonably accomplishable without ) with existing plugins - However, Metalsmith plugins are extremely easy to write, and can even be less than 10 lines of JS!
 
+---
+
 #### [Data Utility](https://github.com/geekwiki/metalsmith-data-util)
 
 **Description**: A plugin used for converting common data serialization formats (*json*, *yaml*, *xml*, etc) as well as moving or renaming said files.
@@ -151,6 +155,7 @@ Some of the dev tasks may not be possible (or at least reasonably accomplishable
 1. [metalsmith-concat-convention](https://github.com/RobLoach/metalsmith-concat-convention) **(Maybe)**
 1. [metalsmith-copy](https://github.com/mattwidmann/metalsmith-copy)
 
+---
 
 #### Article Changelog
 
