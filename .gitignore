@@ -3,6 +3,7 @@ node_modules/
 public/
 public/theme/
 npm-debug.log
+ignored-data/
 
 # The *not* manually added stuff..
 
