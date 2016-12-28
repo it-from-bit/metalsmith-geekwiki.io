@@ -5,11 +5,13 @@
 
 'use strict';
 
-// Imports
-document.write('<script src="components/simplelightbox/simple-lightbox.js"></script>');
-document.write('<script src="components/stickyfill/stickyfill.js"></script>');
+var assetsDir = '/assets'
 
-document.write('<script src="js/_addons.js"></script>');
+// Imports
+document.write('<script src="'+assetsDir+'/components/simplelightbox/simple-lightbox.js"></script>');
+document.write('<script src="'+assetsDir+'/components/stickyfill/stickyfill.js"></script>');
+
+document.write('<script src="'+assetsDir+'/js/_addons.js"></script>');
 
 // Variables
 var Live;
@@ -48,7 +50,7 @@ var Live;
 			 * @since 1.0
 			 * @var string
 			 */
-			simpleIconsPath: 'components/simple-icons',
+			simpleIconsPath: assetsDir+'/components/simple-icons',
 
 			/**
 			 * Simple lightbox options

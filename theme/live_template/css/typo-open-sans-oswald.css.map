@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA;;;GAGG;AAEH;;GAEG;ACPH;;;GAGG;ADQH;;GAEG;AACK,0GAAkG;AAClG,qEAA6D;AAErE;;GAEG;AACH,wVAAiB;EAChB,WAAW,EAAE,yCAAyC;EACtD,WAAW,EAAE,GAAG;;;AAGjB,wiBAAmB;EAClB,WAAW,EAAE,oCAAoC;EACjD,cAAc,EAAE,SAAS",
-"sources": ["typo-open-sans-oswald.scss","_typo.scss"],
-"names": [],
-"file": "typo-open-sans-oswald.css"
-}

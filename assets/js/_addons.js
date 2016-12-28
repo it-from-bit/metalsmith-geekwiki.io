@@ -5,9 +5,11 @@
 
 'use strict';
 
+var assetsDir = '/assets'
+
 // Imports
-document.write('<script src="components/imagesloaded/imagesloaded.pkgd.js"></script>');
-document.write('<script src="components/resize-sensor/resize-sensor.js"></script>');
+document.write('<script src="'+assetsDir+'/components/imagesloaded/imagesloaded.pkgd.js"></script>');
+document.write('<script src="'+assetsDir+'/components/resize-sensor/resize-sensor.js"></script>');
 
 (function($) {
 

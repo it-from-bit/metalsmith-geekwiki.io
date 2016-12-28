@@ -7,8 +7,9 @@ create_date: "06-08-2012"
 author:
   firstname: "Justin"
   lastname: "Hyland"
-  format: "firstname lastname (username)"
+  format: "lastname, firstname"
   username: "jhyland87"
+  prefix: "Author:"
 tags: [ "nslookup", "dig", "DNS", "nameserver", "resolv.conf", "networking" ]
 share:
   title: "A better nslookup"
