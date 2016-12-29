@@ -5,17 +5,25 @@ const debug       = require( 'debug' )( 'build.js' )
 const postcss     = require( 'postcss' )
 const pdf         = require( 'html-pdf' )
 const Metalsmith  = require( 'metalsmith' )
+const xml2json    = require( 'xml2json' )
+const gracefulFs  = require( 'graceful-fs' )
+const mapSiteJson = require( '../metalsmith-mapsite-json' )
 
+gracefulFs.gracefulify(fs)
+
+//const metadata    = require( '../metalsmith-metadata' )
+
+//const dataUtil = require( './metalsmith-data-util' )
 // Metalsmith plugin names to load (names of npm packages without /^metalsmith-/)
 const msPlugins = [
   'markdownit',
-  'metadata',
+  //'metadata',
   'layouts',
   'assets',
   'include',
   'in-place',
-  'pug',
   'collections',
+  'pug',
   'html-tidy',
   'if',
   'static',
@@ -24,21 +32,17 @@ const msPlugins = [
   'build-date',
   'metallic',
   'dynamic',
-  'alias',
+  //'alias',
   'paths',
+  'metadata-directory',
+  'writemetadata',
+  'filenames',
+  'feed-atom',
+  'drafts',
+  'each',
+  'permalinks',
+  //'mapsite',
 
-  /**
-   * Not sure I'm satisfied with using this to keep track of execution duration, since 
-   * it literally does absolutely nothing other than pass the string parameter provided
-   * to the debug() function. But leaving it for now.
-   * @see: https://github.com/deltamualpha/metalsmith-timer/blob/master/lib/index.js
-   * @note: I think the entire plugin can be rewritten as ES6 in 4 lines:
-   *    module.exports = string => ( files, metalsmith, done ) => { 
-   *      require( 'debug' )( 'metalsmith-timer' )( string )
-   *      done() 
-   *    }
-   */
-  'timer'
 
   /* Disabled plugins
   ,'yaml-to-json',
@@ -56,6 +60,13 @@ _.forEach( msPlugins, value => {
   let name    = `metalsmith-${value}`
   let plugin  = require( name )
 
+  let nameSimplified = name.toLowerCase().replace(/^metalsmith\-/, '')
+
+  if ( name !== nameSimplified ){
+    debug( 'Renamed plugin "%s" to "%s"', name, nameSimplified)
+    name = nameSimplified
+  }
+
   if ( ! plugin || typeof plugin !== 'function' ){
     debug( 'Failed to load Metalsmith plugin "%s" as "%s" (require returned typeof: %s)', name, key, typeof plugin )
     return
@@ -70,79 +81,79 @@ debug( `Loaded ${Object.keys(ms).length} of ${msPlugins.length} plugins specifie
 
 const _internal = {}
 
+/**
+ * Read a specified XML file, return its contents in JSON format
+ *
+ * @note This will be easily replaced by https://github.com/geekwiki/metalsmith-data-util 
+ */
+function xmlFile2json( filePath ){
+  const _d      = require( 'debug' )( 'xmlFile2json' )
+  const parser  = require( 'xml2json' )
+  const fs      = require( 'fs' )
 
-//const es6Plugin = options => {
-function es6Plugin({ rowFilesLimit, verbose }){
-  let row = { limit: rowFilesLimit, rowFiles: [], count: 0 }
+  _d( 'xmlFile2json called with filename: %s', filePath )
 
-  if ( verbose ) 
-    console.log( 'Plugin Opts: %s', ( arguments.length ? JSON.stringify( arguments[0] ) : 'None' ) )
+  return function( files, metalsmith, done ){
 
-  return ( files, metalsmith, done ) => {
-    var fKeys = Object.keys( files )
-
-    for ( var k = 0; k < fKeys.length; k++ ) {
-      row.rowFiles.push( fKeys[ k ] )
-        
-      if ( row.limit === row.rowFiles.length+1 || k+1 === fKeys.length ){
-        row.count = row.count+1
-
-        if ( verbose ) console.log( 'Row #%s: %s', row.count, row.rowFiles.join( ', ') )
-
-        row.rowFiles = []
+     fs.readFile( filePath, 'utf8', function ( err, data ) {
+      if ( err ){
+        _d( 'ERROR: %s', err )
+        return done( err )
       }
-    }
-    done()
+      
+      var json = parser.toJson( data )
+      _d( 'RESULT: %s', json )
+
+      return done( null, json )
+    })
   }
 }
 
-const pluginVersion = false
+function yaml2json( folder ){
+  const _d      = require( 'debug' )( 'xmlFile2json' )
+  const parser  = require( 'xml2json' )
+  const fs      = require( 'fs' )
 
-const es6Plugin2 = options => {
-  let row = { limit: 10, rowFiles: [], count: 0 }
+  _d( 'xmlFile2json called with filename: %s', filePath )
 
-  return ( files, metalsmith, done ) => {
-    var fKeys = Object.keys( files )
-    
-    for ( var k = 0; k < fKeys.length; k++ ) {
-      row.rowFiles.push( fKeys[ k ] )
-        
-      if ( row.limit === row.rowFiles.length+1 || k+1 === fKeys.length ){
-        row.count = row.count+1
-        console.log( '>>>>> ROW %s: %s', row.count, row.rowFiles.join( ', ') )
-        row.rowFiles = []
+  return function( files, metalsmith, done ){
+
+     fs.readFile( filePath, 'utf8', function ( err, data ) {
+      if ( err ){
+        _d( 'ERROR: %s', err )
+        return done( err )
       }
-    }
-    done()
+      
+      var json = parser.toJson( data )
+      _d( 'RESULT: %s', json )
+
+      return done( null, json )
+    })
   }
 }
 
 
-var es5Plugin = function( options ){
-  var row = { limit: 10, rowFiles: [], count: 0 }
-  
-  console.log('Plugin Options:',options)
-  return function ( files, metalsmith, done ){
-    var fKeys = Object.keys( files )
-    console.log('File count:', fKeys.length )
-    console.log( "FILE COUNT: %s", fKeys.length || 'None' )
-    /*
-    for ( let [ key, value ] of files ) {
-      console.log('Key "%s":', key,'count')
-    }*/
-
-
-    for ( var k = 0; k < fKeys.length; k++ ) {
-      row.rowFiles.push( files[ fKeys ] )
-        
-      if ( row.limit === row.rowFiles.length+1 || k+1 === fKeys.length ){
-        row.count = row.count+1
-        console.log( '>>>>> ROW %s: %s', row.count, row.rowFiles.join( ', ') )
-        row.rowFiles = []
-      }
-    }
-    done()
+Metalsmith.prototype.msUse = function( name, opts ){
+  if ( ! name || typeof name !== 'string' ){
+    throw new Error( 'Invalid plugin name' ) 
   }
+
+  let toExec
+
+  if ( Object.keys( ms ).indexOf( name ) === -1 ){
+    console.log('>>>> CHECKPOINT B:', name)
+    debug( 'The plugin name "%s" was not found in the msPlugins array - skipping', name )
+
+    return this.use( (function plugin(opts) {
+      return function (files, metalsmith, done) {
+        done()
+      }
+    })())
+  }
+
+  debug( 'Successfully found plugin "%s" in the msPlugins array - loading', name )
+
+  return this.use( ms[ name ]( opts ) )
 }
 
 const config = require( './config' )
@@ -151,50 +162,69 @@ const config = require( './config' )
  ******************************************************************************/
 
 const siteBuild = Metalsmith(__dirname)
-  .use( ms.timer( 'pre-source' ) )
   .source( config.source )
-  .use( ms.timer( 'post-source' ) )
   .destination( config.buildPath )
   .clean(true)
+  /*
+  .msUse('mapsite',{
+    "hostname": "http://geekwiki.local/"
+  })
+  */
+  .msUse('drafts')
+  .msUse('filenames')
   .use(ms.paths({
     property: 'paths'
   }))
-  .use(ms.metadata({
+  .msUse( 'each',function (file, filename, done) {
+    console.log('File: %s', filename)
+    done();
+  })
+  .msUse( 'metadataDirectory',{
+    directory: 'metadata/*.json'
+  })
+  //.use(dataUtil({ src: 'configs/*.yaml' }))
+  /*.use(metadata({
     'site': config.sourceData + '/site.yaml',
     'social_networks': config.sourceData + '/social_networks.yaml',
     'technical':  config.sourceData + '/technical.yaml'
   }))
-  .use(ms.if(
-    ( pluginVersion && pluginVersion == 6 ),
-    es6Plugin({ 
-      //limit: 10, rowFiles: [], count: 0 
-      rowFileLimit: 10, verbose: 4
-    })
-  ))
-  .use(ms.if(
-    ( pluginVersion && pluginVersion == 5 ),
-    es5Plugin({ 
-      //limit: 10, rowFiles: [], count: 0 
-      rowFileLimit: 10, verbose: 4
-    })
-  ))
-  .use( ms.timer( 'pre-assets' ) )
+  */
   .use( ms.assets({
     source: './assets', 
     destination: './assets' 
   }))
-  .use( ms.timer( 'post-assets' ) )
+  .msUse('collections',{
+    articles: 'articles/*.md'
+    /*articles2: {
+      pattern: 'articles/*.md'
+    }*/
+  })
+  .msUse( 'feedAtom',{
+    collection: 'articles'
+  })
+  .msUse('permalinks',{
+      // original options would act as the keys of a `default` linkset, 
+      pattern: ':title',
+      date: 'YYYY',
+      relative: false,
+      // each linkset defines a match, and any other desired option
+      linksets: [{
+          match: { 
+            collection: 'articles' 
+          },
+          pattern: 'article/:title',
+          date: 'mmddyy'
+      },{
+          match: { 
+            collection: 'articles' 
+          },
+          pattern: 'article/:date/:title',
+          date: 'mmddyy'
+      }]
+  })
   .use(ms.if(
     ( typeof config.redirects === 'object' && ! Array.isArray( config.redirects ) ),
     ms.redirect( config.redirects )
-  ))
-  .use(ms.if(
-    false,
-    ms.alias({
-      '/nslookup': '/posts/a-better-nslookup.html'
-      //'/foo.html': '/demos/foo.html',
-      //'/f.html': '/demos/foo.html'
-    })
   ))
   /*
   .use( ms.collections({
@@ -223,6 +253,10 @@ const siteBuild = Metalsmith(__dirname)
     typographer: true,
     linkify: true
   }))
+  .msUse('static', {
+    "src": "source/data",
+    "dest": "data"
+  })
   .use(ms.layouts({
     engine: 'pug',
     pretty: config.usePretty,
@@ -252,7 +286,13 @@ const siteBuild = Metalsmith(__dirname)
       }
     })
   ))
-  .use( ms.timer( 'pre-build' ) )
+  /*
+  .use( mapSiteJson({
+    'hostname': 'http://geekwiki.local/',
+    'pattern': 'articles/*.html',
+    'output': 'metadata/articles.json'
+  }))
+  */
   .build( err => {
     if (err) {
       console.log('Error:',err)

@@ -41,6 +41,7 @@ Just a couple of *badass* geeks
     * **Article Specific** 
       * **Export**: Export post/article in PDF (.`pdf`) or MS Word (`.docx` or `.doc`)
       * **Changelog**: Cached data of the changes made to articles/posts
+      * **_TinyUrl_ Share Links**: Each article should have a link that will create a TinyUrl link to the current article for them, and display it in a modal or popup
       * **Categories/Tags Indexing**: Articles should be categorized, and those categories should be indexed, as well as article tags
       * **Gist Snippets**: Authors should be able to reference a Gist code snippet in their articles
       * **Tags**: The `gen-tag-ul()` mixin needs some work (links, hover, title, positioning, limit, etc)
@@ -52,7 +53,7 @@ Just a couple of *badass* geeks
       * **Article Update Notification Override**: If an article gets updated, and the update is deemed trivial, then any notifications that would normally be sent out should be able to be disabled (Not sure how to do this with static content and a job that builds the website periodically)
       * **Tag Cloud**: Create a [tag cloud](https://en.wikipedia.org/wiki/Tag_cloud) for all the tags
     * **Other**
-      * **News/RSS Feed**: A live RSS feed polling from various sources using client side JS <sub>[more..](#rss-news-feed)</sub>
+      * **News/RSS Feed**: A live <sub><em>(maybe)</em></sub> RSS feed polling from various sources using client side JS <sub>[more..](#rss-news-feed)</sub>
     * **Visitor Functionality**
       * **Comments**: Ability to comment on articles using Facebooks API
       * **User Activity**: Whenever a visitor authors or comments on an article, that activity should be logged... statically... somehow... 

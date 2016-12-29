@@ -1,0 +1,75 @@
+//- This article 'page' is for the full version of the article/blog post.
+
+//- Include Template Base
+extends ../base
+
+//- Content blog for post
+block content
+  - 
+    function censor(censor) {
+      var i = 0;
+
+      return function(key, value) {
+        if(i !== 0 && typeof(censor) === 'object' && typeof(value) == 'object' && censor == value) 
+          return '[Circular]'; 
+
+        if(i >= 29) // seems to be a harded maximum of 30 serialized objects?
+          return '[Unknown]';
+
+        ++i; // so we know we aren't using the original object anymore
+
+        return value;  
+      }
+    }
+    var articlesJson = ( typeof articles === 'object' ? JSON.stringify( JSON.stringify( articles, censor(articles)) ) : null )
+
+  h1 Articles
+
+  strong JSON format
+  textarea
+    != articlesJson
+
+  strong List
+  ul
+    each article, idx in articles
+      - 
+        var articleObj = {
+          keys        : Object.keys( article ).join(', '),
+          idx         : JSON.stringify( idx ),
+          title       : (article.title ? article.title.toString() : 'N/A'),
+          layout      : (article.title ? article.layout.toString() : 'N/A'),
+          summary     : (article.title ? article.summary.toString() : 'N/A'),
+          author      : (article.title ? article.author.toString() : 'N/A'),
+          mode        : (article.title ? article.mode.toString() : 'N/A'),
+          stats       : (article.title ? article.stats.toString() : 'N/A'),
+          filename    : (article.title ? article.filename.toString() : 'N/A'),
+          paths       : (article.title ? JSON.stringify(article.paths) : 'N/A'),
+          collection  : (article.title ? article.collection.toString() : 'N/A'),
+          href        : article.paths.dhref + article.paths.name
+        }
+      li 
+        sup IDX:
+          em 
+            != articleObj.idx
+        strong 
+          a( href=articleObj.href+'.html' )
+            != articleObj.title
+        br
+        span PrettyPrint Link:
+          a( href=articleObj.href )
+            != articleObj.title
+        br
+        span Paths:
+        em 
+          != articleObj.paths
+        br
+        span Layout:
+        em
+          != articleObj.layout
+        br
+        span Collection:
+        em 
+          != articleObj.collection
+        br
+        em Keys:
+          != articleObj.keys

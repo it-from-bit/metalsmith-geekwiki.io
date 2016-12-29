@@ -1,17 +1,29 @@
+.disp-ib {
+  display: inline-block ! important;
+}
+.disp-i {
+  display: inline ! important;
+}
+.disp-b {
+  display: block ! important;
+}
 pre {
-    background-color: #f1f1f1;
-    margin-left: 10px;
-    padding: 5px;
-    font-size: 0.75em;
+  background-color: #f1f1f1;
+  margin-left: 10px;
+  padding: 5px;
+  font-size: 0.75em;
 }
 .subtitle-prefix {
   padding-right: 5px !important;
 }
-
-/*
+/**
  * Headlines
  */
-h1, .box-title, h2, h3, h4, .navigation .post-title, h5, .box-author .box-title, h6 {
+h1, h2, h3, h4, h5, h6,
+.navigation 
+.post-title, 
+.box-author 
+.box-title {
   text-align: left;
 }
 h1, .box-title {
@@ -44,3 +56,150 @@ h1, .box-title {
 .logo-img {
   zoom: 65%;
 }
+/**
+ * Article Index
+ */
+.article-list {
+  margin: 0.75em 0;
+  padding: 0 1em;
+}
+/* Article Unordered List */
+ul.article-list {
+  list-style-type:lower-greek;
+  list-style: none;
+}
+/* Article Ordered List */
+ol.article-list {
+
+}
+/* Article list item */
+.info-item-group {
+  display: block;
+}
+li.article-item {
+  border-bottom: #a7a4a4 2px dashed;
+}
+li.article-item:last-child {
+  border-bottom: 0;
+}
+/* Show an arrow to the left of list items with .arrow-prefix */
+li.arrow-prefix:before, ul.arrow-prefix > li:before { 
+    content: "";
+    border-color: transparent #ffffff;
+    border-style: solid;
+    border-width: 0.35em 0 0.35em 0.45em;
+    display: block;
+    height: 0;
+    width: 0;
+    left: -1em;
+    top: 0.9em;
+    position: relative;
+}
+li.arrow-prefix:before:hover, ul.arrow-prefix > li:before:hover { 
+    border-color: transparent #d4d4d4;
+}
+/* If the items are in a details span, then indent it and make the font small */
+.article-list > li.article-item > .article-details {
+  display: block;
+  font-size: small !important;
+  margin-left: 20px !important;
+}
+.article-list > li.article-item > .article-details > .info-item-group {
+  
+}
+/* Article item title */
+.article-list > li.article-item > .info-item-group > .title,
+.article-list > li.article-item > .article-details > .info-item-group > .title {
+  font-weight: 900;
+  display: inline-block;
+}
+/* Article item title */
+.article-list > li.article-item > .info-item-group > .summary,
+.article-list > li.article-item > .info-item-group > .info-item-group > .summary {
+  font-style: italic;
+  display: inline-block;
+}
+.article-list > li.article-item > .info-item-group > .summary:before,
+.article-list > li.article-item > .info-item-group > .info-item-group > .summary:before { 
+  content: "-";
+  margin: 0 5px 0 5px;
+}
+/* Article item title link */
+.article-list > li.article-item > .info-item-group > .title > a.link:link,
+.article-list > li.article-item > .info-item-group > .info-item-group > .title > a.link:link {
+  text-decoration: none;
+}
+.article-list > li.article-item > .info-item-group > .title > a.link:visited,
+.article-list > li.article-item > .info-item-group > .info-item-group > .title > a.link:visited {
+  text-decoration: none;
+}
+.article-list > li.article-item > .info-item-group > .title > a.link:hover,
+.article-list > li.article-item > .info-item-group > .info-item-group > .title > a.link:hover {
+  text-decoration: underline;
+}
+.article-list > li.article-item > .info-item-group > .title > a.link:active,
+.article-list > li.article-item > .info-item-group > .info-item-group > .title > a.link:active {
+  text-decoration: underline;
+}
+/* Article item link (within title) */
+.article-list > li.article-item > .info-item-group > .title > a.link,
+.article-list > li.article-item > .info-item-group > .info-item-group > .title > a.link {
+  font-style: italic;
+}
+.article-list > li.article-item > .info-item-group > .title > a.link,
+.article-list > li.article-item > .info-item-group > .info-item-group > .title > a.link {
+  /*font-style: italic;*/
+}
+.article-list > li.article-item > .item-value.author {
+  font-size: smaller;
+  margin-left: 15px;
+  font-style: italic;
+}
+.article-list > li.article-item > .item-value.author:before { 
+  content: "-";
+  margin: 0 5px 0 5px;
+}
+/* Article item info key */
+.article-list > li.article-item > .info-item-group > .item-key,
+.article-list > li.article-item > .article-details > .info-item-group > .item-key {
+  display: inline-block;
+  font-weight: 600;
+}
+/* Article item info value */
+.article-list > li.article-item > .info-item-group > .item-value,
+.article-list > li.article-item > .article-details > .info-item-group > .item-value {
+  font-style: italic;
+  display: inline-block;
+  margin-left: 5px;
+}
+/**
+ * CSS Paths to article index list item details
+ *
+ .article-list > li.article-item > .article.title > .article.link
+
+.article-item .article.title .article.link
+
+.article-item > .article.item-key.title
+.article-item > .article.item-value.title
+
+.article-item > .article.item-key.author
+.article-item > .article.item-value.author
+
+.article-item > .article.item-key.summary
+.article-item > .article.item-value.summary
+
+.article-item > .article.item-key.link
+.article-item > .article.item-value.link
+
+.article-item > .article.item-key.category
+.article-item > .article.item-value.category
+
+.article-item > .article.item-key.tags
+.article-item > .article.item-value.tags
+
+.article-item > .article.item-key.created
+.article-item > .article.item-value.created
+
+.article-item > .article.item-key.updated
+.article-item > .article.item-value.updated
+*/

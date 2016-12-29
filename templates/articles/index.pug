@@ -1,0 +1,104 @@
+//- This article 'page' is for the full version of the article/blog post.
+
+//- Include Template Base
+extends ../base
+
+//- Content blog for post
+block content
+  - 
+    function censor(censor) {
+      var i = 0;
+
+      return function(key, value) {
+        if(i !== 0 && typeof(censor) === 'object' && typeof(value) == 'object' && censor == value) 
+          return '[Circular]'; 
+
+        if(i >= 29) // seems to be a harded maximum of 30 serialized objects?
+          return '[Unknown]';
+
+        ++i; // so we know we aren't using the original object anymore
+
+        return value;  
+      }
+    }
+    var articlesJson = ( typeof articles === 'object' ? JSON.stringify( JSON.stringify( articles, censor(articles)) ) : null )
+
+  h1 Articles
+
+  ol.article-list
+    each article, idx in articles
+      - 
+        // Skip the index file (which is what should be calling this)
+        if ( article.paths.name === 'index' ) continue
+        // Compile article data
+        var articleObj = {
+          keys        : Object.keys( article ).join(', '),
+          idx         : idx,
+          title       : (article.title ? article.title.toString() : 'N/A'),
+          layout      : (article.layout ? article.layout.toString() : 'N/A'),
+          summary     : (article.summary ? article.summary.toString() : 'N/A'),
+          author      : (article.author ? article.author.toString() : 'N/A'),
+          mode        : (article.mode ? article.mode.toString() : 'N/A'),
+          stats       : (article.stats ? article.stats.toString() : 'N/A'),
+          filename    : (article.filename ? article.filename.toString() : 'N/A'),
+          paths       : (article.paths ? JSON.stringify(article.paths) : 'N/A'),
+          collection  : (article.collection ? article.collection.toString() : 'N/A'),
+          tags        : (Array.isArray(article.tags) ? article.tags.join(', ') : 'N/A'),
+          category    : (article.category ? article.category : 'N/A'),
+          created     : (article.created ? article.created : 'N/A'),
+          updated     : (article.updated ? article.updated : 'N/A'),
+          href        : article.paths.dhref + article.paths.name + '.html'
+          //,json        : JSON.stringify( JSON.stringify( article, censor( article ) ) )
+          //,pathsJson  : ( typeof article.paths === 'object' ? JSON.stringify( article.paths ) : 'N/A' )
+        }
+      li.article-item 
+        | <!-- !{articleObj.json} --> 
+        //- Article Title/Link (and summary)
+        span.info-item-group
+          span.title
+            a( href=articleObj.href).link
+              != articleObj.title
+
+          //- Article Summary
+          if articleObj.summary
+            span.summary
+              != articleObj.summary
+
+        //- Group the article details into a child span
+        span.article-details
+          //- Article Author
+          if articleObj.author
+            span.info-item-group
+              span.item-key.author Author: 
+              span.item-value.author
+                != articleObj.author
+
+          //- Article Category
+          if articleObj.category
+            span.info-item-group
+              span.item-key.category Category: 
+              span.item-value.category
+                != articleObj.category
+
+          //- Article Tags
+          if articleObj.tags
+            span.info-item-group
+              span.item-key.tags Tags: 
+              span.item-value.tags
+                != articleObj.tags
+
+
+          //- Article Created
+          span.info-item-group
+            span.item-key.created Created: 
+            span.item-value.created
+              != articleObj.created
+
+
+          //- Article Updated
+          if articleObj.updated
+            span.info-item-group
+              span.item-key.updated Updated: 
+              span.item-value.updated
+                != articleObj.updated
+

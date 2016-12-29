@@ -1,0 +1,30 @@
+# Default values for any settings 
+defaults:
+  articles:
+    share:
+      title: "Default Title"
+      summary: "Default Summary"
+      href: "#Default-Href"
+      networks:
+        - "facebook"
+        - "twitter"
+        - "googleplus"
+        - "pinterest"
+        - "linkedin"
+        - "stumbleupon"
+    export:
+      formats:
+        - "pdf"
+        - "docx"
+# 
+verbosity:
+  all: true
+  include: true
+# Limits for any setting
+limits:
+  articles:
+    title: 
+      min: 10
+      max: 40
+    summary:
+      max: 80

@@ -6,7 +6,7 @@ extends ./base
 //- Content blog for post
 block content
   // All Local Variables
-  - var localVars = JSON.stringify( locals )
+  - var localVars = JSON.stringify( Object.keys(locals) )
   | <!-- Local Vars: !{localVars} -->
   // Begin Box Page
   article.box-page
