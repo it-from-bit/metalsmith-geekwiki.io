@@ -43,7 +43,6 @@ const msPlugins = [
   'permalinks',
   //'mapsite',
 
-
   /* Disabled plugins
   ,'yaml-to-json',
   'to-json'
