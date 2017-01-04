@@ -10,10 +10,10 @@ author:
   format: "firstname lastname (username)"
   username: "jhyland87"
 tags: [ "centos6", "centos7", "ext4", "firewalld", "network-manager", "rhel6", "rhel7", "xfs" ]
+categories: [ "Linux Administration", "RHEL", "RedHat OS", "Foo", "Bar", "Baz", "Bang", "Quux", "blah blah" ]
 share:
-  title: "CentOS 7 Icebreaker - Everything you need to know to get started"
-  summary: "CentOS 7 Icebreaker - Everything you need to know to get started"
-  href: "###centos-7-icebreaker-everything-you-need-to-know-to-get-started###"
+  title: "CentOS 7 Icebreaker - Getting Started"
+  summary: "CentOS 7 Icebreaker - Getting Started"
 ---
 There's actually quite a bit of changes from CentOS 6 to CentOS 7, some new commands, packages and some new services. Some older packages have been discontinued and replaced with newer packages, as well as some packages introduced that make it easier to automate some tasks that were previously done via just editing flat text files. In here, I'll cover the ones that I have used thus far in my job and at home. Hopefully this post will make your transition from CentOS 6 to 7 fast and painless, and maybe even fun!
 

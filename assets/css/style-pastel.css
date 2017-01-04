@@ -2395,7 +2395,7 @@ html.touch .photostream {
 /*
  * Tags
  */
-.tags {
+.keywords {
   line-height: 2.5em;
   font-size: 0.875rem;
   list-style: none;
@@ -2407,23 +2407,23 @@ html.touch .photostream {
   height: 2.5em;
   overflow: hidden;
 }
-html.touch .tags {
+html.touch .keywords {
   overflow-x: auto;
 }
-.tags li {
+.keywords li {
   line-height: 2.5em;
   cursor: default;
   margin: 0;
   padding: 0 0.75em;
 }
-.tags li {
+.keywords li {
   background: #2f6094;
   color: #fff;
 }
-.tags li:nth-child(even) {
+.keywords li:nth-child(even) {
   background: #28517d;
 }
-.tags li.tag-likes span:before {
+.keywords li.tag-likes span:before {
   background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbDpz\a cGFjZT0ncHJlc2VydmUnIHZlcnNpb249JzEuMScgc3R5bGU9J3NoYXBlLXJl\a bmRlcmluZzpnZW9tZXRyaWNQcmVjaXNpb247dGV4dC1yZW5kZXJpbmc6Z2Vv\a bWV0cmljUHJlY2lzaW9uO2ltYWdlLXJlbmRlcmluZzpvcHRpbWl6ZVF1YWxp\a dHk7JyB2aWV3Qm94PScwIDAgMTIwNSAxMTUwJyB4PScwcHgnIHk9JzBweCcg\aZmlsbC1ydWxlPSdldmVub2RkJyBjbGlwLXJ1bGU9J2V2ZW5vZGQnPjxwYXRo\aIGQ9J002MDIgMjE2Yzc1LC0xNDQgMTUxLC0yMTYgMzAxLC0yMTYgMTY2LDAg\aMzAxLDEyOSAzMDEsMjg4IDAsMjg4IC0zMDEsNTc2IC02MDIsODY0IC0zMDEs\aLTI4OCAtNjAyLC01NzYgLTYwMiwtODY0IDAsLTE1OSAxMzUsLTI4OCAzMDEs\aLTI4OCAxNTEsMCAyMjYsNzIgMzAxLDIxNnonIHN0eWxlPSdmaWxsOiAjZmZm\aOycgLz48L3N2Zz4=\a") center center/contain no-repeat;
   height: 1em;
   width: 1em;
@@ -2432,14 +2432,14 @@ html.touch .tags {
   margin-right: 0.4em;
   vertical-align: -0.1em;
 }
-.tags li.tag-countdown[data-countdown-date] {
+.keywords li.tag-countdown[data-countdown-date] {
   position: relative;
 }
-.tags li.tag-countdown[data-countdown-date]:before {
+.keywords li.tag-countdown[data-countdown-date]:before {
   content: "00 : 00 : 00";
   visibility: hidden;
 }
-.tags li.tag-countdown[data-countdown-date] span {
+.keywords li.tag-countdown[data-countdown-date] span {
   position: absolute;
   top: 0;
   right: 0;
@@ -2448,7 +2448,7 @@ html.touch .tags {
   display: block;
   text-align: center;
 }
-.tags a, .tags .navigation .post-title, .navigation .tags .post-title {
+.keywords a, .keywords .navigation .post-title, .navigation .keywords .post-title {
   overflow: hidden;
   color: inherit !important;
   text-decoration: none;
@@ -2456,13 +2456,13 @@ html.touch .tags {
   margin: 0 -0.75em;
   padding: 0 0.75em;
 }
-.tags a > span, .tags .navigation .post-title > span, .navigation .tags .post-title > span {
+.keywords a > span, .keywords .navigation .post-title > span, .navigation .keywords .post-title > span {
   transition: transform 0.2s;
   display: block;
   position: relative;
   height: 100%;
 }
-.tags a > span:after, .tags .navigation .post-title > span:after, .navigation .tags .post-title > span:after {
+.keywords a > span:after, .keywords .navigation .post-title > span:after, .navigation .keywords .post-title > span:after {
   position: absolute;
   top: 100%;
   right: 0;
@@ -2472,7 +2472,7 @@ html.touch .tags {
   height: 100%;
   overflow: hidden;
 }
-.tags a:not(:disabled):not(.disabled):hover > span, .tags .navigation .post-title:not(:disabled):not(.disabled):hover > span, .navigation .tags .post-title:not(:disabled):not(.disabled):hover > span {
+.keywords a:not(:disabled):not(.disabled):hover > span, .keywords .navigation .post-title:not(:disabled):not(.disabled):hover > span, .navigation .keywords .post-title:not(:disabled):not(.disabled):hover > span {
   transform: translateY(-100%);
 }
 
@@ -2522,7 +2522,7 @@ html.touch .tags {
 .posts-list figure.align-right ~ * {
   margin-right: 5.125rem;
 }
-.posts-list figure .tags {
+.posts-list figure .keywords {
   position: absolute;
   top: 0;
   left: 0;
@@ -4928,13 +4928,13 @@ html.touch .table table {
     padding: 0;
   }
 }
-.box-post .box-alpha + .box-beta .tags:first-child {
+.box-post .box-alpha + .box-beta .keywords:first-child {
   transform: translateY(-100%);
   position: absolute;
   z-index: 3;
 }
 @media screen and (min-width: 768px) {
-  :not(.holder-bricks) > .box-post:not(.sticky):not(.bricks-item) .box-alpha + .box-beta .tags:first-child {
+  :not(.holder-bricks) > .box-post:not(.sticky):not(.bricks-item) .box-alpha + .box-beta .keywords:first-child {
     transform: none;
     position: static;
   }
@@ -5175,7 +5175,7 @@ html.touch .table table {
 /*
  * Page box
  */
-.box-page .box-alpha + .box-beta .tags:first-child {
+.box-page .box-alpha + .box-beta .keywords:first-child {
   transform: translateY(-100%);
   position: absolute;
   z-index: 3;

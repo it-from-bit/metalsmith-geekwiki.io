@@ -1,6 +1,8 @@
 # Default values for any settings 
 defaults:
   articles:
+    keywords:
+      rotation_mode: "equal" # Todo: Finish the JS logic that uses this
     share:
       title: "Default Title"
       summary: "Default Summary"
@@ -16,7 +18,8 @@ defaults:
       formats:
         - "pdf"
         - "docx"
-# 
+# There are some Jade/Pug mixins that show details via HTML comments, 
+# these controls what those display
 verbosity:
   all: true
   include: true
@@ -28,3 +31,7 @@ limits:
       max: 40
     summary:
       max: 80
+  keywords:
+    tags: 7
+    categories: 7
+    max_global:

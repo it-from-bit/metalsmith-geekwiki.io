@@ -471,7 +471,7 @@
 /*
  * Tags
  */
-.tags {
+.keywords {
 
 	$height: em(35, 14);
 
@@ -616,7 +616,7 @@
 			}
 		}
 
-		.tags {
+		.keywords {
 			@include position(absolute, 0 null null 0);
 		}
 

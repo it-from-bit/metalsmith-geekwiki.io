@@ -56,7 +56,7 @@ mixin social-network(shareables)
 mixin article-tags( timestamp, categories )
   - var timestamp = ( typeof timestamp === 'string' ? timestamp : 'NADA' )
   - var categories = ( ( typeof categories === 'object' && Array.isArray(categories) ) ? categories : [] )
-  ul.tags
+  ul.keywords
     if timestamp
       li.tag-timestamp 
         i 
@@ -180,7 +180,7 @@ mixin inc-0( text )
     li.tag-category
       a(href="#")
         span(data-hover="Hover Text") Tag Text
-mixin gen-tag-ul( tags )
+mixin keyword-list( tags, prefix )
   - 
     function makeTagList( tags ){
       var _tagList = {
@@ -241,6 +241,10 @@ mixin gen-tag-ul( tags )
 
           // Iterate over a list array
           for (var i = 0; i < tags.length; i++) {
+            if ( typeof tags[i] !== 'string' ){
+              continue
+            }
+
             _tagList[ tags[i] ] = {
               hover: tags[i].toUpperCase()
             }
@@ -283,7 +287,12 @@ mixin gen-tag-ul( tags )
   if tags
     - var tagObj = makeTagList( tags )
     if tagObj
-      ul&attributes(attributes).tags
+      ul&attributes(attributes).keywords
+        //- Keyword List Prefix
+        if prefix
+          li.keyword-prefix #{prefix}:
+
+        //- Keywords List Items
         each tObj, text in tagObj
           li
             //- Display it as a link if theres an href value
@@ -493,7 +502,7 @@ mixin compileTitle( title )
         // End Featured Image
       .box-beta
         if tags 
-          ul.tags
+          ul.keywords
             li.tag-timestamp 8 hours ago
             li.tag-category
               a(href='neutral-index.html')

@@ -41,6 +41,7 @@ const msPlugins = [
   'drafts',
   'each',
   'permalinks',
+  'default-values'
   //'mapsite',
 
   /* Disabled plugins
@@ -131,7 +132,6 @@ function yaml2json( folder ){
   }
 }
 
-
 Metalsmith.prototype.msUse = function( name, opts ){
   if ( ! name || typeof name !== 'string' ){
     throw new Error( 'Invalid plugin name' ) 
@@ -174,10 +174,24 @@ const siteBuild = Metalsmith(__dirname)
   .use(ms.paths({
     property: 'paths'
   }))
+  /*
   .msUse( 'each',function (file, filename, done) {
     console.log('File: %s', filename)
     done();
   })
+  */
+  .msUse( 'defaultValues', [
+  // Default Article Settings
+    {
+      pattern : 'articles/*.md',
+      defaults: {
+        layout: 'articles/article-page.pug',
+        categories: 'general',
+        foo: 'bar',
+        draft: false
+      }
+    }
+  ])
   .msUse( 'metadataDirectory',{
     directory: 'metadata/*.json'
   })
@@ -267,6 +281,20 @@ const siteBuild = Metalsmith(__dirname)
       '!partials/*',  '!partials/*/*'
     ]
   }))
+  .msUse( 'writemetadata', {
+    collections: {
+      articles: {
+        output: {
+          path: 'articles/metadata.json',
+          asObject: true,
+          metadata: {
+            "type": "list"
+          }
+        },
+       ignorekeys: ['next', 'previous','contents']
+      }
+    }
+  })
   .use(ms.metallic())
   .use(ms.if(
     false,

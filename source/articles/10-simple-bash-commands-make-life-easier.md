@@ -1,15 +1,12 @@
 ---
 title: "10 Simple Quick Keys in BASH to Make Your Life Easier"
-layout: "articles/article-page.pug"
 summary: "10 Simple Quick Keys in BASH to Make Your Life Easier"
-featured_image:
 create_date: "09-01-2013"
 author:
   firstname: "Richard"
   lastname: "Gray"
   format: "firstname lastname (username)"
   username: "rgray"
-tags:
 share:
   title: "10 Simple Simple Quick Keys in BASH to Make Your Life Easier"
   summary: "10 Simple Simple Quick Keys in BASH to Make Your Life Easier"

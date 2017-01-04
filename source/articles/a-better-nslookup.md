@@ -4,6 +4,7 @@ layout: "articles/article-page.pug"
 summary: "A better nslookup"
 featured_image: "assets/posts/better-nslookup-featured.png"
 create_date: "06-08-2012"
+categories: [ "Linux", "RHEL" ]
 author:
   firstname: "Justin"
   lastname: "Hyland"

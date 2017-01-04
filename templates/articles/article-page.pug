@@ -7,6 +7,41 @@ extends ../base
 block content
   // All Local Variables
   - 
+    // Flatten all of the categories into one single-level array
+    function _flatten( a, r ){
+      if( ! r ){
+        r = []
+      }
+
+      for( var i=0; i<a.length; i++ ){
+        if ( ! a[i] ){
+          continue
+        }
+
+        if ( a[i].constructor == Array ){
+          _flatten( a[i], r )
+        }
+        else {
+          r.push( a[i] )
+        }
+      }
+
+      return r
+    }
+
+    var _categories = _flatten([ 
+      typeof category !== 'undefined' ? category : null, 
+      typeof categories !== 'undefined' ? categories : null 
+    ])
+
+    var _tags = _flatten([ 
+      typeof tag !== 'undefined' ? tag : null, 
+      typeof tags !== 'undefined' ? tags : null 
+    ])
+
+    var _categoriesStr = _categories.join(', ')
+    var _categoriesJSON = JSON.stringify( _categories )
+
     function censor(censor) {
       var i = 0;
 
@@ -30,9 +65,10 @@ block content
     // Begin Alpha Box
     .box-alpha
 
-      // Begin Alpha Tags
-      +gen-tag-ul( tags ).float-left
-      // End Alpha Tags
+      if _categories 
+        // Begin Alpha Keywords
+        +keyword-list( _categories, 'Categories' ).force-left
+        // End Alpha Keywords
 
       if alpha_content
         // Begin Alpha Content
@@ -40,6 +76,7 @@ block content
           p 
             != alpha_content
         // End Alpha Content
+
     // End Alpha Box
 
     // Begin Beta Box
@@ -77,6 +114,8 @@ block content
                     != _subtitle.string
             // End Headline
 
+     
+
         // Begin Page Contents
         != contents
         // End Page Contents
@@ -89,7 +128,13 @@ block content
       // Begin Beta Tags
       //- The beta box tags are tags that the author can define
       //- include ../partials/tags
-      +gen-tag-ul( tags ).float-right
+
+      if _tags 
+        // Begin Beta Keywords
+        +keyword-list( _tags, 'Tags' ).force-right
+        // End Beta Keywords
+
+
       // End Beta Tags
 
       //-

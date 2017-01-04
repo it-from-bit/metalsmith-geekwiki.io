@@ -1,9 +1,10 @@
 # The manually added stuff..
 node_modules/
-public/
-public/theme/
+public/*
 npm-debug.log
 ignored-data/
+.DS_Store
+**/.DS_Store
 
 # The *not* manually added stuff..
 
