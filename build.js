@@ -285,7 +285,7 @@ const siteBuild = Metalsmith(__dirname)
     collections: {
       articles: {
         output: {
-          path: 'articles/metadata.json',
+          path: 'articles/index.json',
           asObject: true,
           metadata: {
             "type": "list"
