@@ -1,6 +1,8 @@
 # The manually added stuff..
 node_modules/
+public
 public/*
+public/**
 npm-debug.log
 ignored-data/
 .DS_Store

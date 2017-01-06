@@ -30,6 +30,7 @@ Key | Req | Type | Desc | Default
 `share.title` | _N_ | *string* | The articles title (to override the articles `title` value) | Articles primary `title`
 `share.summary` | _N_ | *string* | The articles summary (to override the articles `summary` value) | Articles primary `summary`
 `share.href` | _N_ | *string* | The articles href (to override the articles `href` value) | Articles primary `href`
+`github` | _N_ | *object*,*boolean* | Determines if/what data should be retrieved from Githubs API and populated | `true`
 
 An example of the metadata section from an existing .md file:
 

@@ -1,13 +1,36 @@
-const fs          = require( 'fs' )
-const path        = require( 'path' )
-const _           = require( 'lodash' )
-const debug       = require( 'debug' )( 'build.js' )
-const postcss     = require( 'postcss' )
-const pdf         = require( 'html-pdf' )
-const Metalsmith  = require( 'metalsmith' )
-const xml2json    = require( 'xml2json' )
-const gracefulFs  = require( 'graceful-fs' )
-const mapSiteJson = require( '../metalsmith-mapsite-json' )
+const fs            = require( 'fs' )
+const path          = require( 'path' )
+//const _           = require( 'lodash' )
+const _             = require( 'flat-line' )
+const debug         = require( 'debug' )( 'build.js' )
+const postcss       = require( 'postcss' )
+const pdf           = require( 'html-pdf' )
+const Metalsmith    = require( 'metalsmith' )
+const xml2json      = require( 'xml2json' )
+const gracefulFs    = require( 'graceful-fs' )
+const mapSiteJson   = require( '../metalsmith-mapsite-json' )
+const GitHubApi     = require( 'github' )
+const JSONc         = require( 'circular-json' )
+const msGithub      = require( '../metalsmith-github' )
+
+const github = {
+  api: new GitHubApi({
+    // optional
+    debug: true,
+    protocol: "https",
+    host: "api.github.com", // should be api.github.com for GitHub
+    //pathPrefix: "/api/v3", // for some GHEs; none for GitHub
+    headers: {
+      "user-agent": "My-Cool-GitHub-App" // GitHub is happy with a unique user agent
+    },
+    Promise: require('bluebird'),
+    followRedirects: false, // default: true; there's currently an issue with non-get redirects, so allow ability to disable follow-redirects
+    timeout: 5000
+  })
+}
+
+github.repo = github.api.getReposApi('geekwiki', 'metalsmith-geekwiki.io')
+
 
 gracefulFs.gracefulify(fs)
 
@@ -41,7 +64,8 @@ const msPlugins = [
   'drafts',
   'each',
   'permalinks',
-  'default-values'
+  'default-values',
+  'fingerprint'
   //'mapsite',
 
   /* Disabled plugins
@@ -49,6 +73,14 @@ const msPlugins = [
   'to-json'
   */
 ]
+
+if ( typeof process.env.GIT_CLIENT_ID === 'string' ){
+  debug('Found Github client ID: %s', process.env.GIT_CLIENT_ID)
+}
+
+if ( typeof process.env.GIT_CLIENT_SECRET === 'string' ){
+  debug('Found Github client SECRET: %s', process.env.GIT_CLIENT_SECRET)
+}
 
 // Object to store any loaded Metalsmith plugins
 const ms = {}
@@ -157,6 +189,11 @@ Metalsmith.prototype.msUse = function( name, opts ){
 
 const config = require( './config' )
 
+config.getCommitHistory = [
+  new RegExp( '^articles\/.*\.md$' )
+  //'articles/centos-7-icebreaker-everything-you-need-to-know-to-get-started.md'
+]
+
 /* Metalsmith
  ******************************************************************************/
 
@@ -174,12 +211,29 @@ const siteBuild = Metalsmith(__dirname)
   .use(ms.paths({
     property: 'paths'
   }))
-  /*
-  .msUse( 'each',function (file, filename, done) {
-    console.log('File: %s', filename)
-    done();
+  .msUse( 'each',function ( file, filename, done ) {
+    file.stats.md5sum = _.md5( file.contents.toString() )
+
+    debug( 'Set stats.md5sum for file %s to %s', filename, file.stats.md5sum )
+
+    done()
+
+    //https://api.github.com/repos/geekwiki/metalsmith-geekwiki.io/commits?path=source/articles/centos-7-icebreaker-everything-you-need-to-know-to-get-started.md
+
+  })/*
+  .use(msGithub({
+    username: 'geekwiki',
+    repository: 'metalsmith-geekwiki.io',
+    //files: ['articles/*.md']
+  }))*/
+  /*.msUse( 'transform', function(data, m){
+    let md5 = _.md5(data.contents.toString())
+    data.md5sum = md5
+
+    return data;
   })
   */
+  .msUse('fingerprint',{ pattern: 'articles/*' })
   .msUse( 'defaultValues', [
   // Default Article Settings
     {
