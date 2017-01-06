@@ -1,7 +1,7 @@
 ---
 title: "CentOS 7 Icebreaker - Everything you need to know to get started"
 layout: "articles/article-page.pug"
-summary: "CentOS 7 Icebreaker - Everything you need to know to get started"
+summary: "A simple guide showing how to setup a CentOS 7 server"
 featured_image: "assets/articles/centos7.png"
 create_date: "04-12-2016"
 author:
