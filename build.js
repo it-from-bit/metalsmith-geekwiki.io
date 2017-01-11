@@ -222,8 +222,48 @@ const siteBuild = Metalsmith(__dirname)
 
   })/*
   .use(msGithub({
-    username: 'geekwiki',
-    repository: 'metalsmith-geekwiki.io',
+    githubapi: {
+      debug: false,
+      protocol: "https",
+      // should be api.github.com for GitHub
+      host: "api.github.com", 
+      // for some GHEs (none for GitHub)
+      pathPrefix: "", 
+      // Any additional Headers
+      headers: {
+        // GitHub requires a User-Agent header (which defaults to Metalsmith-Github-Api)
+        "User-Agent": "Metalsmith-Github-Api" 
+      },
+      // Library to use for promises
+      Promise: require('bluebird'),
+      // There's currently an issue with non-get redirects, so allow ability to disable follow-redirects
+      followRedirects: false, 
+      // HTTPS request timeout (milliseconds)
+      timeout: 5000,
+      // 
+      username: 'geekwiki',
+      repository: 'metalsmith-geekwiki.io'
+
+    },
+    otherdata:{
+      repo          : 'metalsmith-geekwiki.io',
+      owner         : 'geekwiki',
+      branch        : 'master',
+      path          : srcFile,
+      client_id     : process.env.GIT_CLIENT_ID,
+      client_secret : process.env.GIT_CLIENT_SECRET
+    },
+    processing: {
+      async: true,
+      batch: 5,
+      patient: true
+    },
+    // Files selector using multimatch
+    files: ['articles/*.md'],
+    // The Author Element can be 'author' or 'committer'
+    authorElement: 'author',
+
+    
     //files: ['articles/*.md']
   }))*/
   /*.msUse( 'transform', function(data, m){

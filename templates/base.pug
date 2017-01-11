@@ -17,13 +17,63 @@ html.no-js.no-touch(lang='en')
       // Begin Body Content
       .container
         //-include banner
+        
+        h4 Search Github
+          select.js-data-example-ajax
+
         // Content
         block content
           h1 TEST!..
           p This is a conent test
+
       // End Body Content
       // // .container
       footer#footer
         include partials/footer
     // // #wrapper
     include partials/assets/js
+
+| <!-- foobar: !{foobar} -->
+
+| <!-- jquery: !{JSON.stringify(jquery)} -->
+
+if jquery 
+  | <!-- Setting 'jquery': !{JSON.stringify(jquery)} -->
+  script(type="text/javascript")
+    if jquery.eval
+
+      if jquery.eval.documentReady
+        | console.debug('jquery.eval.documentReady defined as:', !{JSON.stringify(jquery.eval.documentReady)} );
+        | $( document ).ready(function(){
+        | console.debug( 'document.ready' );
+        - if ( Array.isArray( jquery.eval.documentReady ) ) {
+          each jsCommand in jquery.eval.documentReady
+            | !{jsCommand};
+
+        - } else if ( typeof jquery.eval.documentReady === 'string' ) {
+          | !{jquery.eval.documentReady};
+
+        - } else {
+          | console.warn( 'Unable to execute any JS stored in jquery.eval.documentReady, invalid type; Expecting a string or an array' - found a: %s', typeof !{jquery.eval.documentReady}' );
+        - }
+        | });
+      else
+        | console.debug('jquery.eval.documentReady NOT defined' );
+
+      if jquery.eval.windowLoad
+        | console.debug('jquery.eval.windowLoad defined as:', !{JSON.stringify(jquery.eval.windowLoad)} );
+        | $( window ).load(function(){
+        | console.debug( 'window.load' );
+        - if ( Array.isArray( jquery.eval.windowLoad ) ) {
+          each jsCommand in jquery.eval.windowLoad
+            | !{jsCommand};
+
+        - } else if ( typeof jquery.eval.windowLoad === 'string' ) {
+          | !{jquery.eval.windowLoad};
+
+        - } else {
+          | console.warn( 'Unable to execute any JS stored in jquery.eval.windowLoad, invalid type; Expecting a string or an array' - found a: %s', typeof !{jquery.eval.windowLoad}' );
+        - }
+        | });
+      else
+        | console.debug('jquery.eval.windowLoad NOT defined' );
