@@ -1,5 +1,4 @@
-jQuery.fn.popupwindow = function(p)
-{
+jQuery.fn.popupwindow = function(p){
 
 	var profiles = p || {};
 
@@ -81,5 +80,10 @@ jQuery.fn.popupwindow = function(p)
 			return false;
 		});
 	});
-
 };
+
+/*
+$(function(){
+  $( '.popupwindow' ).popupwindow( profiles )
+})
+*/

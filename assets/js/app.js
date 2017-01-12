@@ -16,6 +16,8 @@ document.write('<script src="'+assetsDir+'/js/_addons.js"></script>');
 // Variables
 var Live;
 
+
+
 (function($) {
 
 	/**
@@ -591,4 +593,5 @@ var Live;
 
 	};
 
+	window.Live = Live
 })(jQuery);

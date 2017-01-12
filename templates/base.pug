@@ -17,9 +17,21 @@ html.no-js.no-touch(lang='en')
       // Begin Body Content
       .container
         //-include banner
-        
-        h4 Search Github
-          select.js-data-example-ajax
+
+        h4 Search Articles
+          ul
+            li
+              em By #[strong Title]: 
+              select.article-search(data-filter="title")
+                option
+
+            li
+              em By #[strong Tags]: 
+              select.article-search(data-filter="tags", multiple="multiple")
+
+            li
+              em By #[strong Categories]: 
+              select.article-search(data-filter="categories", multiple="multiple")
 
         // Content
         block content
@@ -44,7 +56,7 @@ if jquery
 
       if jquery.eval.documentReady
         | console.debug('jquery.eval.documentReady defined as:', !{JSON.stringify(jquery.eval.documentReady)} );
-        | $( document ).ready(function(){
+        | $( document ).on( 'ready', function() {
         | console.debug( 'document.ready' );
         - if ( Array.isArray( jquery.eval.documentReady ) ) {
           each jsCommand in jquery.eval.documentReady
@@ -62,7 +74,7 @@ if jquery
 
       if jquery.eval.windowLoad
         | console.debug('jquery.eval.windowLoad defined as:', !{JSON.stringify(jquery.eval.windowLoad)} );
-        | $( window ).load(function(){
+        | $( window ).on( 'load', function() {
         | console.debug( 'window.load' );
         - if ( Array.isArray( jquery.eval.windowLoad ) ) {
           each jsCommand in jquery.eval.windowLoad

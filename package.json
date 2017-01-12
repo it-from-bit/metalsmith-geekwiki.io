@@ -17,6 +17,7 @@
     "github": "^7.2.0",
     "glob": "^7.1.1",
     "graceful-fs": "^4.1.11",
+    "gulp": "^3.9.1",
     "html-pdf": "https://registry.npmjs.org/html-pdf/-/html-pdf-2.0.1.tgz",
     "https": "^1.0.0",
     "jquery": "https://registry.npmjs.org/jquery/-/jquery-3.1.1.tgz",
@@ -126,6 +127,7 @@
     "tachyons-word-break": "https://registry.npmjs.org/tachyons-word-break/-/tachyons-word-break-2.0.0.tgz",
     "uncss": "https://registry.npmjs.org/uncss/-/uncss-0.13.0.tgz",
     "xml2json": "^0.10.0",
+    "xregexp": "^3.1.1",
     "yaml-to-json": "^0.3.0"
   },
   "devDependencies": {},

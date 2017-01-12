@@ -12,6 +12,9 @@ const mapSiteJson   = require( '../metalsmith-mapsite-json' )
 const GitHubApi     = require( 'github' )
 const JSONc         = require( 'circular-json' )
 const msGithub      = require( '../metalsmith-github' )
+const webpack       = require( 'webpack' )
+
+const NyanProgressPlugin = require( './webpack-progress-plugin' )
 
 const github = {
   api: new GitHubApi({
@@ -65,6 +68,7 @@ const msPlugins = [
   'each',
   'permalinks',
   'default-values',
+  'webpack',
   'fingerprint'
   //'mapsite',
 
@@ -111,7 +115,15 @@ _.forEach( msPlugins, value => {
 
 debug( `Loaded ${Object.keys(ms).length} of ${msPlugins.length} plugins specified` )
 
-const _internal = {}
+const _internal = {
+  absPath: function( ){
+    var args = Array.from( arguments )
+
+    args.unshift( __dirname )
+
+    return path.resolve.apply( this, args )
+  }
+}
 
 /**
  * Read a specified XML file, return its contents in JSON format
@@ -273,6 +285,48 @@ const siteBuild = Metalsmith(__dirname)
     return data;
   })
   */
+  .msUse( 'webpack', {
+    context: _internal.absPath( './assets/js/' ),
+    entry: './index.js',
+    stats: {
+      colors: true
+    },
+    output: {
+      path: _internal.absPath( './public/assets/js/' ),
+      filename: 'bundle.js'
+    },
+    plugins: [
+      new NyanProgressPlugin(),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: { 
+          warnings: false,
+          dead_code: true,
+          cascade: true,
+          global_defs: {
+              DEBUG: true
+          }
+        },
+        beautify: true,
+        comments: true,
+        mangle: true
+      }),
+      function() {
+        this.plugin("done", function(stats) {
+          console.log( 'Start Time: %s', new Date( stats.startTime ).toString() )
+          console.log( 'End Time: %s', new Date( stats.endTime ).toString() )
+          console.log( 'Elapsed Time: %s', stats.endTime - stats.startTime)
+
+          /*require("fs").writeFileSync(
+            path.join(__dirname, "..", "stats.json"),
+            JSON.stringify(stats.toJson()));*/
+        });
+      }
+      /*new require('webpack').ProgressPlugin(function handler(percentage, msg) {
+        console.log( 'Webpack Progress - percentage:', percentage)
+        console.log( 'Webpack Progress - msg:', msg)
+      })*/
+    ]
+  })
   .msUse('fingerprint',{ pattern: 'articles/*' })
   .msUse( 'defaultValues', [
   // Default Article Settings
@@ -351,7 +405,7 @@ const siteBuild = Metalsmith(__dirname)
     })
   ))
   .use(ms.include())
-  .ignore( path.resolve( __dirname, 'public/.git' ) )
+  .ignore( _internal.absPath( 'public/.git' ) )
   //.ignore( path.resolve( __dirname, 'public/CNAME' ) )
   .use(ms.markdown())
   .use(ms.markdownit({
