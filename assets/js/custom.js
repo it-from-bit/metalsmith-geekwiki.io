@@ -1,10 +1,3 @@
-
-
-
-$(function(){
-  $( '.popupwindow' ).popupwindow( profiles )
-})
-
 var App = {
   Utils: {
     validateUrl: function( url ){
@@ -41,8 +34,9 @@ var App = {
 }
 
 var Article = {
+  initSearch: function (){
+    console.debug('Article.initSearch() executed...')
 
-  ajaxSearch: function (){
     function formatRepo (repo) {
       if (repo.loading) return repo.text;
 
@@ -83,8 +77,7 @@ var Article = {
           tags: {},
           categories: {}
         }
-      
-
+        
         console.debug('data.result',data.result)
 
         $.each( data.result, function( idx, _article ){
@@ -249,17 +242,3 @@ var Article = {
     
   }
 }
-
-$('#process').click(function(e){
-  console.clear()
-  e.preventDefault;
-  var url = $('#url').val()
-  console.log('app.Utils.validateUrl(%s):', url, app.Utils.validateUrl( url ) )
-  
-  var result = app.Utils.createTinyUrl( url )
-  if ( ! result ){
-    $('#result').text('Error')
-  } else {
-    $('#result').text( result )
-  }
-})

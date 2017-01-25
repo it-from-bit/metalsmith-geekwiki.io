@@ -18,21 +18,6 @@ html.no-js.no-touch(lang='en')
       .container
         //-include banner
 
-        h4 Search Articles
-          ul
-            li
-              em By #[strong Title]: 
-              select.article-search(data-filter="title")
-                option
-
-            li
-              em By #[strong Tags]: 
-              select.article-search(data-filter="tags", multiple="multiple")
-
-            li
-              em By #[strong Categories]: 
-              select.article-search(data-filter="categories", multiple="multiple")
-
         // Content
         block content
           h1 TEST!..

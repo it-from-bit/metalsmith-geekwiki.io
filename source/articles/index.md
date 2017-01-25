@@ -7,5 +7,5 @@ subtitle  : "Article Index"
 foobar    : "Baz Bang"
 jquery: 
   eval: 
-    documentReady: "Article.ajaxSearch();"
+    documentReady: "Article.initSearch();"
 ---

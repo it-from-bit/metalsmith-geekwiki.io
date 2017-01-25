@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html class="no-js no-touch" lang="en">
+  <head>
+    <!-- Begin Meta-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/assets/css/style-neutral.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <link rel="stylesheet" href="/assets/css/typo-open-sans-pt-sans-narrow.min.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/plugins/select2/css/select2.css">
+    <!-- End CSS-->
+    <title> home </title>
+  </head>
+  <body>
+
+    <select multiple id="e1" style="width: 500px;"></select>
+   
+    <!-- // #wrapper-->
+    <!-- Begin JS-->
+    <script src="/assets/components/jquery/jquery.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/jquery.popupwindow.js"></script>
+    <script src="/assets/js/custom.js"></script>
+    <script src="/assets/plugins/DataTables/datatables.min.js"></script>
+    <script src="/assets/plugins/select2/js/select2.full.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.4/lodash.min.js"></script>
+<script>
+
+var filterLogic = {
+  author: function( query, optionObj ){
+    if ( _.isEmpty( query ) || _.isEmpty( optionObj ) ){
+      return false
+    }
+
+    var _isMatch = function( value ){
+      var searchPattern = new RegExp( '^' + search.replace( '*', '.*' ), 'i' )
+
+      return !! value.match( searchPattern )
+    }
+
+    console.debug('')
+    
+
+    if ( ! _.isPlainObject( resultObj.meta ) ){
+      return false
+    }
+
+    if ( ! resultObj.meta.author ){
+      return false
+    }
+
+    if ( _.isPlainObject( resultObj.meta.author ) ){
+
+      console.debug('resultObj.meta.author:',resultObj.meta.author  )
+
+      if ( _.isString( resultObj.meta.author.username ) && resultObj.meta.author.username.length > 0 ){
+
+        var patternMatch = resultObj.meta.author.username.match( filterPtn )
+        console.debug('patternMatch:',patternMatch)
+
+        if ( patternMatch.length > 0 ){
+          return true
+        }
+      }
+    }
+  }
+}
+
+$(document).ready(function(){
+  $.ajax({
+    url: 'https://raw.githubusercontent.com/geekwiki/geekwiki.github.io/master/articles/index.json',
+    dataType: 'json',
+    success: function( response, textStatus, jqXHR ) {
+      console.debug( '[ajax success] response:', response )
+      console.debug( '[ajax success] textStatus:', textStatus )
+      console.debug( '[ajax success] jqXHR:', jqXHR )
+
+      var articleResults = []
+
+      _.forEach(response.result, function( article, idx ) {
+        articleResults.push({
+          id: articleResults.length + 1,
+          text: article.title,
+          meta: article
+        })
+      })
+
+      console.debug('Post-prosessed Select2 options:', articleResults)
+
+      $('select').select2({
+        tags: true,
+        data: articleResults,
+        tokenSeparators: [';'],
+        minimumInputLength: 0,
+        placeholder: 'Search Articles (Start typing an article title, summary, author or anything else..)',
+        allowClear: true,
+        closeOnSelect: true,
+        escapeMarkup: function(markup) {
+          return markup
+        },
+        minimumInputLength: 1,
+        templateResult: formatArticle,
+        templateSelection: function(article) {
+          console.debug('templateSelection articles', article)
+
+          if (typeof article.meta === 'undefined')
+            return article.text
+
+          return truncateTitle(article.meta.title) + ' <small>(' + author2str(article.meta.author) + ')</small>'
+        },
+        matcher: oldMatcher( customMatcher ),
+        sortResults: function( results ) {
+          if ( results.length > 1 )
+            results.pop()
+
+          return results
+        }
+      })
+    },
+    error: function( jqXHR, textStatus, errorThrown ) {
+      alert('Ajax error: ' + errorThrown)
+    }
+  })
+
+
+  function oldMatcher(matcher) {
+    console.debug('[matcher] oldMatcher:', arguments)
+
+    function wrappedMatcher(params, data) {
+      console.debug('[matcher > wrappedMatcher] oldMatcher:', arguments)
+
+      var match = $.extend(true, {}, data);
+
+      if (params.term == null || $.trim(params.term) === '') {
+        return match;
+      }
+
+      if (data.children) {
+        for (var c = data.children.length - 1; c >= 0; c--) {
+          var child = data.children[c];
+
+          // Check if the child object matches
+          // The old matcher returned a boolean true or false
+          var doesMatch = matcher(params.term, child.text, child);
+
+          // If the child didn't match, pop it off
+          if (!doesMatch) {
+            match.children.splice(c, 1);
+          }
+        }
+
+        if (match.children.length > 0) {
+          return match;
+        }
+      }
+
+      if (matcher(params.term, data.text, data)) {
+        return match;
+      }
+
+      return null;
+    }
+
+    return wrappedMatcher;
+  }
+
+  function customMatcher( query, text, resultObj ) {
+    if ( _.isEmpty( query ) ){
+      return false
+    }
+
+    console.debug('[customMatcher] arguments:', arguments)
+    console.debug('[customMatcher] query:', query)
+    console.debug('[customMatcher] text:', text)
+    console.debug('[customMatcher] resultObj:', resultObj)
+
+    var orig = {
+      query     : query,
+      text      : text,
+      resultObj : resultObj
+    }
+
+    var querySplit = query.split( /:(.*)/, 2 )
+
+    // Check if the query value is in the format noun:value
+    if ( querySplit.length > 1 ){
+      var filter = {
+        noun  : querySplit[0].trim().toLowerCase(),
+        value : querySplit[1]
+      }
+
+      if ( ! _.has( filterLogic, filter.noun ) || filter.value.trim().length === 0 ){
+        return false
+      }
+
+      // Return the result of the filter
+      return filterLogic[ filter.noun ]( filter.value, resultObj )
+    }
+    
+    return text.toUpperCase().indexOf( query.toUpperCase() ) !== -1
+  }
+
+  function author2str(author) {
+    if (!_.isString(author) && !_.isObject(author))
+      return false
+
+    if (_.isString(author))
+      return author
+
+    if (_.isString(author.firstname) && _.isString(author.lastname))
+      return author.firstname.substr(0, 1).toUpperCase() + author.lastname.toLowerCase()
+
+    if (_.isString(author.username))
+      return author.username
+  }
+
+  function truncateTitle(title, maxLength) {
+    if (!maxLength)
+      maxLength = 15
+
+    else if (!_.isNumber(maxLength) || maxLength < 1)
+      return false
+
+    title = title.trim()
+
+    if (title.length > maxLength)
+      return title.substr(0, maxLength - 3) + '...'
+
+    return title
+  }
+
+  function formatArticle(article) {
+    console.debug('[formatArticle] article:', article)
+
+    if (!_.isObject(article.meta)) {
+      return article.text
+    }
+
+    var markup = "<div class='select2-result-repository clearfix'>" +
+      "<div class='select2-result-repository__meta'>" +
+      "<div class='select2-result-repository__title'>" + truncateTitle(article.meta.title) + "</div>";
+
+    if (article.meta.summary) {
+      markup += "<div class='select2-result-repository__description'>" + article.meta.summary + "</div>";
+    }
+
+    markup += "<div class='select2-result-repository__statistics'>" +
+      "</div></div>";
+
+    return markup;
+  }
+
+  function formatRepoSelection(article) {
+    return article.text;
+  }
+
+})
+</script>
+    <!-- End JS-->
+  </body>
+</html>

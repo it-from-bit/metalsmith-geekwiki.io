@@ -24,6 +24,19 @@ block content
     var articlesJson = ( typeof articles === 'object' ? JSON.stringify( JSON.stringify( articles, censor(articles)) ) : null )
 
   h1 Articles
+  
+  //- Article Search Form
+  ul
+    li
+      em By #[strong Title]: 
+      select.article-search(data-filter="title")
+        option
+    li
+      em By #[strong Tags]: 
+      select.article-search(data-filter="tags", multiple="multiple")
+    li
+      em By #[strong Categories]: 
+      select.article-search(data-filter="categories", multiple="multiple")
 
   ol.article-list
     each article, idx in articles
@@ -47,7 +60,7 @@ block content
           category    : (article.category ? article.category : 'N/A'),
           created     : (article.created ? article.created : 'N/A'),
           updated     : (article.updated ? article.updated : 'N/A'),
-          href        : article.paths.dhref + article.paths.name + '.html'
+          href        : article.paths.href + article.paths.name + '.html'
           //,json        : JSON.stringify( JSON.stringify( article, censor( article ) ) )
           //,pathsJson  : ( typeof article.paths === 'object' ? JSON.stringify( article.paths ) : 'N/A' )
         }

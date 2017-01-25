@@ -4,16 +4,16 @@ include ../../components/utils
 script(src='/assets/components/jquery/jquery.min.js')
 script(src='/assets/js/app.js')
 script(src='/assets/js/jquery.popupwindow.js')
-//script(src='/assets/js/custom.js')
+script(src='/assets/js/custom.js')
 script(src='/assets/plugins/DataTables/datatables.min.js')
 script(src='/assets/plugins/select2/js/select2.full.js')
 //script(src='/assets/js/jquery.observer.js')
-script(src='/assets/js/bundle.js')
+//script(src='/assets/js/bundle.js')
 
 //- Load any JS assets defined for this page
 if template && template.assets && template.assets.js
   +display-assets( template.assets.js )
-  
+
 script.
   $( document ).on( 'ready', function(){
     new Live
